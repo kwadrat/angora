@@ -61,6 +61,25 @@ def decode(seq):
         result = []
     return result
 
+def transpose(all_lines, row_cnt, col_cnt):
+    lines_count = len(all_lines)
+    empty_line = ' ' * col_cnt
+    trn_lines = []
+    for j in xrange(col_cnt):
+        trn_lines.append([])
+    for i in xrange(row_cnt):
+        if i < lines_count:
+            tmp_line = all_lines[i]
+            tmp_len = len(tmp_line)
+            if tmp_len < col_cnt:
+                tmp_line = tmp_line + ' ' * (col_cnt - tmp_len)
+        else:
+            tmp_line = empty_line
+        for j in xrange(col_cnt):
+            trn_lines[j].append(tmp_line[j])
+    trn_lines = map(lambda x: ''.join(x), trn_lines)
+    return trn_lines 
+
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
     all_lines = open('plansza.txt', 'rb').read().splitlines()
@@ -69,6 +88,9 @@ def main():
     tmp_format = 'row_cnt, col_cnt'; print 'Eval:', tmp_format, eval(tmp_format)
     row_shadow = map(decode, all_lines)
     tmp_format = 'row_shadow'; print 'Eval:', tmp_format, eval(tmp_format)
+    trn_lines = transpose(all_lines, row_cnt, col_cnt)
+    col_shadow = map(decode, trn_lines)
+    tmp_format = 'col_shadow'; print 'Eval:', tmp_format, eval(tmp_format)
 
 if __name__ == '__main__':
     main()
