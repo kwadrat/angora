@@ -54,19 +54,24 @@ cols = [
     [0],
     ]
 
-assert sum(map(sum, rows)) == sum(map(sum, cols))
-
-all_lines = open('plansza.txt', 'rb').read().splitlines()
-row_cnt = len(rows)
-col_cnt = len(cols)
-tmp_format = 'row_cnt, col_cnt'; print 'Eval:', tmp_format, eval(tmp_format)
-
 def decode(seq):
     if seq:
         result = map(len, seq.split())
     else:
         result = []
     return result
+
+def main():
+    assert sum(map(sum, rows)) == sum(map(sum, cols))
+    all_lines = open('plansza.txt', 'rb').read().splitlines()
+    row_cnt = len(rows)
+    col_cnt = len(cols)
+    tmp_format = 'row_cnt, col_cnt'; print 'Eval:', tmp_format, eval(tmp_format)
+    row_shadow = map(decode, all_lines)
+    tmp_format = 'row_shadow'; print 'Eval:', tmp_format, eval(tmp_format)
+
+if __name__ == '__main__':
+    main()
 
 class TestAngoraPuzzle(unittest.TestCase):
     def test_angora_puzzle(self):
