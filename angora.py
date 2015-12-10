@@ -60,7 +60,7 @@ all_lines = open('plansza.txt', 'rb').read().splitlines()
 
 def decode(seq):
     if seq:
-        result = [1]
+        result = [len(seq)]
     else:
         result = []
     return result
@@ -72,3 +72,4 @@ class TestGazowychKolumn(unittest.TestCase):
         '''
         self.assertEqual(decode(''), [])
         self.assertEqual(decode('H'), [1])
+        self.assertEqual(decode('HH'), [2])
