@@ -57,6 +57,9 @@ cols = [
 assert sum(map(sum, rows)) == sum(map(sum, cols))
 
 all_lines = open('plansza.txt', 'rb').read().splitlines()
+row_cnt = len(rows)
+col_cnt = len(cols)
+tmp_format = 'row_cnt, col_cnt'; print 'Eval:', tmp_format, eval(tmp_format)
 
 def decode(seq):
     if seq:
