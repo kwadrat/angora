@@ -64,6 +64,11 @@ def decode(seq):
 def inside(small, large):
     if len(small) > len(large):
         result = 0
+    elif len(small) == len(large):
+        if small <= large:
+            result = 1
+        else:
+            result = 0
     else:
         result = 1
     return result
@@ -118,3 +123,4 @@ class TestAngoraPuzzle(unittest.TestCase):
         '''
         self.assertEqual(inside([], []), 1)
         self.assertEqual(inside([1], []), 0)
+        self.assertEqual(inside([2], [1]), 0)
