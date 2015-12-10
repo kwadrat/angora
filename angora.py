@@ -60,7 +60,7 @@ all_lines = open('plansza.txt', 'rb').read().splitlines()
 
 def decode(seq):
     if seq:
-        result = [len(seq)]
+        result = map(len, seq.split())
     else:
         result = []
     return result
@@ -73,3 +73,4 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(decode(''), [])
         self.assertEqual(decode('H'), [1])
         self.assertEqual(decode('HH'), [2])
+        self.assertEqual(decode('H H'), [1, 1])
