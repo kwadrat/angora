@@ -59,7 +59,11 @@ assert sum(map(sum, rows)) == sum(map(sum, cols))
 all_lines = open('plansza.txt', 'rb').read().splitlines()
 
 def decode(seq):
-    return []
+    if seq:
+        result = [1]
+    else:
+        result = []
+    return result
 
 class TestGazowychKolumn(unittest.TestCase):
     def test_column_hiding(self):
@@ -67,3 +71,4 @@ class TestGazowychKolumn(unittest.TestCase):
         TestGazowychKolumn:
         '''
         self.assertEqual(decode(''), [])
+        self.assertEqual(decode('H'), [1])
