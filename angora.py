@@ -61,6 +61,10 @@ def decode(seq):
         result = []
     return result
 
+def inside(small, large):
+    result = 1
+    return result
+
 def transpose(all_lines, row_cnt, col_cnt):
     lines_count = len(all_lines)
     empty_line = ' ' * col_cnt
@@ -104,3 +108,9 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(decode('H'), [1])
         self.assertEqual(decode('HH'), [2])
         self.assertEqual(decode('H H'), [1, 1])
+
+    def test_one_in_another(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        self.assertEqual(inside([], []), 1)
