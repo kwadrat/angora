@@ -65,10 +65,10 @@ def decode(seq):
         result = []
     return result
 
-class TestGazowychKolumn(unittest.TestCase):
-    def test_column_hiding(self):
+class TestAngoraPuzzle(unittest.TestCase):
+    def test_angora_puzzle(self):
         '''
-        TestGazowychKolumn:
+        TestAngoraPuzzle:
         '''
         self.assertEqual(decode(''), [])
         self.assertEqual(decode('H'), [1])
