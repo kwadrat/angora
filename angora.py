@@ -113,8 +113,9 @@ def transpose(all_lines, row_cnt, col_cnt):
 
 def zip_check(row_shadow, rows, desc):
     row_stat = map(lambda b, c: inside(b, c), row_shadow, rows)
-    for nr, (a, b, c) in enumerate(zip(row_stat, row_shadow, rows)):
-        order_number = green_message(str(nr + 1), b == c)
+    eq_stat = map(lambda b, c: b == c, row_shadow, rows)
+    for nr, (a, b, c, d) in enumerate(zip(row_stat, row_shadow, rows, eq_stat)):
+        order_number = green_message(str(nr + 1), d)
         print order_number, red_message(a, not a), b, c
     total_state = all(row_stat)
     print desc, 'total:', red_message(total_state, not total_state)
