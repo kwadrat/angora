@@ -121,12 +121,9 @@ def main():
     all_lines = open('plansza.txt', 'rb').read().splitlines()
     row_cnt = len(rows)
     col_cnt = len(cols)
-    tmp_format = 'row_cnt, col_cnt'; print 'Eval:', tmp_format, eval(tmp_format)
     row_shadow = map(decode, all_lines)
-    tmp_format = 'row_shadow'; print 'Eval:', tmp_format, eval(tmp_format)
     trn_lines = transpose(all_lines, row_cnt, col_cnt)
     col_shadow = map(decode, trn_lines)
-    tmp_format = 'col_shadow'; print 'Eval:', tmp_format, eval(tmp_format)
     zip_check(row_shadow, rows, 'Rows')
     zip_check(col_shadow, cols, 'Cols')
 
