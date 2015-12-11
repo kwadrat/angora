@@ -136,3 +136,4 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(transpose([], 0, 0), [])
         self.assertEqual(transpose([['a', 'b']], 1, 2), ['a', 'b'])
         self.assertEqual(transpose(['a', 'b'], 2, 1), ['ab'])
+        self.assertEqual(transpose(['abc', 'xyz'], 2, 3), ['ax', 'by', 'cz'])
