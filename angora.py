@@ -118,7 +118,8 @@ def zip_check(row_shadow, rows, desc):
         order_number = green_message(str(nr + 1), d)
         print order_number, red_message(c, not c), a, b
     total_state = all(row_stat)
-    print desc, 'total:', red_message(total_state, not total_state)
+    total_eq = all(eq_stat)
+    print green_message(desc + ' total:', total_eq), red_message(total_state, not total_state)
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
