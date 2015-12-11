@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import unittest
+import itertools
 
 rows = [
     [3],
@@ -68,6 +69,10 @@ def inside(small, large):
         result = all(map(lambda x, y: x <= y, small, large))
     else:
         result = 0
+        for sub_large in itertools.combinations(large, len(small)):
+            result = all(map(lambda x, y: x <= y, small, sub_large))
+            if result:
+                break
     return result
 
 def transpose(all_lines, row_cnt, col_cnt):
@@ -123,3 +128,5 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(inside([2], [1]), 0)
         self.assertEqual(inside([1, 2], [2, 1]), 0)
         self.assertEqual(inside([2], [1, 1]), 0)
+        self.assertEqual(inside([2], [1, 1]), 0)
+        self.assertEqual(inside([2], [2, 1]), 1)
