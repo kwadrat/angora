@@ -66,6 +66,7 @@ def red_message(napis, paint):
 
 def decode(seq):
     if seq:
+        seq = seq.replace('.', ' ')
         result = map(len, seq.split())
     else:
         result = []
@@ -133,6 +134,7 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(decode('H'), [1])
         self.assertEqual(decode('HH'), [2])
         self.assertEqual(decode('H H'), [1, 1])
+        self.assertEqual(decode('.'), [])
 
     def test_one_in_another(self):
         '''
