@@ -55,6 +55,15 @@ cols = [
     [0],
     ]
 
+ZnakEscape = chr(27)
+
+def red_message(napis, paint):
+    if paint:
+        result = '%(escape)s[31m%(napis)s%(escape)s[0m' % { 'escape': ZnakEscape, 'napis': napis }
+    else:
+        result = napis
+    return result
+
 def decode(seq):
     if seq:
         result = map(len, seq.split())
@@ -93,9 +102,10 @@ def transpose(all_lines, row_cnt, col_cnt):
 
 def zip_check(row_shadow, rows):
     row_stat = map(lambda a, b: inside(a, b), row_shadow, rows)
-    for a, b, c in zip(row_stat, row_shadow, rows):
-        print a, b, c
-    print 'Total:', all(row_stat)
+    for nr, (a, b, c) in enumerate(zip(row_stat, row_shadow, rows)):
+        print nr, red_message(a, not a), b, c
+    total_state = all(row_stat)
+    print 'Total:', red_message(total_state, not total_state)
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
