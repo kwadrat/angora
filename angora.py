@@ -127,3 +127,12 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(inside([2], [1, 1]), 0)
         self.assertEqual(inside([2], [1, 1]), 0)
         self.assertEqual(inside([2], [2, 1]), 1)
+        self.assertEqual(inside([], [2, 1]), 1)
+
+    def test_exchange_rows_cols(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        self.assertEqual(transpose([], 0, 0), [])
+        self.assertEqual(transpose([['a', 'b']], 1, 2), ['a', 'b'])
+        self.assertEqual(transpose(['a', 'b'], 2, 1), ['ab'])
