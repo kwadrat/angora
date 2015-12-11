@@ -91,6 +91,12 @@ def transpose(all_lines, row_cnt, col_cnt):
     trn_lines = map(lambda x: ''.join(x), trn_lines)
     return trn_lines 
 
+def zip_check(row_shadow, rows):
+    row_stat = map(lambda a, b: inside(a, b), row_shadow, rows)
+    for a, b, c in zip(row_stat, row_shadow, rows):
+        print a, b, c
+    print 'Total:', all(row_stat)
+
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
     all_lines = open('plansza.txt', 'rb').read().splitlines()
@@ -102,6 +108,8 @@ def main():
     trn_lines = transpose(all_lines, row_cnt, col_cnt)
     col_shadow = map(decode, trn_lines)
     tmp_format = 'col_shadow'; print 'Eval:', tmp_format, eval(tmp_format)
+    zip_check(row_shadow, rows)
+    zip_check(col_shadow, cols)
 
 if __name__ == '__main__':
     main()
