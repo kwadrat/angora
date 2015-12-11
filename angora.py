@@ -63,10 +63,8 @@ def decode(seq):
     return result
 
 def inside(small, large):
-    if len(small) > len(large):
-        result = 0
-    else:
-        result = 0
+    result = 0
+    if len(small) <= len(large):
         for sub_large in itertools.combinations(large, len(small)):
             result = all(map(lambda x, y: x <= y, small, sub_large))
             if result:
