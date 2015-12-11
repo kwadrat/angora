@@ -67,7 +67,7 @@ def inside(small, large):
     elif len(small) == len(large):
         result = all(map(lambda x, y: x <= y, small, large))
     else:
-        result = 1
+        result = 0
     return result
 
 def transpose(all_lines, row_cnt, col_cnt):
@@ -122,3 +122,4 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(inside([1], []), 0)
         self.assertEqual(inside([2], [1]), 0)
         self.assertEqual(inside([1, 2], [2, 1]), 0)
+        self.assertEqual(inside([2], [1, 1]), 0)
