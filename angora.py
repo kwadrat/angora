@@ -100,12 +100,12 @@ def transpose(all_lines, row_cnt, col_cnt):
     trn_lines = map(lambda x: ''.join(x), trn_lines)
     return trn_lines 
 
-def zip_check(row_shadow, rows):
+def zip_check(row_shadow, rows, desc):
     row_stat = map(lambda a, b: inside(a, b), row_shadow, rows)
     for nr, (a, b, c) in enumerate(zip(row_stat, row_shadow, rows)):
         print nr + 1, red_message(a, not a), b, c
     total_state = all(row_stat)
-    print 'Total:', red_message(total_state, not total_state)
+    print desc, 'total:', red_message(total_state, not total_state)
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
@@ -118,8 +118,8 @@ def main():
     trn_lines = transpose(all_lines, row_cnt, col_cnt)
     col_shadow = map(decode, trn_lines)
     tmp_format = 'col_shadow'; print 'Eval:', tmp_format, eval(tmp_format)
-    zip_check(row_shadow, rows)
-    zip_check(col_shadow, cols)
+    zip_check(row_shadow, rows, 'Rows')
+    zip_check(col_shadow, cols, 'Cols')
 
 if __name__ == '__main__':
     main()
