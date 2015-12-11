@@ -112,8 +112,8 @@ def transpose(all_lines, row_cnt, col_cnt):
     return trn_lines 
 
 def zip_check(row_shadow, rows, desc):
-    row_stat = map(lambda b, c: inside(b, c), row_shadow, rows)
-    eq_stat = map(lambda b, c: b == c, row_shadow, rows)
+    row_stat = map(lambda a, b: inside(a, b), row_shadow, rows)
+    eq_stat = map(lambda a, b: a == b, row_shadow, rows)
     for nr, (a, b, c, d) in enumerate(zip(row_stat, row_shadow, rows, eq_stat)):
         order_number = green_message(str(nr + 1), d)
         print order_number, red_message(a, not a), b, c
