@@ -57,6 +57,13 @@ cols = [
 
 ZnakEscape = chr(27)
 
+def green_message(napis, paint):
+    if paint:
+        result = '%(escape)s[32m%(napis)s%(escape)s[0m' % { 'escape': ZnakEscape, 'napis': napis }
+    else:
+        result = napis
+    return result
+
 def red_message(napis, paint):
     if paint:
         result = '%(escape)s[31m%(napis)s%(escape)s[0m' % { 'escape': ZnakEscape, 'napis': napis }
