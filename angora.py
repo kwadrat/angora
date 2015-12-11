@@ -103,7 +103,7 @@ def transpose(all_lines, row_cnt, col_cnt):
 def zip_check(row_shadow, rows):
     row_stat = map(lambda a, b: inside(a, b), row_shadow, rows)
     for nr, (a, b, c) in enumerate(zip(row_stat, row_shadow, rows)):
-        print nr, red_message(a, not a), b, c
+        print nr + 1, red_message(a, not a), b, c
     total_state = all(row_stat)
     print 'Total:', red_message(total_state, not total_state)
 
