@@ -140,6 +140,9 @@ def main():
 if __name__ == '__main__':
     main()
 
+'''
+a = map(lambda x: (sum(x[1]) + len(x[1]) - 1, x[0] + 1, x[1]), enumerate(angora.rows));a.sort(reverse=1);a
+'''
 class TestAngoraPuzzle(unittest.TestCase):
     def test_angora_puzzle(self):
         '''
