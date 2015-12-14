@@ -15,8 +15,8 @@ H.H......HHH.HH....H...H.
 H.HHHHHHHHH.H. ..H   ..H.
 .HH.H..HH...HH.HHH.....H.
 HHH.H.H.H..H....HHHHH.H..
-........H...HH. H ..HHHHH
-HHHHHHH.H.. H ..H.H.H.HHH
+........H...HH.HH ..HHHHH
+HHHHHHH.H.. H...H.H.H.HHH
 H.....H.HH..H..HH...HH.H.
 H.HHH.H...HHHH..HHHHH..H.
 H.HHH.H.HHH.HHHHHHHHHH.HH
