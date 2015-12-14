@@ -18,8 +18,8 @@ HHHHHHH H H H H H HHHHHHH
                 H        
 H H   H         H        
 H     H     H.  H        
-H H   H     HH. H        
+H H   H     HH..H        
 H HHH H HHH HHHHHHHHHH HH
   H   H     HHHHH  HHHHH 
-      H      ..          
-  HHHHH      H. H        
+      H      ...         
+  HHHHH      H.HH        
