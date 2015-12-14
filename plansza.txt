@@ -1,5 +1,5 @@
-HHHHHHH.HHH  . .H.HHHHHHH
-H.....H.HH.    ...H.....H
+HHHHHHH.HHH .. .H.HHHHHHH
+H.....H.HH. H  ...H.....H
 H.HHH.H.....HHH.H.H.HHH.H
 H.HHH.H. ..HHHHHH.H.HHH.H
 H.HHH.H. HHHH .HH.H.HHH.H
