@@ -13,10 +13,10 @@ H.H.....  HH.HH . .   .H.
 ..HH..H.H  . .  .HH.HHHHH
 ...HHH.HH.HH.HHHHHH.HHH.H
 H.HHHHHHHHH. .  .H    .H.
-.HH.H..HH  .    HH ....H.
-HHH.H.H.H .H.  .HHHHH.H..
-........H ..    H . HHHH 
-HHHHHHH.H . H  .H. .H.HHH
+.HH.H..HH  .  . HH ....H.
+HHH.H.H.H .H. ..HHHHH.H..
+........H ..  . H . HHHH 
+HHHHHHH.H . H ..H. .H.HHH
 H.....H.HH..H..HH.. H .H.
 H.HHH.H...HHHH..HHHHH..H.
 H.HHH.H.HHH.HHHHHHHHHH.HH
