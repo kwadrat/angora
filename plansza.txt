@@ -4,7 +4,7 @@
 H.HHH.H.  .HHHHHH.H.HHH.H
 H.HHH.H.        H H HHH H
 H  .. H           H.... H
-HHHHHHH H H H H H HHHHHHH
+HHHHHHH.H.H.H.H.H.HHHHHHH
     .           H .......
   H   HH  H   HHH H      
   H               .      
@@ -19,7 +19,7 @@ HHHHHHH H H H H H HHHHHHH
 HHHHHHH.        H   H.HHH
 H.    H     H.  H   H .H.
 H.HHH.H...HHHH..HHHHH..H.
-H HHH H HHH HHHHHHHHHH HH
+H.HHH.H.HHH.HHHHHHHHHH.HH
 H.HHH.H.  .HHHHHH.HHHHHH.
       H      ...    .  ..
   HHHHH     .H.HH.  HHHH 
