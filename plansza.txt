@@ -9,14 +9,14 @@ HHHHHHH.H.H.H.H.H.HHHHHHH
 H.HH. HH..H.H.HHH.H.   H 
 H.H.....  H .   . .   .H.
 .HHHH.H.  HH H  H      ..
-.H.H. .H  .  H  H H   HH 
-..HH..H.        .HH.HHHHH
+.H.H. .H. .  H  H H   HH 
+..HH..H.H       .HH.HHHHH
 ...HHH.HH.HH.HHHHHH.HHH.H
 H.HHHHHHHHH.    .H    .H.
-.HH.H..H   .    HH ....H.
-HHH.H.H.  .H.  .HHHHH.H..
-........  ..    H . HHHH 
-HHHHHHH.  .    .H. .H.HHH
+.HH.H..HH  .    HH ....H.
+HHH.H.H.H .H.  .HHHHH.H..
+........H ..    H . HHHH 
+HHHHHHH.H .    .H. .H.HHH
 H.....H.HH..H..HH.. H .H.
 H.HHH.H...HHHH..HHHHH..H.
 H.HHH.H.HHH.HHHHHHHHHH.HH
