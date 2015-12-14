@@ -12,7 +12,7 @@ H.H......HHH.HH....H...H.
 .H.H...H...H.H.HHHH.H.HHH
 ..HH..H.H.H... ..HH.HHHHH
 ...HHH.HH.HH.HHHHHH.HHH.H
-H.HHHHHHHHH.H. ..HH  ..H.
+H.HHHHHHHHH.H. ..HH. ..H.
 .HH.H..HH...HH.HHH.....H.
 HHH.H.H.H..H....HHHHH.H..
 ........H...HH.HH ..HHHHH
@@ -21,5 +21,5 @@ H.....H.HH..H..HH...HH.H.
 H.HHH.H...HHHH..HHHHH..H.
 H.HHH.H.HHH.HHHHHHHHHH.HH
 H.HHH.H.H..HHHHHH.HHHHHH.
-H.....H..H ......H. .HH..
+H.....H..H ......H.H.HH..
 HHHHHHH.HH  .H.HH...HHHHH
