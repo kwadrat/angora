@@ -15,11 +15,11 @@ HHHHHHH.H.H.H.H.H.HHHHHHH
   H   H         .        
   H   .         H   .    
   H   H    H    H   H  . 
- ...  .         H   HHHH 
+ .... .         H   HHHH 
 HHHHHHH.        H   H.HHH
-H...  H     H.  H   H .H.
+H.... H     H.  H   H .H.
 H.HHH.H...HHHH..HHHHH..H.
 H.HHH.H.HHH.HHHHHHHHHH.HH
 H.HHH.H.  .HHHHHH.HHHHHH.
-  ..  H      ....   .  ..
+  ... H      ....   .  ..
   HHHHH     .H.HH.  HHHH 
