@@ -128,7 +128,8 @@ def zip_check(row_shadow, rows, desc):
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
-    all_lines = open('plansza.txt', 'rb').read().splitlines()
+    full_txt = open('plansza.txt', 'rb').read()
+    all_lines = full_txt.splitlines()
     row_cnt = len(rows)
     col_cnt = len(cols)
     row_shadow = map(decode, all_lines)
