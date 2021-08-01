@@ -103,6 +103,9 @@ def decode(seq):
 
 
 def inside(small, large):
+    '''
+    Shorter subsequence can be inside large sequence
+    '''
     result = 0
     small_cnt = len(small)
     if small_cnt <= len(large):
