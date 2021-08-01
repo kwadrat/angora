@@ -91,6 +91,9 @@ def red_message(napis, paint):
 
 
 def decode(seq):
+    '''
+    Count number of marks (H letter)
+    '''
     if seq:
         seq = seq.replace('.', ' ')
         result = list(map(len, seq.split()))
