@@ -55,6 +55,10 @@ cols = '''\
 1 3 1 1 1 5
 '''
 
+CODE_BLACK = 'H'
+CODE_UNKNOWN = '.'
+CODE_EMPTY = ' '
+
 
 def line_to_numbers(one_line):
     return list(map(int, one_line.split()))
@@ -215,3 +219,11 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(transpose(['a', 'b'], 2, 1), ['ab'])
         self.assertEqual(transpose(['abc', 'xyz'], 2, 3), ['ax', 'by', 'cz'])
         self.assertEqual(transpose(['ax', 'by', 'cz'], 3, 2), ['abc', 'xyz'])
+
+    def test_constants(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        self.assertEqual(CODE_BLACK, 'H')
+        self.assertEqual(CODE_UNKNOWN, '.')
+        self.assertEqual(CODE_EMPTY, ' ')
