@@ -66,6 +66,7 @@ def text_to_numbers(one_txt):
     all_lines = one_txt.splitlines()
     return list(map(line_to_numbers, all_lines))
 
+
 rows = text_to_numbers(rows)
 cols = text_to_numbers(cols)
 
