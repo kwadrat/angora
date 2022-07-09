@@ -189,10 +189,8 @@ class WorkArea:
         all_lines = full_txt.splitlines()
         for row_nr in range(self.row_cnt):
             row_txt = all_lines[row_nr]
-            line_ls = []
             for col_nr in range(self.col_cnt):
-                line_ls.append(row_txt[col_nr])
-            self.int_table.append(line_ls)
+                self.int_table[row_nr][col_nr] = row_txt[col_nr]
 
     def save_to_file(self, file_name):
         '''
