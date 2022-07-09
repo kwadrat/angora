@@ -165,12 +165,14 @@ class WorkArea:
                 line_ls.append(CODE_UNKNOWN)
             self.int_table.append(line_ls)
 
-    def __init__(self, row_cnt, col_cnt, verbose=0):
+    def __init__(self, rows, cols, verbose=0):
         '''
         WorkArea:
         '''
-        self.row_cnt = row_cnt
-        self.col_cnt = col_cnt
+        self.rows = rows
+        self.cols = cols
+        self.row_cnt = len(self.rows)
+        self.col_cnt = len(self.cols)
         self.verbose = verbose
         self.prepare_empty_data()
 
