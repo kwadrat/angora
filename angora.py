@@ -153,6 +153,23 @@ def zip_check(row_shadow, rows, desc):
     print('%s %s' % (green_message(desc + ' total:', total_eq), red_message(total_state, not total_state)))
 
 
+def easy_guess(one_ls, line_size):
+    delta = line_size - (sum(one_ls) + len(one_ls) - 1)
+    pos_left = 0
+    out_ls = []
+    for one_size in one_ls:
+        possible_width = one_size - delta
+        if possible_width > 0:
+            first_marked = pos_left + delta
+            first_stopped = pos_left + one_size
+            one_tpl = (first_marked, first_stopped)
+            out_ls.append(one_tpl)
+        pos_left += one_size  # Przeskocz za czarny ciąg
+        pos_left += 1  # Przeskocz kratkę odstępu między czarnymi
+    print(delta, one_ls, out_ls)
+    return out_ls
+
+
 class WorkArea:
     def prepare_empty_data(self):
         '''
@@ -279,3 +296,16 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(CODE_BLACK, 'H')
         self.assertEqual(CODE_UNKNOWN, '.')
         self.assertEqual(CODE_EMPTY, ' ')
+
+    def test_moving_to_limits(self):
+        '''
+        TestAngoraPuzzle:
+        Funkcja zwraca listę [(początek, koniec), ...] elementów do wypełnienia
+        Konwencja wyniku: Python range() lub inaczej C/for
+        '''
+        self.assertEqual(easy_guess([20], 20), [(0, 20)])
+        self.assertEqual(easy_guess([19], 19), [(0, 19)])
+        self.assertEqual(easy_guess([18], 19), [(1, 18)])
+        self.assertEqual(easy_guess([17], 19), [(2, 17)])
+        self.assertEqual(easy_guess([4, 5], 10), [(0, 4), (5, 10)])
+        self.assertEqual(easy_guess([2, 5], 10), [(5, 8)])
