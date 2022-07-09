@@ -165,12 +165,13 @@ class WorkArea:
                 line_ls.append(CODE_UNKNOWN)
             self.int_table.append(line_ls)
 
-    def __init__(self, row_cnt, col_cnt):
+    def __init__(self, row_cnt, col_cnt, verbose=0):
         '''
         WorkArea:
         '''
         self.row_cnt = row_cnt
         self.col_cnt = col_cnt
+        self.verbose = verbose
         self.prepare_empty_data()
 
     def slim_text(self):
