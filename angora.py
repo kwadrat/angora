@@ -176,7 +176,7 @@ def rc_order():
 
 
 if __name__ == '__main__':
-    if sys.argv[1] == 'order':
+    if len(sys.argv) > 1 and sys.argv[1] == 'order':
         rc_order()
     else:
         main()
