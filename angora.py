@@ -133,6 +133,7 @@ def transpose(all_lines, row_cnt, col_cnt):
         for j in range(col_cnt):
             trn_lines[j].append(tmp_line[j])
     trn_lines = map(lambda x: ''.join(x), trn_lines)
+    trn_lines = list(trn_lines)
     return trn_lines
 
 
