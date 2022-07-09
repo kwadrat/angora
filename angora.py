@@ -153,6 +153,46 @@ def zip_check(row_shadow, rows, desc):
     print('%s %s' % (green_message(desc + ' total:', total_eq), red_message(total_state, not total_state)))
 
 
+class WorkArea:
+    def __init__(self, row_cnt, col_cnt):
+        '''
+        WorkArea:
+        '''
+        self.row_cnt = row_cnt
+        self.col_cnt = col_cnt
+
+    def slim_text(self):
+        '''
+        WorkArea:
+        '''
+        return '\n'.join(map(lambda one_line: ''.join(one_line), self.int_table))
+
+    def read_from_file(self, file_name):
+        '''
+        WorkArea:
+        '''
+        fd = open(file_name)
+        full_txt = fd.read()
+        fd.close()
+        all_lines = full_txt.splitlines()
+        self.int_table = []
+        for row_nr in range(self.row_cnt):
+            row_txt = all_lines[row_nr]
+            line_ls = []
+            for col_nr in range(self.col_cnt):
+                line_ls.append(row_txt[col_nr])
+            self.int_table.append(line_ls)
+
+    def save_to_file(self, file_name):
+        '''
+        WorkArea:
+        '''
+        full_txt = self.slim_text() + '\n'
+        fd = open(file_name, 'w')
+        fd.write(full_txt)
+        fd.close()
+
+
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
     full_txt = open('plansza.txt').read()
