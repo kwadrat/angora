@@ -166,13 +166,24 @@ def main():
     zip_check(col_shadow, cols, 'Cols')
 
 
-if __name__ == '__main__':
-    main()
+def rc_dump(label, data_ls):
+    a = list(map(lambda x: (sum(x[1]) + len(x[1]) - 1, x[0] + 1, x[1]), enumerate(data_ls)))
+    a.sort(reverse=1)
+    print(label)
+    for one_tpl in a:
+        print(one_tpl)
 
-'''
-a = map(lambda x: (sum(x[1]) + len(x[1]) - 1, x[0] + 1, x[1]), enumerate(angora.rows));a.sort(reverse=1);a
-a = map(lambda x: (sum(x[1]) + len(x[1]) - 1, x[0] + 1, x[1]), enumerate(angora.cols));a.sort(reverse=1);a
-'''
+
+def rc_order():
+    rc_dump('Rows', rows)
+    rc_dump('Cols', cols)
+
+
+if __name__ == '__main__':
+    if sys.argv[1] == 'order':
+        rc_order()
+    else:
+        main()
 
 
 class TestAngoraPuzzle(unittest.TestCase):
