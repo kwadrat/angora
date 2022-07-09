@@ -154,12 +154,24 @@ def zip_check(row_shadow, rows, desc):
 
 
 class WorkArea:
+    def prepare_empty_data(self):
+        '''
+        WorkArea:
+        '''
+        self.int_table = []
+        for row_nr in range(self.row_cnt):
+            line_ls = []
+            for col_nr in range(self.col_cnt):
+                line_ls.append(CODE_UNKNOWN)
+            self.int_table.append(line_ls)
+
     def __init__(self, row_cnt, col_cnt):
         '''
         WorkArea:
         '''
         self.row_cnt = row_cnt
         self.col_cnt = col_cnt
+        self.prepare_empty_data()
 
     def slim_text(self):
         '''
@@ -175,7 +187,6 @@ class WorkArea:
         full_txt = fd.read()
         fd.close()
         all_lines = full_txt.splitlines()
-        self.int_table = []
         for row_nr in range(self.row_cnt):
             row_txt = all_lines[row_nr]
             line_ls = []
