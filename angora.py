@@ -9,8 +9,6 @@ import sys
 import unittest
 import itertools
 
-three_or_more = sys.version >= '3'
-
 rows = '''\
 3 1 1 2
 3 4 1
@@ -153,9 +151,7 @@ def zip_check(row_shadow, rows, desc):
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
-    full_txt = open('plansza.txt', 'rb').read()
-    if three_or_more:
-        full_txt = full_txt.decode('utf-8')
+    full_txt = open('plansza.txt').read()
     all_lines = full_txt.splitlines()
     row_cnt = len(rows)
     col_cnt = len(cols)
