@@ -166,7 +166,6 @@ def easy_guess(one_ls, line_size):
             out_ls.append(one_tpl)
         pos_left += one_size  # Przeskocz za czarny ciąg
         pos_left += 1  # Przeskocz kratkę odstępu między czarnymi
-    print(delta, one_ls, out_ls)
     return out_ls
 
 
