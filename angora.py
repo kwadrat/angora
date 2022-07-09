@@ -100,7 +100,7 @@ def decode(seq):
     Count number of marks (H letter)
     '''
     if seq:
-        seq = seq.replace('.', ' ')
+        seq = seq.replace(CODE_UNKNOWN, CODE_EMPTY)
         result = list(map(len, seq.split()))
     else:
         result = []
