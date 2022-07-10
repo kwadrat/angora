@@ -331,6 +331,44 @@ class WorkArea:
                     row_nr = self.row_cnt - 1 - offset
                     self.set_black(row_nr, col_nr)
 
+    def fill_b_from_each_border(self, is_col, is_end):
+        '''
+        WorkArea:
+        '''
+        if is_col:
+            item_len = self.col_cnt
+        else:
+            item_len = self.row_cnt
+        for item_nr in range(item_len):
+            if is_col:
+                len_ls = self.cols[item_nr]
+                line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
+            else:
+                len_ls = self.rows[item_nr]
+                line_ls = self.int_table[item_nr]
+            if is_end:
+                one_length = len_ls[-1]
+                one_text = ''.join(reversed(line_ls[-one_length:]))
+            else:
+                one_length = len_ls[0]
+                one_text = ''.join(line_ls[:one_length])
+            point_ls = near_border(one_length, one_text)
+            if point_ls:
+                tmp_format = 'is_col, is_end, item_nr, one_length, one_text, point_ls'
+                print('EvalE: %s %s' % (tmp_format, eval(tmp_format)))
+            for offset in point_ls:
+                if is_end:
+                    item_pos = item_len - 1 - offset
+                else:
+                    item_pos = offset
+                if is_col:
+                    row_nr = item_pos
+                    col_nr = item_nr
+                else:
+                    row_nr = item_nr
+                    col_nr = item_pos
+                self.set_black(row_nr, col_nr)
+
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
