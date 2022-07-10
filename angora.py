@@ -186,6 +186,7 @@ def starting_point(first_by_border, cell_ls):
 
 def near_border(first_by_border, cell_ls):
     black_ls = []
+    space_ls = []
     black_detected = 0
     offset = starting_point(first_by_border, cell_ls)
     for nr in range(offset, offset + first_by_border):
@@ -193,7 +194,7 @@ def near_border(first_by_border, cell_ls):
             black_ls.append(nr)
         if cell_ls[nr] == CODE_BLACK:
             black_detected = 1
-    return black_ls
+    return [black_ls, space_ls]
 
 
 def gen_cl_hd(length):
@@ -317,7 +318,7 @@ class WorkArea:
             else:
                 one_length = len_ls[0]
                 one_text = ''.join(line_ls)
-            black_ls = near_border(one_length, one_text)
+            black_ls, space_ls = near_border(one_length, one_text)
             if black_ls:
                 tmp_format = 'is_col, is_end, item_nr, one_length, one_text, black_ls'
                 print('EvalE: %s %s' % (tmp_format, eval(tmp_format)))
@@ -450,13 +451,13 @@ class TestAngoraPuzzle(unittest.TestCase):
         '''
         TestAngoraPuzzle:
         '''
-        self.assertEqual(near_border(4, 'H......'), [1, 2, 3])
-        self.assertEqual(near_border(4, '.......'), [])
-        self.assertEqual(near_border(4, '.H.....'), [2, 3])
-        self.assertEqual(near_border(5, '.H.....'), [2, 3, 4])
-        self.assertEqual(near_border(5, '.H.H...'), [2, 4])
-        self.assertEqual(near_border(5, ' H.H...'), [2, 4, 5])
-        self.assertEqual(near_border(5, '.. .H.......'), [5, 6, 7])
+        self.assertEqual(near_border(4, 'H......'), [[1, 2, 3], []])
+        self.assertEqual(near_border(4, '.......'), [[], []])
+        self.assertEqual(near_border(4, '.H.....'), [[2, 3], []])
+        self.assertEqual(near_border(5, '.H.....'), [[2, 3, 4], []])
+        self.assertEqual(near_border(5, '.H.H...'), [[2, 4], []])
+        self.assertEqual(near_border(5, ' H.H...'), [[2, 4, 5], []])
+        self.assertEqual(near_border(5, '.. .H.......'), [[5, 6, 7], []])
         self.assertEqual(starting_point(5, '.. .H.......'), 3)
         self.assertEqual(starting_point(5, '...H.......'), 0)
 
