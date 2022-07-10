@@ -221,11 +221,23 @@ class WorkArea:
         self.int_table[row_nr][col_nr] = CODE_BLACK
         self.is_modified = 1
 
-    def slim_text(self):
+    def slim_text(self, enable_axis=0):
         '''
         WorkArea:
         '''
-        return '\n'.join(map(lambda one_line: ''.join(one_line), self.int_table))
+        out_ls = []
+        if enable_axis:
+            col_header = gen_cl_hd(self.col_cnt)
+            out_ls.append(col_header)
+        for nr, row_data in enumerate(self.int_table):
+            if enable_axis:
+                trailing_txt = ' ' + str(nr)
+            else:
+                trailing_txt = ''
+            unified_line = ''.join(row_data) + trailing_txt
+            out_ls.append(unified_line)
+        out_txt = '\n'.join(out_ls)
+        return out_txt
 
     def read_from_file(self, file_name):
         '''
