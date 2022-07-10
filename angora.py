@@ -369,6 +369,14 @@ class WorkArea:
                     col_nr = item_pos
                 self.set_black(row_nr, col_nr)
 
+    def fill_a_from_each_border(self):
+        '''
+        WorkArea:
+        '''
+        for is_col in range(2):
+            for is_end in range(2):
+                self.fill_b_from_each_border(is_col, is_end)
+
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
