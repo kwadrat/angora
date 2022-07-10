@@ -317,11 +317,11 @@ class WorkArea:
             else:
                 one_length = len_ls[0]
                 one_text = ''.join(line_ls)
-            point_ls = near_border(one_length, one_text)
-            if point_ls:
-                tmp_format = 'is_col, is_end, item_nr, one_length, one_text, point_ls'
+            black_ls = near_border(one_length, one_text)
+            if black_ls:
+                tmp_format = 'is_col, is_end, item_nr, one_length, one_text, black_ls'
                 print('EvalE: %s %s' % (tmp_format, eval(tmp_format)))
-            for offset in point_ls:
+            for offset in black_ls:
                 if is_end:
                     item_pos = item_len - 1 - offset
                 else:
