@@ -279,6 +279,57 @@ class WorkArea:
                 for row_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
 
+    def fill_from_each_border(self):
+        '''
+        WorkArea:
+        '''
+        for row_nr in range(self.row_cnt):
+            len_ls = self.rows[row_nr]
+            line_ls = self.int_table[row_nr]
+            if 1:
+                one_length = len_ls[0]
+                one_text = ''.join(line_ls[:one_length])
+                point_ls = near_border(one_length, one_text)
+                if point_ls:
+                    tmp_format = 'row_nr, one_length, one_text, point_ls'
+                    print('EvalA: %s %s' % (tmp_format, eval(tmp_format)))
+                for offset in point_ls:
+                    col_nr = offset
+                    self.set_black(row_nr, col_nr)
+            if 1:
+                one_length = len_ls[-1]
+                one_text = ''.join(reversed(line_ls[-one_length:]))
+                point_ls = near_border(one_length, one_text)
+                if point_ls:
+                    tmp_format = 'row_nr, one_length, one_text, point_ls'
+                    print('EvalB: %s %s' % (tmp_format, eval(tmp_format)))
+                for offset in point_ls:
+                    col_nr = self.col_cnt - 1 - offset
+                    self.set_black(row_nr, col_nr)
+        for col_nr in range(self.col_cnt):
+            len_ls = self.cols[col_nr]
+            line_ls = list(map(lambda lbd_line: lbd_line[col_nr], self.int_table))
+            if 1:
+                one_length = len_ls[0]
+                one_text = ''.join(line_ls[:one_length])
+                point_ls = near_border(one_length, one_text)
+                if point_ls:
+                    tmp_format = 'col_nr, one_length, one_text, point_ls'
+                    print('EvalC: %s %s' % (tmp_format, eval(tmp_format)))
+                for offset in point_ls:
+                    row_nr = offset
+                    self.set_black(row_nr, col_nr)
+            if 1:
+                one_length = len_ls[-1]
+                one_text = ''.join(reversed(line_ls[-one_length:]))
+                point_ls = near_border(one_length, one_text)
+                if point_ls:
+                    tmp_format = 'col_nr, one_length, one_text, point_ls'
+                    print('EvalD: %s %s' % (tmp_format, eval(tmp_format)))
+                for offset in point_ls:
+                    row_nr = self.row_cnt - 1 - offset
+                    self.set_black(row_nr, col_nr)
+
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
