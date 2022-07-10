@@ -221,7 +221,7 @@ class WorkArea:
         self.int_table[row_nr][col_nr] = CODE_BLACK
         self.is_modified = 1
 
-    def slim_text(self, enable_axis=0):
+    def slim_text(self, enable_axis=1):
         '''
         WorkArea:
         '''
