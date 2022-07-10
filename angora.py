@@ -404,6 +404,17 @@ def main():
     if 1:
         out_txt = work_area.slim_text()
         print(out_txt)
+    work_a_area = WorkArea(rows, cols)
+    print('Place a %d' % work_a_area.modify_count)
+    work_a_area.small_margins_hint()
+    print('Place b %d' % work_a_area.modify_count)
+    work_a_area.fill_a_from_each_border()
+    print('Place c %d' % work_a_area.modify_count)
+    work_a_area.fill_a_from_each_border()
+    print('Place d %d' % work_a_area.modify_count)
+    print('Both solutions are the same: %s' % (
+        work_area.slim_text(enable_axis=0) == work_a_area.slim_text(enable_axis=0),
+        ))
 
 
 def rc_dump(label, data_ls):
