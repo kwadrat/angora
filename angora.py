@@ -347,6 +347,18 @@ class WorkArea:
                     row_nr = item_nr
                     col_nr = item_pos
                 self.set_black(row_nr, col_nr)
+            for offset in space_ls:
+                if is_end:
+                    item_pos = item_len - 1 - offset
+                else:
+                    item_pos = offset
+                if is_col:
+                    row_nr = item_pos
+                    col_nr = item_nr
+                else:
+                    row_nr = item_nr
+                    col_nr = item_pos
+                self.set_space(row_nr, col_nr)
 
     def fill_a_from_each_border(self):
         '''
