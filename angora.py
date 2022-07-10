@@ -169,6 +169,17 @@ def easy_guess(one_ls, line_size):
     return out_ls
 
 
+def near_border(first_by_border, cell_ls):
+    out_ls = []
+    black_detected = 0
+    for nr in range(first_by_border):
+        if black_detected and cell_ls[nr] != CODE_BLACK:
+            out_ls.append(nr)
+        if cell_ls[nr] == CODE_BLACK:
+            black_detected = 1
+    return out_ls
+
+
 class WorkArea:
     def prepare_empty_data(self):
         '''
@@ -308,3 +319,13 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(easy_guess([17], 19), [(2, 17)])
         self.assertEqual(easy_guess([4, 5], 10), [(0, 4), (5, 10)])
         self.assertEqual(easy_guess([2, 5], 10), [(5, 8)])
+
+    def test_by_border_fill_from_first_black(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        self.assertEqual(near_border(4, 'H......'), [1, 2, 3])
+        self.assertEqual(near_border(4, '.......'), [])
+        self.assertEqual(near_border(4, '.H.....'), [2, 3])
+        self.assertEqual(near_border(5, '.H.....'), [2, 3, 4])
+        self.assertEqual(near_border(5, '.H.H...'), [2, 4])
