@@ -180,6 +180,10 @@ def near_border(first_by_border, cell_ls):
     return out_ls
 
 
+def gen_cl_hd(length):
+    return ''.join(map(lambda a: str(a % 10), range(length)))
+
+
 class WorkArea:
     def prepare_empty_data(self):
         '''
@@ -361,3 +365,10 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(near_border(4, '.H.....'), [2, 3])
         self.assertEqual(near_border(5, '.H.....'), [2, 3, 4])
         self.assertEqual(near_border(5, '.H.H...'), [2, 4])
+
+    def test_generating_column_heading(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        self.assertEqual(gen_cl_hd(2), '01')
+        self.assertEqual(gen_cl_hd(3), '012')
