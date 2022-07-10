@@ -200,7 +200,7 @@ class WorkArea:
         '''
         WorkArea:
         '''
-        self.is_modified = 0
+        self.modify_count = 0
 
     def __init__(self, rows, cols, verbose=0):
         '''
@@ -219,7 +219,7 @@ class WorkArea:
         WorkArea:
         '''
         self.int_table[row_nr][col_nr] = CODE_BLACK
-        self.is_modified += 1
+        self.modify_count += 1
 
     def slim_text(self, enable_axis=1):
         '''
@@ -347,15 +347,15 @@ def main():
         zip_check(row_shadow, rows, 'Rows')
         zip_check(col_shadow, cols, 'Cols')
     work_area = WorkArea(rows, cols)
-    print('PlaceA %d' % work_area.is_modified)
+    print('PlaceA %d' % work_area.modify_count)
     work_area.small_margins_hint()
-    print('PlaceB %d' % work_area.is_modified)
+    print('PlaceB %d' % work_area.modify_count)
     work_area.fill_from_each_border()
-    print('PlaceC %d' % work_area.is_modified)
+    print('PlaceC %d' % work_area.modify_count)
     work_area.fill_from_each_border()
-    print('PlaceD %d' % work_area.is_modified)
+    print('PlaceD %d' % work_area.modify_count)
     work_area.fill_from_each_border()
-    print('PlaceE %d' % work_area.is_modified)
+    print('PlaceE %d' % work_area.modify_count)
     if 1:
         out_txt = work_area.slim_text()
         print(out_txt)
