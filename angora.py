@@ -345,21 +345,11 @@ def main():
         zip_check(row_shadow, rows, 'Rows')
         zip_check(col_shadow, cols, 'Cols')
     work_area = WorkArea(rows, cols)
-    if 0:
-        out_txt = work_area.slim_text()
-        print(out_txt)
-    if 0:
-        work_area.read_from_file('plansza.txt')
     work_area.small_margins_hint()
-    if 1:
-        out_txt = work_area.slim_text()
-        print(out_txt)
     work_area.fill_from_each_border()
     if 1:
         out_txt = work_area.slim_text()
         print(out_txt)
-    if 0:
-        work_area.save_to_file('plansza2.txt')
 
 
 def rc_dump(label, data_ls):
