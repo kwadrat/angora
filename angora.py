@@ -333,15 +333,33 @@ class WorkArea:
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
-    full_txt = open('plansza.txt').read()
-    all_lines = full_txt.splitlines()
-    row_cnt = len(rows)
-    col_cnt = len(cols)
-    row_shadow = map(decode, all_lines)
-    trn_lines = transpose(all_lines, row_cnt, col_cnt)
-    col_shadow = map(decode, trn_lines)
-    zip_check(row_shadow, rows, 'Rows')
-    zip_check(col_shadow, cols, 'Cols')
+    if 0:
+        all_lines = []
+        row_cnt = col_cnt = 0
+        row_shadow = list(map(decode, all_lines))
+        if 1:
+            tmp_format = 'row_shadow'
+            print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        trn_lines = transpose(all_lines, row_cnt, col_cnt)
+        col_shadow = list(map(decode, trn_lines))
+        zip_check(row_shadow, rows, 'Rows')
+        zip_check(col_shadow, cols, 'Cols')
+    work_area = WorkArea(rows, cols)
+    if 0:
+        out_txt = work_area.slim_text()
+        print(out_txt)
+    if 0:
+        work_area.read_from_file('plansza.txt')
+    work_area.small_margins_hint()
+    if 1:
+        out_txt = work_area.slim_text()
+        print(out_txt)
+    work_area.fill_from_each_border()
+    if 1:
+        out_txt = work_area.slim_text()
+        print(out_txt)
+    if 0:
+        work_area.save_to_file('plansza2.txt')
 
 
 def rc_dump(label, data_ls):
