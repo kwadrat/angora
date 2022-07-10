@@ -307,7 +307,7 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(CODE_UNKNOWN, '.')
         self.assertEqual(CODE_EMPTY, ' ')
 
-    def test_moving_to_limits(self):
+    def test_moving_both_directions_to_limits(self):
         '''
         TestAngoraPuzzle:
         Funkcja zwraca listę [(początek, koniec), ...] elementów do wypełnienia
