@@ -192,6 +192,12 @@ class WorkArea:
                 line_ls.append(CODE_UNKNOWN)
             self.int_table.append(line_ls)
 
+    def assume_no_modification(self):
+        '''
+        WorkArea:
+        '''
+        self.is_modified = 0
+
     def __init__(self, rows, cols, verbose=0):
         '''
         WorkArea:
@@ -202,6 +208,7 @@ class WorkArea:
         self.col_cnt = len(self.cols)
         self.verbose = verbose
         self.prepare_empty_data()
+        self.assume_no_modification()
 
     def slim_text(self):
         '''
