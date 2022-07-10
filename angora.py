@@ -280,57 +280,6 @@ class WorkArea:
                 for row_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
 
-    def fill_from_each_border(self):
-        '''
-        WorkArea:
-        '''
-        for row_nr in range(self.row_cnt):
-            len_ls = self.rows[row_nr]
-            line_ls = self.int_table[row_nr]
-            if 1:
-                one_length = len_ls[0]
-                one_text = ''.join(line_ls[:one_length])
-                point_ls = near_border(one_length, one_text)
-                if point_ls:
-                    tmp_format = 'row_nr, one_length, one_text, point_ls'
-                    print('EvalA: %s %s' % (tmp_format, eval(tmp_format)))
-                for offset in point_ls:
-                    col_nr = offset
-                    self.set_black(row_nr, col_nr)
-            if 1:
-                one_length = len_ls[-1]
-                one_text = ''.join(reversed(line_ls[-one_length:]))
-                point_ls = near_border(one_length, one_text)
-                if point_ls:
-                    tmp_format = 'row_nr, one_length, one_text, point_ls'
-                    print('EvalB: %s %s' % (tmp_format, eval(tmp_format)))
-                for offset in point_ls:
-                    col_nr = self.col_cnt - 1 - offset
-                    self.set_black(row_nr, col_nr)
-        for col_nr in range(self.col_cnt):
-            len_ls = self.cols[col_nr]
-            line_ls = list(map(lambda lbd_line: lbd_line[col_nr], self.int_table))
-            if 1:
-                one_length = len_ls[0]
-                one_text = ''.join(line_ls[:one_length])
-                point_ls = near_border(one_length, one_text)
-                if point_ls:
-                    tmp_format = 'col_nr, one_length, one_text, point_ls'
-                    print('EvalC: %s %s' % (tmp_format, eval(tmp_format)))
-                for offset in point_ls:
-                    row_nr = offset
-                    self.set_black(row_nr, col_nr)
-            if 1:
-                one_length = len_ls[-1]
-                one_text = ''.join(reversed(line_ls[-one_length:]))
-                point_ls = near_border(one_length, one_text)
-                if point_ls:
-                    tmp_format = 'col_nr, one_length, one_text, point_ls'
-                    print('EvalD: %s %s' % (tmp_format, eval(tmp_format)))
-                for offset in point_ls:
-                    row_nr = self.row_cnt - 1 - offset
-                    self.set_black(row_nr, col_nr)
-
     def fill_b_from_each_border(self, is_col, is_end):
         '''
         WorkArea:
@@ -391,19 +340,6 @@ def main():
         col_shadow = list(map(decode, trn_lines))
         zip_check(row_shadow, rows, 'Rows')
         zip_check(col_shadow, cols, 'Cols')
-    work_area = WorkArea(rows, cols)
-    print('PlaceA %d' % work_area.modify_count)
-    work_area.small_margins_hint()
-    print('PlaceB %d' % work_area.modify_count)
-    work_area.fill_from_each_border()
-    print('PlaceC %d' % work_area.modify_count)
-    work_area.fill_from_each_border()
-    print('PlaceD %d' % work_area.modify_count)
-    work_area.fill_from_each_border()
-    print('PlaceE %d' % work_area.modify_count)
-    if 1:
-        out_txt = work_area.slim_text()
-        print(out_txt)
     work_a_area = WorkArea(rows, cols)
     print('Place a %d' % work_a_area.modify_count)
     work_a_area.small_margins_hint()
@@ -412,9 +348,11 @@ def main():
     print('Place c %d' % work_a_area.modify_count)
     work_a_area.fill_a_from_each_border()
     print('Place d %d' % work_a_area.modify_count)
-    print('Both solutions are the same: %s' % (
-        work_area.slim_text(enable_axis=0) == work_a_area.slim_text(enable_axis=0),
-        ))
+    work_a_area.fill_a_from_each_border()
+    print('Place e %d' % work_a_area.modify_count)
+    if 1:
+        out_txt = work_a_area.slim_text()
+        print(out_txt)
 
 
 def rc_dump(label, data_ls):
