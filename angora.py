@@ -187,7 +187,8 @@ def starting_point(first_by_border, cell_ls):
 def near_border(first_by_border, cell_ls):
     out_ls = []
     black_detected = 0
-    for nr in range(first_by_border):
+    offset = starting_point(first_by_border, cell_ls)
+    for nr in range(offset, offset + first_by_border):
         if black_detected and cell_ls[nr] != CODE_BLACK:
             out_ls.append(nr)
         if cell_ls[nr] == CODE_BLACK:
@@ -454,6 +455,8 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(near_border(4, '.H.....'), [2, 3])
         self.assertEqual(near_border(5, '.H.....'), [2, 3, 4])
         self.assertEqual(near_border(5, '.H.H...'), [2, 4])
+        self.assertEqual(near_border(5, ' H.H...'), [2, 4, 5])
+        self.assertEqual(near_border(5, '.. .H.......'), [5, 6, 7])
         self.assertEqual(starting_point(5, '.. .H.......'), 3)
         self.assertEqual(starting_point(5, '...H.......'), 0)
 
