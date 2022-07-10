@@ -185,15 +185,15 @@ def starting_point(first_by_border, cell_ls):
 
 
 def near_border(first_by_border, cell_ls):
-    out_ls = []
+    black_ls = []
     black_detected = 0
     offset = starting_point(first_by_border, cell_ls)
     for nr in range(offset, offset + first_by_border):
         if black_detected and cell_ls[nr] != CODE_BLACK:
-            out_ls.append(nr)
+            black_ls.append(nr)
         if cell_ls[nr] == CODE_BLACK:
             black_detected = 1
-    return out_ls
+    return black_ls
 
 
 def gen_cl_hd(length):
