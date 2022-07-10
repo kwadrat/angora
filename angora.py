@@ -169,6 +169,21 @@ def easy_guess(one_ls, line_size):
     return out_ls
 
 
+def starting_point(first_by_border, cell_ls):
+    offset = 0
+    look_for_place = 1
+    while look_for_place:
+        good_place_found = 1
+        for i in reversed(range(first_by_border)):
+            if cell_ls[offset + i] == CODE_EMPTY:
+                offset += i + 1
+                good_place_found = 0
+                break
+        if good_place_found:
+            look_for_place = 0
+    return offset
+
+
 def near_border(first_by_border, cell_ls):
     out_ls = []
     black_detected = 0
@@ -439,6 +454,8 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(near_border(4, '.H.....'), [2, 3])
         self.assertEqual(near_border(5, '.H.....'), [2, 3, 4])
         self.assertEqual(near_border(5, '.H.H...'), [2, 4])
+        self.assertEqual(starting_point(5, '.. .H.......'), 3)
+        self.assertEqual(starting_point(5, '...H.......'), 0)
 
     def test_generating_column_heading(self):
         '''
