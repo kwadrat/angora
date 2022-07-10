@@ -231,6 +231,24 @@ class WorkArea:
         fd.write(full_txt)
         fd.close()
 
+    def small_margins_hint(self):
+        '''
+        WorkArea:
+        Początkowo można zaczernić te kratki, które na pewno są
+        zaczernione, bo jest na tyle dużo punktów w linii, że wystąpi
+        zaczerniona część wspólna.
+        '''
+        for row_nr in range(self.row_cnt):
+            easy_ls = easy_guess(self.rows[row_nr], self.col_cnt)
+            for easy_start, easy_end in easy_ls:
+                for col_nr in range(easy_start, easy_end):
+                    self.int_table[row_nr][col_nr] = CODE_BLACK
+        for col_nr in range(self.col_cnt):
+            easy_ls = easy_guess(self.cols[col_nr], self.row_cnt)
+            for easy_start, easy_end in easy_ls:
+                for row_nr in range(easy_start, easy_end):
+                    self.int_table[row_nr][col_nr] = CODE_BLACK
+
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
