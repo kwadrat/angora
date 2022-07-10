@@ -210,6 +210,13 @@ class WorkArea:
         self.prepare_empty_data()
         self.assume_no_modification()
 
+    def set_black(self, row_nr, col_nr):
+        '''
+        WorkArea:
+        '''
+        self.int_table[row_nr][col_nr] = CODE_BLACK
+        self.is_modified = 1
+
     def slim_text(self):
         '''
         WorkArea:
@@ -249,12 +256,12 @@ class WorkArea:
             easy_ls = easy_guess(self.rows[row_nr], self.col_cnt)
             for easy_start, easy_end in easy_ls:
                 for col_nr in range(easy_start, easy_end):
-                    self.int_table[row_nr][col_nr] = CODE_BLACK
+                    self.set_black(row_nr, col_nr)
         for col_nr in range(self.col_cnt):
             easy_ls = easy_guess(self.cols[col_nr], self.row_cnt)
             for easy_start, easy_end in easy_ls:
                 for row_nr in range(easy_start, easy_end):
-                    self.int_table[row_nr][col_nr] = CODE_BLACK
+                    self.set_black(row_nr, col_nr)
 
 
 def main():
