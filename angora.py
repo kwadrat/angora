@@ -272,12 +272,14 @@ class WorkArea:
             easy_ls = easy_guess(self.rows[row_nr], self.col_cnt)
             for easy_start, easy_end in easy_ls:
                 for col_nr in range(easy_start, easy_end):
-                    self.set_black(row_nr, col_nr)
+                    if self.int_table[row_nr][col_nr] != CODE_BLACK:
+                        self.set_black(row_nr, col_nr)
         for col_nr in range(self.col_cnt):
             easy_ls = easy_guess(self.cols[col_nr], self.row_cnt)
             for easy_start, easy_end in easy_ls:
                 for row_nr in range(easy_start, easy_end):
-                    self.set_black(row_nr, col_nr)
+                    if self.int_table[row_nr][col_nr] != CODE_BLACK:
+                        self.set_black(row_nr, col_nr)
 
     def fill_from_each_border(self):
         '''
