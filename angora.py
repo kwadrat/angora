@@ -297,10 +297,10 @@ class WorkArea:
                 line_ls = self.int_table[item_nr]
             if is_end:
                 one_length = len_ls[-1]
-                one_text = ''.join(reversed(line_ls[-one_length:]))
+                one_text = ''.join(reversed(line_ls))
             else:
                 one_length = len_ls[0]
-                one_text = ''.join(line_ls[:one_length])
+                one_text = ''.join(line_ls)
             point_ls = near_border(one_length, one_text)
             if point_ls:
                 tmp_format = 'is_col, is_end, item_nr, one_length, one_text, point_ls'
