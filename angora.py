@@ -372,6 +372,7 @@ class WorkArea:
         '''
         WorkArea:
         '''
+        self.is_end = 0
         if self.is_col:
             item_len = self.col_cnt
         else:
