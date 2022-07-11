@@ -398,23 +398,16 @@ def main():
         zip_check(row_shadow, rows, 'Rows')
         zip_check(col_shadow, cols, 'Cols')
     work_a_area = WorkArea(rows, cols)
-    print('Place a %d' % work_a_area.modify_count)
     work_a_area.small_margins_hint()
-    if 1:
-        out_txt = work_a_area.slim_text()
-        print(out_txt)
-    print('Place b %d' % work_a_area.modify_count)
+    work_a_area.display_state('a')
     work_a_area.fill_a_from_each_border()
-    print('Place c %d' % work_a_area.modify_count)
+    work_a_area.display_state('b')
     work_a_area.fill_a_from_each_border()
-    print('Place d %d' % work_a_area.modify_count)
+    work_a_area.display_state('c')
     work_a_area.fill_a_from_each_border()
-    print('Place e %d' % work_a_area.modify_count)
+    work_a_area.display_state('d')
     work_a_area.fill_a_from_each_border()
-    print('Place f %d' % work_a_area.modify_count)
-    if 1:
-        out_txt = work_a_area.slim_text()
-        print(out_txt)
+    work_a_area.display_state('e')
 
 
 def rc_dump(label, data_ls):
