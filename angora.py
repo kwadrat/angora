@@ -408,9 +408,9 @@ class WorkArea:
                 # Fill gaps
                 first_index = one_text.index(CODE_BLACK)
                 last_index = one_text.rindex(CODE_BLACK)
-                for i in range(first_index + 1, last_index):
-                    if one_text[i] is CODE_UNKNOWN:
-                        pass
+                for offset in range(first_index + 1, last_index):
+                    if one_text[offset] is CODE_UNKNOWN:
+                        self.helper_black(item_len, item_nr, offset)
 
     def fill_a_from_each_border(self):
         '''
