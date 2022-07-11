@@ -189,9 +189,17 @@ def near_border(first_by_border, cell_ls):
     space_ls = []
     black_detected = 0
     offset = starting_point(first_by_border, cell_ls)
-    for i in range(offset):
-        if cell_ls[i] == CODE_UNKNOWN:
-            space_ls.append(i)
+    if offset:
+        for i in range(offset):
+            if cell_ls[i] == CODE_UNKNOWN:
+                space_ls.append(i)
+    else:
+        if cell_ls[first_by_border] == CODE_BLACK:
+            for i in range(first_by_border):
+                if cell_ls[first_by_border + i] == CODE_BLACK and cell_ls[i] == CODE_UNKNOWN:
+                    space_ls.append(i)
+                else:
+                    break  # No more spaces to insert
     for nr in range(offset, offset + first_by_border):
         if black_detected and cell_ls[nr] != CODE_BLACK:
             black_ls.append(nr)
@@ -483,6 +491,9 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(near_border(5, '.H.H...'), [[2, 4], []])
         self.assertEqual(near_border(5, ' H.H...'), [[2, 4, 5], []])
         self.assertEqual(near_border(5, '.. .H.......'), [[5, 6, 7], [0, 1]])
+        self.assertEqual(near_border(3, '...H.......'), [[], [0]])
+        self.assertEqual(near_border(3, '...HH......'), [[], [0, 1]])
+        self.assertEqual(near_border(4, '...HH......'), [[], [0]])
         self.assertEqual(starting_point(5, '.. .H.......'), 3)
         self.assertEqual(starting_point(5, '...H.......'), 0)
 
