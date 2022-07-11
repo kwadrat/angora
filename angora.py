@@ -338,6 +338,22 @@ class WorkArea:
             col_nr = item_pos
         self.set_black(row_nr, col_nr)
 
+    def helper_space(self, item_len, item_nr, offset):
+        '''
+        WorkArea:
+        '''
+        if self.is_end:
+            item_pos = item_len - 1 - offset
+        else:
+            item_pos = offset
+        if self.is_col:
+            row_nr = item_pos
+            col_nr = item_nr
+        else:
+            row_nr = item_nr
+            col_nr = item_pos
+        self.set_space(row_nr, col_nr)
+
     def small_margins_hint(self):
         '''
         WorkArea:
@@ -376,17 +392,7 @@ class WorkArea:
             for offset in black_ls:
                 self.helper_black(item_len, item_nr, offset)
             for offset in space_ls:
-                if self.is_end:
-                    item_pos = item_len - 1 - offset
-                else:
-                    item_pos = offset
-                if self.is_col:
-                    row_nr = item_pos
-                    col_nr = item_nr
-                else:
-                    row_nr = item_nr
-                    col_nr = item_pos
-                self.set_space(row_nr, col_nr)
+                self.helper_space(item_len, item_nr, offset)
 
     def fill_c_for_both(self):
         '''
