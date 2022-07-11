@@ -318,7 +318,7 @@ class WorkArea:
                 for row_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
 
-    def fill_b_from_each_border(self, is_end):
+    def fill_b_from_each_border(self):
         '''
         WorkArea:
         '''
@@ -333,7 +333,7 @@ class WorkArea:
             else:
                 len_ls = self.rows[item_nr]
                 line_ls = self.int_table[item_nr]
-            if is_end:
+            if self.is_end:
                 one_length = len_ls[-1]
                 one_text = ''.join(reversed(line_ls))
             else:
@@ -341,10 +341,10 @@ class WorkArea:
                 one_text = ''.join(line_ls)
             black_ls, space_ls = near_border(one_length, one_text)
             if black_ls or space_ls:
-                tmp_format = 'self.is_col, is_end, item_nr, one_length, one_text, black_ls, space_ls'
+                tmp_format = 'self.is_col, self.is_end, item_nr, one_length, one_text, black_ls, space_ls'
                 print('EvalE: %s %s' % (tmp_format, eval(tmp_format)))
             for offset in black_ls:
-                if is_end:
+                if self.is_end:
                     item_pos = item_len - 1 - offset
                 else:
                     item_pos = offset
@@ -356,7 +356,7 @@ class WorkArea:
                     col_nr = item_pos
                 self.set_black(row_nr, col_nr)
             for offset in space_ls:
-                if is_end:
+                if self.is_end:
                     item_pos = item_len - 1 - offset
                 else:
                     item_pos = offset
@@ -401,7 +401,7 @@ class WorkArea:
         '''
         for self.is_col in range(2):
             for self.is_end in range(2):
-                self.fill_b_from_each_border(self.is_end)
+                self.fill_b_from_each_border()
             self.fill_c_for_both()
 
     def display_state(self, label):
