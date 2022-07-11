@@ -318,16 +318,16 @@ class WorkArea:
                 for row_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
 
-    def fill_b_from_each_border(self, is_col, is_end):
+    def fill_b_from_each_border(self, is_end):
         '''
         WorkArea:
         '''
-        if is_col:
+        if self.is_col:
             item_len = self.col_cnt
         else:
             item_len = self.row_cnt
         for item_nr in range(item_len):
-            if is_col:
+            if self.is_col:
                 len_ls = self.cols[item_nr]
                 line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
             else:
@@ -341,14 +341,14 @@ class WorkArea:
                 one_text = ''.join(line_ls)
             black_ls, space_ls = near_border(one_length, one_text)
             if black_ls or space_ls:
-                tmp_format = 'is_col, is_end, item_nr, one_length, one_text, black_ls, space_ls'
+                tmp_format = 'self.is_col, is_end, item_nr, one_length, one_text, black_ls, space_ls'
                 print('EvalE: %s %s' % (tmp_format, eval(tmp_format)))
             for offset in black_ls:
                 if is_end:
                     item_pos = item_len - 1 - offset
                 else:
                     item_pos = offset
-                if is_col:
+                if self.is_col:
                     row_nr = item_pos
                     col_nr = item_nr
                 else:
@@ -360,7 +360,7 @@ class WorkArea:
                     item_pos = item_len - 1 - offset
                 else:
                     item_pos = offset
-                if is_col:
+                if self.is_col:
                     row_nr = item_pos
                     col_nr = item_nr
                 else:
@@ -401,7 +401,7 @@ class WorkArea:
         '''
         for self.is_col in range(2):
             for self.is_end in range(2):
-                self.fill_b_from_each_border(self.is_col, self.is_end)
+                self.fill_b_from_each_border(self.is_end)
             self.fill_c_for_both()
 
     def display_state(self, label):
