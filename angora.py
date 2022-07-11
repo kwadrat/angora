@@ -322,6 +322,22 @@ class WorkArea:
             line_ls = self.int_table[item_nr]
         return len_ls, line_ls
 
+    def helper_position(self, item_len, item_nr, offset):
+        '''
+        WorkArea:
+        '''
+        if self.is_end:
+            item_pos = item_len - 1 - offset
+        else:
+            item_pos = offset
+        if self.is_col:
+            row_nr = item_pos
+            col_nr = item_nr
+        else:
+            row_nr = item_nr
+            col_nr = item_pos
+        return row_nr, col_nr
+
     def helper_black(self, item_len, item_nr, offset):
         '''
         WorkArea:
