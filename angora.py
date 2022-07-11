@@ -393,6 +393,9 @@ def main():
     work_a_area = WorkArea(rows, cols)
     print('Place a %d' % work_a_area.modify_count)
     work_a_area.small_margins_hint()
+    if 1:
+        out_txt = work_a_area.slim_text()
+        print(out_txt)
     print('Place b %d' % work_a_area.modify_count)
     work_a_area.fill_a_from_each_border()
     print('Place c %d' % work_a_area.modify_count)
