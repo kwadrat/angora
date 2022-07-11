@@ -322,6 +322,22 @@ class WorkArea:
             line_ls = self.int_table[item_nr]
         return len_ls, line_ls
 
+    def helper_black(self, item_len, item_nr, offset):
+        '''
+        WorkArea:
+        '''
+        if self.is_end:
+            item_pos = item_len - 1 - offset
+        else:
+            item_pos = offset
+        if self.is_col:
+            row_nr = item_pos
+            col_nr = item_nr
+        else:
+            row_nr = item_nr
+            col_nr = item_pos
+        self.set_black(row_nr, col_nr)
+
     def small_margins_hint(self):
         '''
         WorkArea:
@@ -358,17 +374,7 @@ class WorkArea:
                 tmp_format = 'self.is_col, self.is_end, item_nr, one_length, one_text, black_ls, space_ls'
                 print('EvalE: %s %s' % (tmp_format, eval(tmp_format)))
             for offset in black_ls:
-                if self.is_end:
-                    item_pos = item_len - 1 - offset
-                else:
-                    item_pos = offset
-                if self.is_col:
-                    row_nr = item_pos
-                    col_nr = item_nr
-                else:
-                    row_nr = item_nr
-                    col_nr = item_pos
-                self.set_black(row_nr, col_nr)
+                self.helper_black(item_len, item_nr, offset)
             for offset in space_ls:
                 if self.is_end:
                     item_pos = item_len - 1 - offset
