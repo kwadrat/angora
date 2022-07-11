@@ -400,8 +400,8 @@ class WorkArea:
         WorkArea:
         '''
         for self.is_col in range(2):
-            for is_end in range(2):
-                self.fill_b_from_each_border(self.is_col, is_end)
+            for self.is_end in range(2):
+                self.fill_b_from_each_border(self.is_col, self.is_end)
             self.fill_c_for_both(self.is_col)
 
     def display_state(self, label):
