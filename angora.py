@@ -310,6 +310,18 @@ class WorkArea:
             item_len = self.row_cnt
         return item_len
 
+    def helper_lists(self, item_nr):
+        '''
+        WorkArea:
+        '''
+        if self.is_col:
+            len_ls = self.cols[item_nr]
+            line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
+        else:
+            len_ls = self.rows[item_nr]
+            line_ls = self.int_table[item_nr]
+        return len_ls, line_ls
+
     def small_margins_hint(self):
         '''
         WorkArea:
@@ -334,12 +346,7 @@ class WorkArea:
         '''
         item_len = self.helper_len()
         for item_nr in range(item_len):
-            if self.is_col:
-                len_ls = self.cols[item_nr]
-                line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
-            else:
-                len_ls = self.rows[item_nr]
-                line_ls = self.int_table[item_nr]
+            len_ls, line_ls = self.helper_lists(item_nr)
             if self.is_end:
                 one_length = len_ls[-1]
                 one_text = ''.join(reversed(line_ls))
@@ -382,12 +389,7 @@ class WorkArea:
         self.is_end = 0
         item_len = self.helper_len()
         for item_nr in range(item_len):
-            if self.is_col:
-                len_ls = self.cols[item_nr]
-                line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
-            else:
-                len_ls = self.rows[item_nr]
-                line_ls = self.int_table[item_nr]
+            len_ls, line_ls = self.helper_lists(item_nr)
             one_text = ''.join(line_ls)
             if len(len_ls) == 1:
                 if 1:
