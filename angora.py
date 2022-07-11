@@ -376,6 +376,13 @@ class WorkArea:
             for is_end in range(2):
                 self.fill_b_from_each_border(is_col, is_end)
 
+    def display_state(self, label):
+        '''
+        WorkArea:
+        '''
+        print('Place %s %d' % (label, self.modify_count))
+        print(self.slim_text())
+
 
 def main():
     assert sum(map(sum, rows)) == sum(map(sum, cols))
