@@ -300,6 +300,16 @@ class WorkArea:
         fd.write(full_txt)
         fd.close()
 
+    def helper_len(self):
+        '''
+        WorkArea:
+        '''
+        if self.is_col:
+            item_len = self.col_cnt
+        else:
+            item_len = self.row_cnt
+        return item_len
+
     def small_margins_hint(self):
         '''
         WorkArea:
@@ -322,10 +332,7 @@ class WorkArea:
         '''
         WorkArea:
         '''
-        if self.is_col:
-            item_len = self.col_cnt
-        else:
-            item_len = self.row_cnt
+        item_len = self.helper_len()
         for item_nr in range(item_len):
             if self.is_col:
                 len_ls = self.cols[item_nr]
@@ -373,10 +380,7 @@ class WorkArea:
         WorkArea:
         '''
         self.is_end = 0
-        if self.is_col:
-            item_len = self.col_cnt
-        else:
-            item_len = self.row_cnt
+        item_len = self.helper_len()
         for item_nr in range(item_len):
             if self.is_col:
                 len_ls = self.cols[item_nr]
