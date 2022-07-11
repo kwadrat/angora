@@ -340,7 +340,7 @@ class WorkArea:
                 one_length = len_ls[0]
                 one_text = ''.join(line_ls)
             black_ls, space_ls = near_border(one_length, one_text)
-            if black_ls:
+            if black_ls or space_ls:
                 tmp_format = 'is_col, is_end, item_nr, one_length, one_text, black_ls, space_ls'
                 print('EvalE: %s %s' % (tmp_format, eval(tmp_format)))
             for offset in black_ls:
