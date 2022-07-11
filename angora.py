@@ -368,6 +368,33 @@ class WorkArea:
                     col_nr = item_pos
                 self.set_space(row_nr, col_nr)
 
+    def fill_c_for_both(self, is_col):
+        '''
+        WorkArea:
+        '''
+        if is_col:
+            item_len = self.col_cnt
+        else:
+            item_len = self.row_cnt
+        for item_nr in range(item_len):
+            if is_col:
+                len_ls = self.cols[item_nr]
+                line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
+            else:
+                len_ls = self.rows[item_nr]
+                line_ls = self.int_table[item_nr]
+            one_text = ''.join(line_ls)
+            if len(len_ls) == 1:
+                if 1:
+                    tmp_format = 'is_col, item_nr, len_ls, one_text'
+                    print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+                # Fill gaps
+                first_index = one_text.index(CODE_BLACK)
+                last_index = one_text.rindex(CODE_BLACK)
+                for i in range(first_index + 1, last_index):
+                    if one_text[i] is CODE_UNKNOWN:
+                        pass
+
     def fill_a_from_each_border(self):
         '''
         WorkArea:
@@ -375,6 +402,7 @@ class WorkArea:
         for is_col in range(2):
             for is_end in range(2):
                 self.fill_b_from_each_border(is_col, is_end)
+            self.fill_c_for_both(is_col)
 
     def display_state(self, label):
         '''
