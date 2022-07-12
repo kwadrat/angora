@@ -351,7 +351,11 @@ class WorkArea:
             line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
         else:
             line_ls = self.int_table[item_nr]
-        return line_ls
+        if self.is_end:
+            one_text = ''.join(reversed(line_ls))
+        else:
+            one_text = ''.join(line_ls)
+        return one_text
 
     def helper_position(self, item_len, item_nr, offset):
         '''
@@ -408,13 +412,11 @@ class WorkArea:
         item_len = self.helper_len()
         for item_nr in range(item_len):
             len_ls = self.get_sketch(item_nr)
-            line_ls = self.get_details(item_nr)
+            one_text = self.get_details(item_nr)
             if self.is_end:
                 one_length = len_ls[-1]
-                one_text = ''.join(reversed(line_ls))
             else:
                 one_length = len_ls[0]
-                one_text = ''.join(line_ls)
             black_ls, space_ls = near_border(one_length, one_text)
             if black_ls or space_ls:
                 tmp_format = 'self.is_col, self.is_end, item_nr, one_length, one_text, black_ls, space_ls'
@@ -440,8 +442,7 @@ class WorkArea:
         item_len = self.helper_len()
         for item_nr in range(item_len):
             len_ls = self.get_sketch(item_nr)
-            line_ls = self.get_details(item_nr)
-            one_text = ''.join(line_ls)
+            one_text = self.get_details(item_nr)
             if len(len_ls) == 1:
                 if 1:
                     tmp_format = 'self.is_col, item_nr, len_ls, one_text'
