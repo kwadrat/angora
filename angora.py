@@ -282,7 +282,7 @@ class WorkArea:
             out_ls.append(col_header)
         for nr, row_data in enumerate(self.int_table):
             if enable_axis:
-                trailing_txt = ' ' + str(nr)
+                trailing_txt = ' ' + str(nr + 1)
             else:
                 trailing_txt = ''
             unified_line = ''.join(row_data) + trailing_txt
