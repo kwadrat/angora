@@ -419,7 +419,8 @@ class WorkArea:
         '''
         item_len = self.helper_len()
         for item_nr in range(item_len):
-            len_ls, line_ls = self.helper_lists(item_nr)
+            len_ls = self.get_sketch(item_nr)
+            line_ls = self.get_details(item_nr)
             if self.is_end:
                 one_length = len_ls[-1]
                 one_text = ''.join(reversed(line_ls))
@@ -450,7 +451,8 @@ class WorkArea:
         self.is_end = 0
         item_len = self.helper_len()
         for item_nr in range(item_len):
-            len_ls, line_ls = self.helper_lists(item_nr)
+            len_ls = self.get_sketch(item_nr)
+            line_ls = self.get_details(item_nr)
             one_text = ''.join(line_ls)
             if len(len_ls) == 1:
                 if 1:
