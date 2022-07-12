@@ -277,16 +277,14 @@ class WorkArea:
         WorkArea:
         '''
         if self.int_table[row_nr][col_nr] != CODE_BLACK:
-            self.int_table[row_nr][col_nr] = CODE_BLACK
-            self.modify_count += 1
+            self.single_set(row_nr, col_nr, CODE_BLACK)
 
     def set_space(self, row_nr, col_nr):
         '''
         WorkArea:
         '''
         if self.int_table[row_nr][col_nr] == CODE_UNKNOWN:
-            self.int_table[row_nr][col_nr] = CODE_EMPTY
-            self.modify_count += 1
+            self.single_set(row_nr, col_nr, CODE_EMPTY)
         else:
             raise RuntimeError('Why cleaning this place?')
 
