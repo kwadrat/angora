@@ -208,6 +208,18 @@ def near_border(first_by_border, cell_ls):
     return [black_ls, space_ls]
 
 
+def from_border(first_by_border, cell_ls):
+    black_ls = []
+    space_ls = []
+    if cell_ls[0] == CODE_BLACK:
+        for nr in range(first_by_border):
+            if cell_ls[nr] == CODE_UNKNOWN:
+                black_ls.append(nr)
+        if cell_ls[nr] == CODE_UNKNOWN:
+            space_ls.append(first_by_border)
+    return [black_ls, space_ls]
+
+
 def gen_cl_hd(length):
     return ''.join(map(lambda a: str(a % 10), range(length)))
 
@@ -546,6 +558,15 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(near_border(4, '...HH......'), [[], [0]])
         self.assertEqual(starting_point(5, '.. .H.......'), 3)
         self.assertEqual(starting_point(5, '...H.......'), 0)
+
+    def test_ship_touches_border(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        self.assertEqual(from_border(4, '...HH......'), [[], []])
+        self.assertEqual(from_border(4, 'H......'), [[1, 2, 3], [4]])
+        self.assertEqual(from_border(5, 'H......'), [[1, 2, 3, 4], [5]])
+        self.assertEqual(from_border(5, 'HH.....'), [[2, 3, 4], [5]])
 
     def test_generating_column_heading(self):
         '''
