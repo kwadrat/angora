@@ -409,6 +409,7 @@ class WorkArea:
         '''
         WorkArea:
         '''
+        frequent_update = 1
         item_len = self.helper_len()
         for item_nr in range(item_len):
             len_ls = self.get_sketch(item_nr)
@@ -425,11 +426,15 @@ class WorkArea:
                 self.helper_black(item_len, item_nr, offset)
             for offset in space_ls:
                 self.helper_space(item_len, item_nr, offset)
+            if frequent_update:
+                one_text = self.get_details(item_nr)
             black_ls, space_ls = from_border(one_length, one_text)
             for offset in black_ls:
                 self.helper_black(item_len, item_nr, offset)
             for offset in space_ls:
                 self.helper_space(item_len, item_nr, offset)
+            if frequent_update:
+                one_text = self.get_details(item_nr)
             black_ls = fill_ship_by_border(one_length, one_text)
             for offset in black_ls:
                 self.helper_black(item_len, item_nr, offset)
