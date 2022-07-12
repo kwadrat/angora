@@ -446,9 +446,6 @@ class WorkArea:
             len_ls = self.get_sketch(item_nr)
             one_text = self.get_details(item_nr)
             if len(len_ls) == 1:
-                if 1:
-                    tmp_format = 'self.is_col, item_nr, len_ls, one_text'
-                    print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
                 # Fill gaps
                 first_index = one_text.index(CODE_BLACK)
                 last_index = one_text.rindex(CODE_BLACK)
