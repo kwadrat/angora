@@ -353,18 +353,6 @@ class WorkArea:
             line_ls = self.int_table[item_nr]
         return line_ls
 
-    def helper_lists(self, item_nr):
-        '''
-        WorkArea:
-        '''
-        if self.is_col:
-            len_ls = self.cols[item_nr]
-            line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
-        else:
-            len_ls = self.rows[item_nr]
-            line_ls = self.int_table[item_nr]
-        return len_ls, line_ls
-
     def helper_position(self, item_len, item_nr, offset):
         '''
         WorkArea:
