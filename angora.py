@@ -333,6 +333,16 @@ class WorkArea:
             item_len = self.row_cnt
         return item_len
 
+    def get_sketch(self, item_nr):
+        '''
+        WorkArea:
+        '''
+        if self.is_col:
+            len_ls = self.cols[item_nr]
+        else:
+            len_ls = self.rows[item_nr]
+        return len_ls
+
     def helper_lists(self, item_nr):
         '''
         WorkArea:
