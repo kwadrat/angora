@@ -265,6 +265,13 @@ class WorkArea:
         self.prepare_empty_data()
         self.assume_no_modification()
 
+    def single_set(self, row_nr, col_nr, one_symbol):
+        '''
+        WorkArea:
+        '''
+        self.int_table[row_nr][col_nr] = one_symbol
+        self.modify_count += 1
+
     def set_black(self, row_nr, col_nr):
         '''
         WorkArea:
