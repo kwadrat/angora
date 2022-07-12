@@ -419,9 +419,6 @@ class WorkArea:
             else:
                 one_length = len_ls[0]
             black_ls, space_ls = near_border(one_length, one_text)
-            if black_ls or space_ls:
-                tmp_format = 'self.is_col, self.is_end, item_nr, one_length, one_text, black_ls, space_ls'
-                print('EvalE: %s %s' % (tmp_format, eval(tmp_format)))
             for offset in black_ls:
                 self.helper_black(item_len, item_nr, offset)
             for offset in space_ls:
