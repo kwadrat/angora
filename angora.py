@@ -419,6 +419,9 @@ class WorkArea:
                 self.helper_black(item_len, item_nr, offset)
             for offset in space_ls:
                 self.helper_space(item_len, item_nr, offset)
+            black_ls = fill_ship_by_border(one_length, one_text)
+            for offset in black_ls:
+                self.helper_black(item_len, item_nr, offset)
 
     def fill_c_for_both(self):
         '''
