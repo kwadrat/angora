@@ -221,7 +221,7 @@ def from_border(first_by_border, cell_ls):
 
 
 def gen_cl_hd(length):
-    return ''.join(map(lambda a: str(a % 10), range(length)))
+    return ''.join(map(lambda a: str(a % 10), range(1, length + 1)))
 
 
 class WorkArea:
@@ -577,5 +577,5 @@ class TestAngoraPuzzle(unittest.TestCase):
         '''
         TestAngoraPuzzle:
         '''
-        self.assertEqual(gen_cl_hd(2), '01')
-        self.assertEqual(gen_cl_hd(3), '012')
+        self.assertEqual(gen_cl_hd(2), '12')
+        self.assertEqual(gen_cl_hd(3), '123')
