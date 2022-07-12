@@ -215,7 +215,7 @@ def from_border(first_by_border, cell_ls):
         for nr in range(first_by_border):
             if cell_ls[nr] == CODE_UNKNOWN:
                 black_ls.append(nr)
-        if cell_ls[nr] == CODE_UNKNOWN:
+        if cell_ls[first_by_border] == CODE_UNKNOWN:
             space_ls.append(first_by_border)
     return [black_ls, space_ls]
 
@@ -572,6 +572,7 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(from_border(4, 'H......'), [[1, 2, 3], [4]])
         self.assertEqual(from_border(5, 'H......'), [[1, 2, 3, 4], [5]])
         self.assertEqual(from_border(5, 'HH.....'), [[2, 3, 4], [5]])
+        self.assertEqual(from_border(1, 'H..'), [[], [1]])
 
     def test_generating_column_heading(self):
         '''
