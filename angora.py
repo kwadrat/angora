@@ -461,15 +461,14 @@ def main():
         zip_check(col_shadow, cols, 'Cols')
     work_a_area = WorkArea(rows, cols)
     work_a_area.small_margins_hint()
-    work_a_area.display_state('a')
-    work_a_area.fill_a_from_each_border()
-    work_a_area.display_state('b')
-    work_a_area.fill_a_from_each_border()
-    work_a_area.display_state('c')
-    work_a_area.fill_a_from_each_border()
-    work_a_area.display_state('d')
-    work_a_area.fill_a_from_each_border()
-    work_a_area.display_state('e')
+    prev_count = -1
+    while 1:
+        prev_count = work_a_area.modify_count
+        work_a_area.fill_a_from_each_border()
+        if work_a_area.modify_count > prev_count:
+            work_a_area.display_state('a')
+        else:
+            break
 
 
 def rc_dump(label, data_ls):
