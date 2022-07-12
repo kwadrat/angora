@@ -220,6 +220,17 @@ def from_border(first_by_border, cell_ls):
     return [black_ls, space_ls]
 
 
+def fill_ship_by_border(first_by_border, cell_ls):
+    black_ls = []
+    # Fill fields of ship that is touching border
+    if cell_ls[first_by_border] == CODE_EMPTY:
+        if CODE_BLACK in cell_ls[:first_by_border]:
+            for nr in range(first_by_border):
+                if cell_ls[nr] == CODE_UNKNOWN:
+                    black_ls.append(nr)
+    return black_ls
+
+
 def gen_cl_hd(length):
     return ''.join(map(lambda a: str(a % 10), range(1, length + 1)))
 
@@ -572,6 +583,14 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(from_border(5, 'H......'), [[1, 2, 3, 4], [5]])
         self.assertEqual(from_border(5, 'HH.....'), [[2, 3, 4], [5]])
         self.assertEqual(from_border(1, 'H..'), [[], [1]])
+
+    def test_ship_is_finished_but_not_filled(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        self.assertEqual(fill_ship_by_border(2, '.H .'), [0])
+        self.assertEqual(fill_ship_by_border(3, 'H.H .'), [1])
+        self.assertEqual(fill_ship_by_border(3, '.H. .'), [0, 2])
 
     def test_generating_column_heading(self):
         '''
