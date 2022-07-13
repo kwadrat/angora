@@ -289,7 +289,7 @@ class ItemChisel:
                     part_after = self.cell_txt[end_point:]
                     other_txt = part_before + part_after
                     if end_point <= self.total_len:
-                        if other_txt.count(CODE_BLACK) == 0:
+                        if self.next_chisel is not None or other_txt.count(CODE_BLACK) == 0:
                             if part_inside.count(CODE_EMPTY) == 0:
                                 result = self.local_nr
                                 look_for_result = 0
