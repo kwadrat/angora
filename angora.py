@@ -305,13 +305,14 @@ class ItemChisel:
         ItemChisel:
         '''
         result = None
-        self.sub_start = sub_start
-        self.local_nr = self.sub_start - 1
-        curr_pos = self.internal_rotate()
-        if self.next_chisel is not None:
-            if curr_pos is not None:
-                next_pos = curr_pos + self.ship_len + 1
-                self.next_chisel.multi_rotor_pos(next_pos)
+        if sub_start < self.total_len:
+            self.sub_start = sub_start
+            self.local_nr = self.sub_start - 1
+            curr_pos = self.internal_rotate()
+            if self.next_chisel is not None:
+                if curr_pos is not None:
+                    next_pos = curr_pos + self.ship_len + 1
+                    self.next_chisel.multi_rotor_pos(next_pos)
         return result
 
     def next_head_pos(self):
@@ -322,7 +323,10 @@ class ItemChisel:
         if self.next_chisel is not None:
             tail_status = self.next_chisel.internal_rotate()
             if tail_status is None:
-                self.internal_rotate()
+                curr_pos = self.internal_rotate()
+                if curr_pos is not None:
+                    next_pos = curr_pos + self.ship_len + 1
+                    self.next_chisel.multi_rotor_pos(next_pos)
         else:
             self.internal_rotate()
         return result
@@ -793,3 +797,7 @@ class TestAngoraPuzzle(unittest.TestCase):
         obj.text_for_all('. .')
         self.assertEqual(obj.next_full_pos(), [0, 2])
         self.assertEqual(obj.next_full_pos(), None)
+        obj.text_for_all(' . . . ')
+        self.assertEqual(obj.next_full_pos(), [1, 3])
+        self.assertEqual(obj.next_full_pos(), [1, 5])
+        self.assertEqual(obj.next_full_pos(), [3, 5])
