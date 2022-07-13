@@ -328,6 +328,20 @@ class ItemChisel:
                     self.next_chisel.multi_rotor_pos(next_pos)
         return result
 
+    def update_locations(self):
+        '''
+        ItemChisel:
+        '''
+        if self.next_chisel is not None:
+            tail_status = self.next_chisel.internal_rotate()
+            if tail_status is None:
+                curr_pos = self.internal_rotate()
+                if curr_pos is not None:
+                    next_pos = curr_pos + self.ship_len + 1
+                    self.next_chisel.multi_rotor_pos(next_pos)
+        else:
+            self.internal_rotate()
+
     def next_head_pos(self):
         '''
         ItemChisel:
