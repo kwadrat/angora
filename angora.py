@@ -284,7 +284,7 @@ class ItemChisel:
             if self.local_nr < self.total_len:
                 if self.cell_txt[self.local_nr] in (CODE_UNKNOWN, CODE_BLACK):
                     end_point = self.local_nr + self.ship_len
-                    part_before = self.cell_txt[:self.local_nr]
+                    part_before = self.cell_txt[self.sub_start:self.local_nr]
                     part_inside = self.cell_txt[self.local_nr:end_point]
                     part_after = self.cell_txt[end_point:]
                     other_txt = part_before + part_after
