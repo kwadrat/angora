@@ -252,10 +252,11 @@ class ItemChisel:
         '''
         self.ship_len = ship_len
 
-    def __init__(self, ship_len):
+    def __init__(self, ship_len, elem_nr=0):
         '''
         ItemChisel:
         '''
+        self.elem_nr = elem_nr
         self.internal_store(ship_len)
         self.set_next(None)
 
