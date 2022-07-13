@@ -174,6 +174,10 @@ def starting_point(first_by_border, cell_ls):
     look_for_place = 1
     while look_for_place:
         good_place_found = 1
+        if offset + first_by_border < len(cell_ls) and cell_ls[offset + first_by_border] == CODE_BLACK:
+            offset += 1
+            good_place_found = 0
+            continue
         for i in reversed(range(first_by_border)):
             if cell_ls[offset + i] == CODE_EMPTY:
                 offset += i + 1
@@ -711,8 +715,20 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(near_border(3, '...H.......'), [[], [0]])
         self.assertEqual(near_border(3, '...HH......'), [[], [0, 1]])
         self.assertEqual(near_border(4, '...HH......'), [[], [0]])
+        self.assertEqual(near_border(3, ' ..HH'), [[], [1]])
+        self.assertEqual(near_border(2, ' ..HH'), [[], [1, 2]])
+        self.assertEqual(starting_point(4, '    HHHH.'), 4) # qaz
         self.assertEqual(starting_point(5, '.. .H.......'), 3)
         self.assertEqual(starting_point(5, '...H.......'), 0)
+        self.assertEqual(starting_point(3, ' ..HH'), 2)
+        self.assertEqual(starting_point(2, ' ..HH'), 3)
+        self.assertEqual(starting_point(4, ' .H.. '), 1)
+        self.assertEqual(starting_point(1, ' .H.. '), 2)
+        self.assertEqual(starting_point(2, ' .H.. '), 1)
+        self.assertEqual(starting_point(3, ' .H.. '), 1)
+        self.assertEqual(starting_point(4, ' ..H. '), 1)
+        self.assertEqual(starting_point(2, ' ..H. '), 2)
+        self.assertEqual(starting_point(10, '    ....HHHHHH. '), 4)
 
     def test_ship_touches_border(self):
         '''
