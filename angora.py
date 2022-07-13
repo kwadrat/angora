@@ -235,6 +235,99 @@ def gen_cl_hd(length):
     return ''.join(map(lambda a: str(a % 10), range(1, length + 1)))
 
 
+class ItemChisel:
+    def set_next(self, next_chisel):
+        '''
+        ItemChisel:
+        '''
+        self.next_chisel = next_chisel
+
+    def internal_store(self, ship_len):
+        '''
+        ItemChisel:
+        '''
+        self.ship_len = ship_len
+
+    def __init__(self, ship_len):
+        '''
+        ItemChisel:
+        '''
+        self.internal_store(ship_len)
+        self.set_next(None)
+
+    def apply_new_text(self, cell_txt):
+        '''
+        ItemChisel:
+        '''
+        self.cell_txt = cell_txt
+        self.total_len = len(self.cell_txt)
+
+    def internal_rotate(self):
+        '''
+        ItemChisel:
+        '''
+        result = None
+        look_for_result = 1
+        while look_for_result and self.local_nr is not None and self.local_nr < self.total_len:
+            self.local_nr += 1
+            if self.local_nr < self.total_len:
+                if self.cell_txt[self.local_nr] in (CODE_UNKNOWN, CODE_BLACK):
+                    end_point = self.local_nr + self.ship_len
+                    part_before = self.cell_txt[:self.local_nr]
+                    part_inside = self.cell_txt[self.local_nr:end_point]
+                    part_after = self.cell_txt[end_point:]
+                    other_txt = part_before + part_after
+                    if end_point <= self.total_len:
+                        if other_txt.count(CODE_BLACK) == 0:
+                            if part_inside.count(CODE_EMPTY) == 0:
+                                result = self.local_nr
+                                look_for_result = 0
+            else:
+                self.local_nr = None
+        return result
+
+    def get_list_of_positions(self):
+        '''
+        ItemChisel:
+        '''
+        result = None
+        if self.local_nr is not None:
+            if self.next_chisel is None:
+                result = [self.local_nr]
+            else:
+                tail_ls = self.next_chisel.get_list_of_positions()
+                if tail_ls is not None:
+                    result = [self.local_nr] + tail_ls
+        return result
+
+    def multi_rotor_pos(self, sub_start):
+        '''
+        ItemChisel:
+        '''
+        result = None
+        self.sub_start = sub_start
+        self.local_nr = self.sub_start - 1
+        curr_pos = self.internal_rotate()
+        if curr_pos is not None:
+            if self.next_chisel is not None:
+                next_pos = curr_pos + self.ship_len + 1
+                self.next_chisel.multi_rotor_pos(next_pos)
+        return result
+
+    def next_head_pos(self):
+        '''
+        ItemChisel:
+        '''
+        result = self.get_list_of_positions()
+        if self.next_chisel is not None:
+            tail_status = self.next_chisel.internal_rotate()
+            if tail_status is None:
+                self.internal_rotate()
+        else:
+            self.internal_rotate()
+        return result
+
+
 class WorkArea:
     def prepare_empty_data(self):
         '''
@@ -616,3 +709,53 @@ class TestAngoraPuzzle(unittest.TestCase):
         '''
         self.assertEqual(gen_cl_hd(2), '12')
         self.assertEqual(gen_cl_hd(3), '123')
+
+    def test_a(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        obj = ItemChisel(1)
+        obj.apply_new_text('.')
+        obj.multi_rotor_pos(0)
+        self.assertEqual(obj.next_head_pos(), [0])
+        self.assertEqual(obj.next_head_pos(), None)
+        obj = ItemChisel(1)
+        obj.apply_new_text('..')
+        obj.multi_rotor_pos(0)
+        self.assertEqual(obj.next_head_pos(), [0])
+        self.assertEqual(obj.next_head_pos(), [1])
+        self.assertEqual(obj.next_head_pos(), None)
+        obj = ItemChisel(1)
+        obj.apply_new_text('...')
+        obj.multi_rotor_pos(0)
+        self.assertEqual(obj.next_head_pos(), [0])
+        self.assertEqual(obj.next_head_pos(), [1])
+        self.assertEqual(obj.next_head_pos(), [2])
+        self.assertEqual(obj.next_head_pos(), None)
+        obj = ItemChisel(1)
+        obj.apply_new_text('. .')
+        obj.multi_rotor_pos(0)
+        self.assertEqual(obj.next_head_pos(), [0])
+        self.assertEqual(obj.next_head_pos(), [2])
+        self.assertEqual(obj.next_head_pos(), None)
+        obj = ItemChisel(1)
+        obj.apply_new_text('H')
+        obj.multi_rotor_pos(0)
+        self.assertEqual(obj.next_head_pos(), [0])
+        self.assertEqual(obj.next_head_pos(), None)
+        obj = ItemChisel(1)
+        obj.apply_new_text('  H  .')
+        obj.multi_rotor_pos(0)
+        self.assertEqual(obj.next_head_pos(), [2])
+        self.assertEqual(obj.next_head_pos(), None)
+        obj = ItemChisel(1)
+        obj.apply_new_text('. H')
+        obj.multi_rotor_pos(0)
+        self.assertEqual(obj.next_head_pos(), [2])
+        self.assertEqual(obj.next_head_pos(), None)
+        obj = ItemChisel(2)
+        obj.apply_new_text('.. .')
+        obj.multi_rotor_pos(0)
+        self.assertEqual(obj.next_head_pos(), [0])
+        self.assertEqual(obj.next_head_pos(), None)
+        obj = ItemChisel(1)
