@@ -308,8 +308,8 @@ class ItemChisel:
         self.sub_start = sub_start
         self.local_nr = self.sub_start - 1
         curr_pos = self.internal_rotate()
-        if curr_pos is not None:
-            if self.next_chisel is not None:
+        if self.next_chisel is not None:
+            if curr_pos is not None:
                 next_pos = curr_pos + self.ship_len + 1
                 self.next_chisel.multi_rotor_pos(next_pos)
         return result
