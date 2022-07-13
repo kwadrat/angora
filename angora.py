@@ -291,8 +291,10 @@ class ItemChisel:
                     if end_point <= self.total_len:
                         if self.next_chisel is not None or other_txt.count(CODE_BLACK) == 0:
                             if part_inside.count(CODE_EMPTY) == 0:
-                                result = self.local_nr
-                                look_for_result = 0
+                                if self.local_nr == 0 or self.cell_txt[self.local_nr - 1] != CODE_BLACK:
+                                    if end_point == self.total_len or self.cell_txt[end_point] != CODE_BLACK:
+                                        result = self.local_nr
+                                        look_for_result = 0
             else:
                 self.local_nr = None
         return result
