@@ -252,6 +252,12 @@ class ItemChisel:
         '''
         self.ship_len = ship_len
 
+    def __repr__(self):
+        '''
+        ItemChisel:
+        '''
+        return 'ItemChisel[%d]' % self.elem_nr
+
     def __init__(self, ship_len, elem_nr=0):
         '''
         ItemChisel:
