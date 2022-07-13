@@ -328,6 +328,31 @@ class ItemChisel:
         return result
 
 
+class WoodenBox:
+    def __init__(self, len_ls):
+        '''
+        WoodenBox:
+        '''
+        self.wood_ls = list(map(lambda x: ItemChisel(x), len_ls))
+        for i in range(len(self.wood_ls) - 1):
+            next_in_chain = self.wood_ls[i + 1]
+            self.wood_ls[i].set_next(next_in_chain)
+
+    def text_for_all(self, cell_txt):
+        '''
+        WoodenBox:
+        '''
+        for one_ship in self.wood_ls:
+            one_ship.apply_new_text(cell_txt)
+        new_nr = self.wood_ls[0].multi_rotor_pos(0)
+
+    def next_full_pos(self):
+        '''
+        WoodenBox:
+        '''
+        return self.wood_ls[0].next_head_pos()
+
+
 class WorkArea:
     def prepare_empty_data(self):
         '''
@@ -759,3 +784,12 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(obj.next_head_pos(), [0])
         self.assertEqual(obj.next_head_pos(), None)
         obj = ItemChisel(1)
+
+    def test_b(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        obj = WoodenBox([1, 1])
+        obj.text_for_all('. .')
+        self.assertEqual(obj.next_full_pos(), [0, 2])
+        self.assertEqual(obj.next_full_pos(), None)
