@@ -348,7 +348,7 @@ class WoodenBox:
         '''
         WoodenBox:
         '''
-        self.wood_ls = list(map(lambda x: ItemChisel(x), len_ls))
+        self.wood_ls = list(map(lambda x: ItemChisel(x[1], x[0]), enumerate(len_ls)))
         for i in range(len(self.wood_ls) - 1):
             next_in_chain = self.wood_ls[i + 1]
             self.wood_ls[i].set_next(next_in_chain)
