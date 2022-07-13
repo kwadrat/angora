@@ -344,7 +344,7 @@ class WoodenBox:
         '''
         for one_ship in self.wood_ls:
             one_ship.apply_new_text(cell_txt)
-        new_nr = self.wood_ls[0].multi_rotor_pos(0)
+        self.wood_ls[0].multi_rotor_pos(0)
 
     def next_full_pos(self):
         '''
