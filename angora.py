@@ -717,7 +717,7 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(near_border(4, '...HH......'), [[], [0]])
         self.assertEqual(near_border(3, ' ..HH'), [[], [1]])
         self.assertEqual(near_border(2, ' ..HH'), [[], [1, 2]])
-        self.assertEqual(starting_point(4, '    HHHH.'), 4) # qaz
+        self.assertEqual(starting_point(4, '    HHHH.'), 4)
         self.assertEqual(starting_point(5, '.. .H.......'), 3)
         self.assertEqual(starting_point(5, '...H.......'), 0)
         self.assertEqual(starting_point(3, ' ..HH'), 2)
