@@ -75,6 +75,9 @@ cols = text_to_numbers(cols)
 ZnakEscape = chr(27)
 
 
+verbose_messages = 0
+small_enough = 29
+enable_stepping = 0
 def color_message(napis, paint, color):
     if paint:
         result = '%(escape)s[%(color)sm%(napis)s%(escape)s[0m' % {
@@ -169,16 +172,20 @@ def easy_guess(one_ls, line_size):
     return out_ls
 
 
-def starting_point(first_by_border, cell_ls):
+def starting_point(ship_len, cell_ls):
     offset = 0
     look_for_place = 1
     while look_for_place:
         good_place_found = 1
-        if offset + first_by_border < len(cell_ls) and cell_ls[offset + first_by_border] == CODE_BLACK:
+        if offset + ship_len > len(cell_ls):
+            offset = None  # Impossible, ship extends beyond legal domain
+            look_for_place = 0
+            continue
+        if offset + ship_len < len(cell_ls) and cell_ls[offset + ship_len] == CODE_BLACK:
             offset += 1
             good_place_found = 0
             continue
-        for i in reversed(range(first_by_border)):
+        for i in reversed(range(ship_len)):
             if cell_ls[offset + i] == CODE_EMPTY:
                 offset += i + 1
                 good_place_found = 0
@@ -193,22 +200,23 @@ def near_border(first_by_border, cell_ls):
     space_ls = []
     black_detected = 0
     offset = starting_point(first_by_border, cell_ls)
-    if offset:
-        for i in range(offset):
-            if cell_ls[i] == CODE_UNKNOWN:
-                space_ls.append(i)
-    else:
-        if cell_ls[first_by_border] == CODE_BLACK:
-            for i in range(first_by_border):
-                if cell_ls[first_by_border + i] == CODE_BLACK and cell_ls[i] == CODE_UNKNOWN:
+    if offset is not None:
+        if offset:
+            for i in range(offset):
+                if cell_ls[i] == CODE_UNKNOWN:
                     space_ls.append(i)
-                else:
-                    break  # No more spaces to insert
-    for nr in range(offset, offset + first_by_border):
-        if black_detected and cell_ls[nr] != CODE_BLACK:
-            black_ls.append(nr)
-        if cell_ls[nr] == CODE_BLACK:
-            black_detected = 1
+        else:
+            if cell_ls[first_by_border] == CODE_BLACK:
+                for i in range(first_by_border):
+                    if cell_ls[first_by_border + i] == CODE_BLACK and cell_ls[i] == CODE_UNKNOWN:
+                        space_ls.append(i)
+                    else:
+                        break  # No more spaces to insert
+        for nr in range(offset, offset + first_by_border):
+            if black_detected and cell_ls[nr] != CODE_BLACK:
+                black_ls.append(nr)
+            if cell_ls[nr] == CODE_BLACK:
+                black_detected = 1
     return [black_ls, space_ls]
 
 
@@ -239,12 +247,62 @@ def gen_cl_hd(length):
     return ''.join(map(lambda a: str(a % 10), range(1, length + 1)))
 
 
+class DeBug:
+    def this_off_test(self):
+        '''
+        DeBug:
+        '''
+        self.this_test = 0
+
+    def __init__(self):
+        '''
+        DeBug:
+        '''
+        self.this_off_test()
+
+    def look_at_this_test(self):
+        '''
+        DeBug:
+        '''
+        self.this_test = 1
+
+    def i_should_inform(self, my_nr):
+        '''
+        DeBug:
+        '''
+        if 0:
+            result = self.this_test and (my_nr == 4)
+            if result:
+                print()
+                print('%s' % self.all_state)
+        return 0
+        return result
+
+    def set_state(self, prm_state):
+        '''
+        DeBug:
+        '''
+        self.all_state = prm_state
+
+de_bug = DeBug()
+
 class ItemChisel:
     def set_next(self, next_chisel):
         '''
         ItemChisel:
         '''
         self.next_chisel = next_chisel
+
+    def set_local(self, lcl_number):
+        '''
+        ItemChisel:
+        '''
+        if 0:
+            if lcl_number is None and self.elem_nr == 5 and de_bug.this_test:
+                de_bug.this_off_test()
+                import pdb
+                pdb.set_trace()
+        self.local_nr = lcl_number
 
     def internal_store(self, ship_len):
         '''
@@ -256,12 +314,17 @@ class ItemChisel:
         '''
         ItemChisel:
         '''
-        return 'ItemChisel[%d]' % self.elem_nr
+        if self.local_nr is None:
+            tmp_txt = 'None'
+        else:
+            tmp_txt = '%d' % self.local_nr
+        return 'ItemChisel[%d, %s]' % (self.elem_nr, tmp_txt)
 
     def __init__(self, ship_len, elem_nr=0):
         '''
         ItemChisel:
         '''
+        self.set_local(-2)
         self.elem_nr = elem_nr
         self.internal_store(ship_len)
         self.set_next(None)
@@ -281,7 +344,7 @@ class ItemChisel:
         look_for_result = 1
         while look_for_result and self.local_nr is not None and self.local_nr < self.total_len:
             self.local_nr += 1
-            if self.local_nr < self.total_len:
+            if self.local_nr >= 0 and self.local_nr < self.total_len:
                 if self.cell_txt[self.local_nr] in (CODE_UNKNOWN, CODE_BLACK):
                     end_point = self.local_nr + self.ship_len
                     part_before = self.cell_txt[self.sub_start:self.local_nr]
@@ -296,7 +359,9 @@ class ItemChisel:
                                         result = self.local_nr
                                         look_for_result = 0
             else:
-                self.local_nr = None
+                self.set_local(None)
+        if verbose_messages:
+            print('End internal_rotate()', self, result)
         return result
 
     def get_list_of_positions(self):
@@ -313,34 +378,110 @@ class ItemChisel:
                     result = [self.local_nr] + tail_ls
         return result
 
-    def multi_rotor_pos(self, sub_start):
+    def count_of_intruders_between_me_and_next(self, curr_pos, position_of_next=None):
+        '''
+        ItemChisel:
+        '''
+        start_idx = curr_pos + self.ship_len
+        if position_of_next is None:
+            after_str = self.cell_txt[start_idx:]
+        else:
+            after_str = self.cell_txt[start_idx:position_of_next]
+        return after_str.count(CODE_BLACK)
+
+    def multi_rotor_pos(self, sub_start, detail_stop=0):
         '''
         ItemChisel:
         '''
         result = None
+        if verbose_messages:
+            print('Wejscie do multi_rotor_ _pos:', self, sub_start, self.total_len)
+        if 0:
+            if self.elem_nr == 4:
+                import pdb
+                pdb.set_trace()
+        if detail_stop:
+            import pdb
+            pdb.set_trace()
         if sub_start < self.total_len:
             self.sub_start = sub_start
-            self.local_nr = self.sub_start - 1
-            curr_pos = self.internal_rotate()
-            if self.next_chisel is not None:
+            self.set_local(self.sub_start - 1)
+            look_for_good_values = 1
+            while look_for_good_values:
+                curr_pos = self.internal_rotate()
                 if curr_pos is not None:
-                    next_pos = curr_pos + self.ship_len + 1
-                    self.next_chisel.multi_rotor_pos(next_pos)
+                    if self.next_chisel is not None:
+                        next_pos = curr_pos + self.ship_len + 1
+                        if next_pos >= self.total_len:
+                            look_for_good_values = 0  # Next ship will overflow
+                        else:
+                            if de_bug.i_should_inform(self.elem_nr):
+                                print('next_chisel.multi_rotor_pos A %d' % next_pos)
+                                if 1:
+                                    import pdb
+                                    pdb.set_trace()
+                            position_of_next = self.next_chisel.multi_rotor_pos(next_pos)
+                            if position_of_next is not None:
+                                if self.count_of_intruders_between_me_and_next(curr_pos, position_of_next) == 0:
+                                    result = curr_pos  # OK, head and tail are in good places
+                                    look_for_good_values = 0  # Return good place upward
+                    else:
+                        if self.count_of_intruders_between_me_and_next(curr_pos) == 0:
+                            result = curr_pos  # OK, head is in good places, there is no tail to ask
+                            look_for_good_values = 0  # Return good place upward
+                        else:
+                            if verbose_messages:
+                                print('Else A4', self)
+                        if verbose_messages:
+                            print('Else A3', self)
+                else:
+                    look_for_good_values = 0  # No more good places for current ship, end search loop
+                    if verbose_messages:
+                        print('Else A2', self)
+        else:
+            if verbose_messages:
+                print('Else A1', self)
         return result
 
     def update_locations(self):
         '''
         ItemChisel:
         '''
-        if self.next_chisel is not None:
-            tail_status = self.next_chisel.internal_rotate()
-            if tail_status is None:
-                curr_pos = self.internal_rotate()
-                if curr_pos is not None:
-                    next_pos = curr_pos + self.ship_len + 1
-                    self.next_chisel.multi_rotor_pos(next_pos)
+        my_status = None
+        if self.next_chisel is None:
+            my_status = self.internal_rotate()
         else:
-            self.internal_rotate()
+            updating_not_finished = 1
+            while updating_not_finished:
+                if de_bug.i_should_inform(self.elem_nr):
+                    print('next_chisel.update_locations')
+                position_of_next = self.next_chisel.update_locations()
+                if position_of_next is None:
+                    curr_pos = self.internal_rotate()
+                    if curr_pos is None:
+                        updating_not_finished = 0  # Nothing found, send failure upward
+                    else:
+                        next_pos = curr_pos + self.ship_len + 1
+                        if next_pos >= self.total_len:
+                            updating_not_finished = 0  # Next ship would overflow, send failure upward
+                        else:
+                            if de_bug.i_should_inform(self.elem_nr):
+                                print('next_chisel.multi_rotor_pos B %d' % next_pos)
+                            position_of_next = self.next_chisel.multi_rotor_pos(next_pos)
+                            if position_of_next is None:
+                                updating_not_finished = 0  # Next ship failed to find place, send failure upward
+                            else:
+                                if self.count_of_intruders_between_me_and_next(self.local_nr, position_of_next) == 0:
+                                    my_status = self.local_nr
+                                    updating_not_finished = 0  # Good solution found
+                else:
+                    if self.local_nr is None:
+                        updating_not_finished = 0  # No position here, send failure upward
+                    else:
+                        if self.count_of_intruders_between_me_and_next(self.local_nr, position_of_next) == 0:
+                            my_status = self.local_nr
+                            updating_not_finished = 0  # Good solution found
+        return my_status
 
     def next_head_pos(self):
         '''
@@ -360,19 +501,29 @@ class WoodenBox:
         for i in range(len(self.wood_ls) - 1):
             next_in_chain = self.wood_ls[i + 1]
             self.wood_ls[i].set_next(next_in_chain)
+        de_bug.set_state(self.wood_ls)
 
-    def text_for_all(self, cell_txt):
+    def text_for_all(self, cell_txt, detail_stop=0):
         '''
         WoodenBox:
         '''
         for one_ship in self.wood_ls:
             one_ship.apply_new_text(cell_txt)
-        self.wood_ls[0].multi_rotor_pos(0)
+        if detail_stop:
+            import pdb
+            pdb.set_trace()
+        self.wood_ls[0].multi_rotor_pos(0, detail_stop=0)
+        if verbose_messages:
+            for one_ship in self.wood_ls:
+                print(one_ship)
 
-    def next_full_pos(self):
+    def next_full_pos(self, detail_stop=0):
         '''
         WoodenBox:
         '''
+        if detail_stop:
+            import pdb
+            pdb.set_trace()
         return self.wood_ls[0].next_head_pos()
 
 
@@ -411,6 +562,8 @@ class WorkArea:
         WorkArea:
         '''
         self.int_table[row_nr][col_nr] = one_symbol
+        if enable_stepping:
+            self.save_to_file('g%04d' % self.modify_count, enable_axis=1)
         self.modify_count += 1
 
     def set_black(self, row_nr, col_nr):
@@ -426,7 +579,7 @@ class WorkArea:
         '''
         if self.int_table[row_nr][col_nr] == CODE_UNKNOWN:
             self.single_set(row_nr, col_nr, CODE_EMPTY)
-        else:
+        elif self.int_table[row_nr][col_nr] != CODE_EMPTY:
             raise RuntimeError('Why cleaning this place?')
 
     def slim_text(self, enable_axis=1):
@@ -460,11 +613,11 @@ class WorkArea:
             for col_nr in range(self.col_cnt):
                 self.int_table[row_nr][col_nr] = row_txt[col_nr]
 
-    def save_to_file(self, file_name):
+    def save_to_file(self, file_name, enable_axis=0):
         '''
         WorkArea:
         '''
-        full_txt = self.slim_text() + '\n'
+        full_txt = self.slim_text(enable_axis) + '\n'
         fd = open(file_name, 'w')
         fd.write(full_txt)
         fd.close()
@@ -582,6 +735,46 @@ class WorkArea:
             for offset in black_ls:
                 self.helper_black(item_len, item_nr, offset)
 
+    def place_ship_with_water(self, item_len, item_nr, ship_start, ship_len):
+        '''
+        WorkArea:
+        '''
+        if ship_start > 0:
+            self.helper_space(item_len, item_nr, ship_start - 1)
+        for offset in range(ship_len):
+            self.helper_black(item_len, item_nr, ship_start + offset)
+        if ship_start + ship_len < item_len:
+            self.helper_space(item_len, item_nr, ship_start + ship_len)
+
+    def fill_what_can_be_deduced(self, item_len, item_nr, len_ls, one_text, poss_ls):
+        '''
+        WorkArea:
+        '''
+        for ship_nr, ship_len in enumerate(len_ls):
+            one_set = set(map(lambda one_sol: one_sol[ship_nr], poss_ls))
+            if len(one_set) == 1:  # In all cases ship is in the same place
+                if 1:
+                    ship_start = list(one_set)[0]
+                    self.place_ship_with_water(item_len, item_nr, ship_start, ship_len)
+
+    def analyze_possibilities(self, item_len, item_nr, len_ls, one_text):
+        '''
+        WorkArea:
+        '''
+        poss_ls = []
+        wooden_box = WoodenBox(len_ls)
+        wooden_box.text_for_all(one_text)
+        while 1:
+            new_one = wooden_box.next_full_pos()
+            if new_one is None:
+                break
+            else:
+                poss_ls.append(new_one)
+        solution_cnt = len(poss_ls)
+        if solution_cnt < small_enough:
+            self.fill_what_can_be_deduced(item_len, item_nr, len_ls, one_text, poss_ls)
+                
+
     def fill_c_for_both(self):
         '''
         WorkArea:
@@ -598,6 +791,8 @@ class WorkArea:
                 for offset in range(first_index + 1, last_index):
                     if one_text[offset] is CODE_UNKNOWN:
                         self.helper_black(item_len, item_nr, offset)
+            if 1:
+                self.analyze_possibilities(item_len, item_nr, len_ls, one_text)
 
     def fill_a_from_each_border(self):
         '''
@@ -733,10 +928,12 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(near_border(3, ' ..HH'), [[], [1]])
         self.assertEqual(near_border(2, ' ..HH'), [[], [1, 2]])
         self.assertEqual(starting_point(4, '    HHHH.'), 4)
+        #self.assertEqual(near_border(4, '    HHHH.'), [[], [8]]) # qaz - row 4, col 12
         self.assertEqual(starting_point(5, '.. .H.......'), 3)
         self.assertEqual(starting_point(5, '...H.......'), 0)
         self.assertEqual(starting_point(3, ' ..HH'), 2)
         self.assertEqual(starting_point(2, ' ..HH'), 3)
+        #self.assertEqual(starting_point(10, '    ....HHHHHH. '), 5)
         self.assertEqual(starting_point(4, ' .H.. '), 1)
         self.assertEqual(starting_point(1, ' .H.. '), 2)
         self.assertEqual(starting_point(2, ' .H.. '), 1)
@@ -744,6 +941,7 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(starting_point(4, ' ..H. '), 1)
         self.assertEqual(starting_point(2, ' ..H. '), 2)
         self.assertEqual(starting_point(10, '    ....HHHHHH. '), 4)
+        self.assertEqual(starting_point(9, ' ..H. '), None)
 
     def test_ship_touches_border(self):
         '''
@@ -832,3 +1030,49 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(obj.next_full_pos(), [1, 3])
         self.assertEqual(obj.next_full_pos(), [1, 5])
         self.assertEqual(obj.next_full_pos(), [3, 5])
+
+    def test_c(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        obj = WoodenBox([6, 4, 1, 3, 1])
+        obj.text_for_all('.HHHHH..HHHH...HHH..')
+        self.assertEqual(obj.next_full_pos(), [0, 8, 13, 15, 19])
+        self.assertEqual(obj.next_full_pos(), [1, 8, 13, 15, 19])
+        self.assertEqual(obj.next_full_pos(), None)
+
+    def test_d(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        obj = WoodenBox([4, 1, 1, 1, 1])
+        obj.text_for_all('...........H.H.H.H..', detail_stop=0)
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [0, 11, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(), [1, 11, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(), [2, 11, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(), [3, 11, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(), [4, 11, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(), [5, 11, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(), [6, 11, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(), [8, 13, 15, 17, 19])
+        self.assertEqual(obj.next_full_pos(), None)
+
+    def test_e(self):
+        '''
+        TestAngoraPuzzle:
+        '''
+        obj = WoodenBox([4, 2, 3, 1, 1, 1])
+        obj.text_for_all(' HHHH .......... ...', detail_stop=0)
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 9, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 9, 13, 15, 18])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 9, 13, 15, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 9, 13, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 9, 14, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 9, 15, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 10, 14, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 10, 15, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 6, 11, 15, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 7, 10, 14, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 7, 10, 15, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 7, 11, 15, 17, 19])
+        self.assertEqual(obj.next_full_pos(detail_stop=0), [1, 8, 11, 15, 17, 19])
