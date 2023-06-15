@@ -56,11 +56,13 @@ def zip_check(row_shadow, rows, desc):
     print('%s %s' % (green_message(desc + ' total:', total_eq), red_message(total_state, not total_state)))
 
 
-def main():
+def main(state_file):
     r_sum = sum(map(sum, rows))
     c_sum = sum(map(sum, cols))
     assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
     work_a_area = wk_area.WorkArea(rows, cols)
+    if state_file:
+        work_a_area.read_from_file(state_file)
     work_a_area.small_margins_hint()
     prev_count = -1
     while 1:
@@ -97,7 +99,7 @@ if __name__ == '__main__':
         error_occured = 0
         option_done = 1
     if opt_bag.guess_steps:
-        main()
+        main(opt_bag.state)
         error_occured = 0
         option_done = 1
     if not option_done:
