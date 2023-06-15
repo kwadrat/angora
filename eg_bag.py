@@ -146,6 +146,10 @@ def gen_cl_hd(length):
     return ''.join(map(lambda a: str(a % 10), range(1, length + 1)))
 
 
+def always_in_shadow(one_set, ship_lngth):
+    return list(range(max(one_set), min(one_set) + ship_lngth))
+
+
 class TestBagFunctions(unittest.TestCase):
     def test_angora_puzzle(self):
         '''
@@ -248,3 +252,15 @@ class TestBagFunctions(unittest.TestCase):
         '''
         self.assertEqual(gen_cl_hd(2), '12')
         self.assertEqual(gen_cl_hd(3), '123')
+
+    def test_multi_shadowed_places(self):
+        '''
+        TestBagFunctions:
+        '''
+        self.assertEqual(always_in_shadow({0, 0}, 7), [0, 1, 2, 3, 4, 5, 6])
+        self.assertEqual(always_in_shadow({0, 0}, 6), [0, 1, 2, 3, 4, 5])
+        self.assertEqual(always_in_shadow({0, 1}, 6), [1, 2, 3, 4, 5])
+        self.assertEqual(always_in_shadow({1, 1}, 6), [1, 2, 3, 4, 5, 6])
+        self.assertEqual(always_in_shadow({0, 8}, 6), [])
+        self.assertEqual(always_in_shadow({1, 6}, 7), [6, 7])
+        self.assertEqual(always_in_shadow({2, 6}, 7), [6, 7, 8])
