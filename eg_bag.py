@@ -78,18 +78,19 @@ def fill_ship_by_border(first_by_border, cell_ls):
 
 
 def easy_guess(one_ls, line_size):
-    delta = line_size - (sum(one_ls) + len(one_ls) - 1)
     pos_left = 0
     out_ls = []
-    for one_size in one_ls:
-        possible_width = one_size - delta
-        if possible_width > 0:
-            first_marked = pos_left + delta
-            first_stopped = pos_left + one_size
-            one_tpl = (first_marked, first_stopped)
-            out_ls.append(one_tpl)
-        pos_left += one_size  # Przeskocz za czarny ciąg
-        pos_left += 1  # Przeskocz kratkę odstępu między czarnymi
+    delta = line_size - (sum(one_ls) + len(one_ls) - 1)
+    if delta >= 0:
+        for one_size in one_ls:
+            possible_width = one_size - delta
+            if possible_width > 0:
+                first_marked = pos_left + delta
+                first_stopped = pos_left + one_size
+                one_tpl = (first_marked, first_stopped)
+                out_ls.append(one_tpl)
+            pos_left += one_size  # Przeskocz za czarny ciąg
+            pos_left += 1  # Przeskocz kratkę odstępu między czarnymi
     return out_ls
 
 
@@ -185,6 +186,7 @@ class TestBagFunctions(unittest.TestCase):
         Funkcja zwraca listę [(początek, koniec), ...] elementów do wypełnienia
         Konwencja wyniku: Python range() lub inaczej C/for
         '''
+        self.assertEqual(easy_guess([17], 15), [])
         self.assertEqual(easy_guess([20], 20), [(0, 20)])
         self.assertEqual(easy_guess([19], 19), [(0, 19)])
         self.assertEqual(easy_guess([18], 19), [(1, 18)])
