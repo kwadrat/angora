@@ -181,7 +181,7 @@ class ItemChisel:
 
 
 class TestChiselTool(unittest.TestCase):
-    def test_a(self):
+    def test_1_a(self):
         '''
         TestChiselTool:
         '''
@@ -190,12 +190,22 @@ class TestChiselTool(unittest.TestCase):
         obj.multi_rotor_pos(0)
         self.assertEqual(obj.next_head_pos(), [0])
         self.assertEqual(obj.next_head_pos(), None)
+
+    def test_2_a(self):
+        '''
+        TestChiselTool:
+        '''
         obj = ItemChisel(1)
         obj.apply_new_text('..')
         obj.multi_rotor_pos(0)
         self.assertEqual(obj.next_head_pos(), [0])
         self.assertEqual(obj.next_head_pos(), [1])
         self.assertEqual(obj.next_head_pos(), None)
+
+    def test_3_a(self):
+        '''
+        TestChiselTool:
+        '''
         obj = ItemChisel(1)
         obj.apply_new_text('...')
         obj.multi_rotor_pos(0)
@@ -203,30 +213,54 @@ class TestChiselTool(unittest.TestCase):
         self.assertEqual(obj.next_head_pos(), [1])
         self.assertEqual(obj.next_head_pos(), [2])
         self.assertEqual(obj.next_head_pos(), None)
+
+    def test_4_a(self):
+        '''
+        TestChiselTool:
+        '''
         obj = ItemChisel(1)
         obj.apply_new_text('. .')
         obj.multi_rotor_pos(0)
         self.assertEqual(obj.next_head_pos(), [0])
         self.assertEqual(obj.next_head_pos(), [2])
         self.assertEqual(obj.next_head_pos(), None)
+
+    def test_5_a(self):
+        '''
+        TestChiselTool:
+        '''
         obj = ItemChisel(1)
         obj.apply_new_text('H')
         obj.multi_rotor_pos(0)
         self.assertEqual(obj.next_head_pos(), [0])
         self.assertEqual(obj.next_head_pos(), None)
+
+    def test_6_a(self):
+        '''
+        TestChiselTool:
+        '''
         obj = ItemChisel(1)
         obj.apply_new_text('  H  .')
         obj.multi_rotor_pos(0)
         self.assertEqual(obj.next_head_pos(), [2])
         self.assertEqual(obj.next_head_pos(), None)
+
+    def test_7_a(self):
+        '''
+        TestChiselTool:
+        '''
         obj = ItemChisel(1)
         obj.apply_new_text('. H')
         obj.multi_rotor_pos(0)
         self.assertEqual(obj.next_head_pos(), [2])
         self.assertEqual(obj.next_head_pos(), None)
+
+    def test_8_a(self):
+        '''
+        TestChiselTool:
+        '''
         obj = ItemChisel(2)
         obj.apply_new_text('.. .')
         obj.multi_rotor_pos(0)
         self.assertEqual(obj.next_head_pos(), [0])
         self.assertEqual(obj.next_head_pos(), None)
-        obj = ItemChisel(1)
