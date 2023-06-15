@@ -31,10 +31,10 @@ class WoodenBox:
         return self.wood_ls[0].next_head_pos()
 
 
-class TestBagFunctions(unittest.TestCase):
+class TestBoxFunctions(unittest.TestCase):
     def test_b(self):
         '''
-        TestBagFunctions:
+        TestBoxFunctions:
         '''
         obj = WoodenBox([1, 1])
         obj.text_for_all('. .')
@@ -47,7 +47,7 @@ class TestBagFunctions(unittest.TestCase):
 
     def test_c(self):
         '''
-        TestBagFunctions:
+        TestBoxFunctions:
         '''
         obj = WoodenBox([6, 4, 1, 3, 1])
         obj.text_for_all('.HHHHH..HHHH...HHH..')
@@ -57,7 +57,7 @@ class TestBagFunctions(unittest.TestCase):
 
     def test_d(self):
         '''
-        TestBagFunctions:
+        TestBoxFunctions:
         '''
         obj = WoodenBox([4, 1, 1, 1, 1])
         obj.text_for_all('...........H.H.H.H..')
@@ -73,7 +73,7 @@ class TestBagFunctions(unittest.TestCase):
 
     def test_e(self):
         '''
-        TestBagFunctions:
+        TestBoxFunctions:
         '''
         obj = WoodenBox([4, 2, 3, 1, 1, 1])
         obj.text_for_all(' HHHH .......... ...')
@@ -93,7 +93,7 @@ class TestBagFunctions(unittest.TestCase):
 
     def test_f(self):
         '''
-        TestBagFunctions:
+        TestBoxFunctions:
         '''
         obj = WoodenBox([3, 3, 3, 2])
         obj.text_for_all(' .HH ... HHH HHH  HH')
@@ -102,7 +102,7 @@ class TestBagFunctions(unittest.TestCase):
 
     def test_g(self):
         '''
-        TestBagFunctions:
+        TestBoxFunctions:
         '''
         obj = WoodenBox([4, 1, 1, 1, 1])
         obj.text_for_all(' .HHH..    H H H H  ')
