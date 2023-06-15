@@ -117,9 +117,9 @@ def red_message(napis, paint):
     return color_message(napis, paint, '31')
 
 
-def decode(seq):
+def lengths_of_trains(seq):
     '''
-    Count number of marks (H letter)
+    Determine length of trains
     '''
     if seq:
         seq = seq.replace(CODE_UNKNOWN, CODE_EMPTY)
@@ -812,11 +812,11 @@ class TestAngoraPuzzle(unittest.TestCase):
         '''
         TestAngoraPuzzle:
         '''
-        self.assertEqual(decode(''), [])
-        self.assertEqual(decode('H'), [1])
-        self.assertEqual(decode('HH'), [2])
-        self.assertEqual(decode('H H'), [1, 1])
-        self.assertEqual(decode('.'), [])
+        self.assertEqual(lengths_of_trains(''), [])
+        self.assertEqual(lengths_of_trains('H'), [1])
+        self.assertEqual(lengths_of_trains('HH'), [2])
+        self.assertEqual(lengths_of_trains('H H'), [1, 1])
+        self.assertEqual(lengths_of_trains('.'), [])
 
     def test_one_in_another(self):
         '''
