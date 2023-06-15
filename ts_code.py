@@ -6,12 +6,14 @@ import unittest
 import im_chisel
 import eg_bag
 import lb_cnst
+import wn_box
 
 
 fast_test_ls = [
     eg_bag.TestBagFunctions,
     lb_cnst.TestConstants,
     im_chisel.TestChiselTool,
+    wn_box.TestBoxFunctions,
     ]
 
 
