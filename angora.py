@@ -800,13 +800,6 @@ def rc_order():
     rc_dump('Cols', cols)
 
 
-if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == 'order':
-        rc_order()
-    else:
-        main()
-
-
 class TestAngoraPuzzle(unittest.TestCase):
     def test_angora_puzzle(self):
         '''
@@ -1044,3 +1037,10 @@ class TestAngoraPuzzle(unittest.TestCase):
         self.assertEqual(obj.next_full_pos(), [1, 11, 13, 15, 17])
         self.assertEqual(obj.next_full_pos(), [2, 11, 13, 15, 17])
         self.assertEqual(obj.next_full_pos(), None)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1 and sys.argv[1] == 'order':
+        rc_order()
+    else:
+        main()
