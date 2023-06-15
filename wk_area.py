@@ -248,7 +248,8 @@ class WorkArea:
         '''
         for ship_nr, ship_len in enumerate(len_ls):
             one_set = set(map(lambda one_sol: one_sol[ship_nr], poss_ls))
-            if len(one_set) == 1:  # In all cases ship is in the same place
+            set_lngth = len(one_set)
+            if set_lngth == 1:  # In all cases ship is in the same place
                 ship_start = list(one_set)[0]
                 self.place_ship_with_water(item_len, item_nr, ship_start, ship_len)
 
