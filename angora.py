@@ -46,7 +46,7 @@ def red_message(napis, paint):
 
 
 def zip_check(row_shadow, rows, desc):
-    row_stat = map(lambda a, b: eg_bag.inside(a, b), row_shadow, rows)
+    row_stat = map(lambda a, b: eg_bag.is_inside(a, b), row_shadow, rows)
     eq_stat = map(lambda a, b: a == b, row_shadow, rows)
     for nr, (a, b, c, d) in enumerate(zip(row_shadow, rows, row_stat, eq_stat)):
         order_number = green_message(str(nr + 1), d)

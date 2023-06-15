@@ -19,7 +19,7 @@ def lengths_of_trains(seq):
     return result
 
 
-def inside(small, large):
+def is_inside(small, large):
     '''
     Shorter subsequence can be inside large sequence
     '''
@@ -160,14 +160,14 @@ class TestBagFunctions(unittest.TestCase):
         '''
         TestBagFunctions:
         '''
-        self.assertEqual(inside([], []), 1)
-        self.assertEqual(inside([1], []), 0)
-        self.assertEqual(inside([2], [1]), 0)
-        self.assertEqual(inside([1, 2], [2, 1]), 0)
-        self.assertEqual(inside([2], [1, 1]), 0)
-        self.assertEqual(inside([2], [1, 1]), 0)
-        self.assertEqual(inside([2], [2, 1]), 1)
-        self.assertEqual(inside([], [2, 1]), 1)
+        self.assertEqual(is_inside([], []), 1)
+        self.assertEqual(is_inside([1], []), 0)
+        self.assertEqual(is_inside([2], [1]), 0)
+        self.assertEqual(is_inside([1, 2], [2, 1]), 0)
+        self.assertEqual(is_inside([2], [1, 1]), 0)
+        self.assertEqual(is_inside([2], [1, 1]), 0)
+        self.assertEqual(is_inside([2], [2, 1]), 1)
+        self.assertEqual(is_inside([], [2, 1]), 1)
 
     def test_exchange_rows_cols(self):
         '''
