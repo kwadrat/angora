@@ -5,6 +5,8 @@
 python -m unittest angora; red_green_bar.py $? $COLUMNS
 '''
 
+import dx_options
+import ts_code
 import fx_area
 
 import sys
@@ -977,7 +979,20 @@ class TestAngoraPuzzle(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == 'order':
+    parser, opt_bag = dx_options.recognize_options()
+    option_done = 0
+    error_occured = 1
+    if opt_bag.run_tests:
+        error_occured = ts_code.perform_tests()
+        option_done = 1
+    if opt_bag.show_order:
         rc_order()
-    else:
+        error_occured = 0
+        option_done = 1
+    if opt_bag.guess_steps:
         main()
+        error_occured = 0
+        option_done = 1
+    if not option_done:
+        parser.print_help()
+    sys.exit(error_occured)
