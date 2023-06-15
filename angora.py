@@ -770,7 +770,9 @@ class WorkArea:
 
 
 def main():
-    assert sum(map(sum, rows)) == sum(map(sum, cols))
+    r_sum = sum(map(sum, rows))
+    c_sum = sum(map(sum, cols))
+    assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
     work_a_area = WorkArea(rows, cols)
     work_a_area.small_margins_hint()
     prev_count = -1
