@@ -11,17 +11,6 @@ small_enough = 3
 
 
 class WorkArea:
-    def prepare_empty_data(self):
-        '''
-        WorkArea:
-        '''
-        self.int_table = []
-        for row_nr in range(self.row_cnt):
-            line_ls = []
-            for col_nr in range(self.col_cnt):
-                line_ls.append(lb_cnst.CODE_UNKNOWN)
-            self.int_table.append(line_ls)
-
     def assume_no_modification(self):
         '''
         WorkArea:
@@ -40,7 +29,7 @@ class WorkArea:
         self.col_cnt = col_b_cnt
         self.pos_dtls = ps_info.PositionVault(row_b_cnt, col_b_cnt)
         self.verbose = verbose
-        self.prepare_empty_data()
+        self.int_table = self.pos_dtls.prepare_empty_data()
         self.assume_no_modification()
 
     def single_set(self, row_nr, col_nr, one_symbol):
