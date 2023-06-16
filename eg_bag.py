@@ -45,13 +45,13 @@ def from_border(first_by_border, cell_ls):
     return [black_ls, space_ls]
 
 
-def transpose(all_lines, row_cnt, col_a_cnt):
+def transpose(all_lines, row_a_cnt, col_a_cnt):
     lines_count = len(all_lines)
     empty_line = ' ' * col_a_cnt
     trn_lines = []
     for j in range(col_a_cnt):
         trn_lines.append([])
-    for i in range(row_cnt):
+    for i in range(row_a_cnt):
         if i < lines_count:
             tmp_line = all_lines[i]
             tmp_len = len(tmp_line)
