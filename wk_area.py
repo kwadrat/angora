@@ -85,7 +85,7 @@ class WorkArea:
         all_lines = full_txt.splitlines()
         for row_nr in self.pos_dtls.each_row():
             row_txt = all_lines[row_nr]
-            for col_nr in range(self.col_cnt):
+            for col_nr in self.pos_dtls.each_col():
                 self.int_table[row_nr][col_nr] = row_txt[col_nr]
 
     def save_to_file(self, file_name, enable_axis=0):
@@ -173,7 +173,7 @@ class WorkArea:
             for easy_start, easy_end in easy_ls:
                 for col_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
-        for col_nr in range(self.col_cnt):
+        for col_nr in self.pos_dtls.each_col():
             easy_ls = eg_bag.easy_guess(self.cols[col_nr], self.row_cnt)
             for easy_start, easy_end in easy_ls:
                 for row_nr in range(easy_start, easy_end):
