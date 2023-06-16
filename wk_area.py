@@ -63,7 +63,7 @@ class WorkArea:
         '''
         out_ls = []
         if enable_axis:
-            col_header = eg_bag.gen_cl_hd(self.col_cnt)
+            col_header = self.pos_dtls.col_header()
             out_ls.append(col_header)
         for nr, row_data in enumerate(self.int_table):
             if enable_axis:

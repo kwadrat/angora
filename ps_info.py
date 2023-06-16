@@ -4,6 +4,7 @@
 import unittest
 
 import lb_cnst
+import eg_bag
 
 
 class PositionVault:
@@ -38,6 +39,12 @@ class PositionVault:
         '''
         return range(self.col_cnt)
 
+    def col_header(self):
+        '''
+        PositionVault:
+        '''
+        return eg_bag.gen_cl_hd(self.col_cnt)
+
 
 class TestPositionDetails(unittest.TestCase):
     def test_position_details(self):
@@ -62,3 +69,4 @@ class TestPositionDetails(unittest.TestCase):
         obj = PositionVault(row_count=3, col_count=2)
         self.assertEqual(list(obj.each_row()), [0, 1, 2])
         self.assertEqual(list(obj.each_col()), [0, 1])
+        self.assertEqual(obj.col_header(), '12')
