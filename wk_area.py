@@ -83,7 +83,7 @@ class WorkArea:
         full_txt = fd.read()
         fd.close()
         all_lines = full_txt.splitlines()
-        for row_nr in range(self.row_cnt):
+        for row_nr in self.pos_dtls.each_row():
             row_txt = all_lines[row_nr]
             for col_nr in range(self.col_cnt):
                 self.int_table[row_nr][col_nr] = row_txt[col_nr]
@@ -168,7 +168,7 @@ class WorkArea:
         zaczernione, bo jest na tyle dużo punktów w linii, że wystąpi
         zaczerniona część wspólna.
         '''
-        for row_nr in range(self.row_cnt):
+        for row_nr in self.pos_dtls.each_row():
             easy_ls = eg_bag.easy_guess(self.rows[row_nr], self.col_cnt)
             for easy_start, easy_end in easy_ls:
                 for col_nr in range(easy_start, easy_end):

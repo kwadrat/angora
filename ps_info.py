@@ -26,6 +26,12 @@ class PositionVault:
             lcl_tbl.append(line_ls)
         return lcl_tbl
 
+    def each_row(self):
+        '''
+        PositionVault:
+        '''
+        return range(self.row_cnt)
+
 
 class TestPositionDetails(unittest.TestCase):
     def test_position_details(self):
@@ -42,3 +48,10 @@ class TestPositionDetails(unittest.TestCase):
         '''
         obj = PositionVault(row_count=2, col_count=2)
         self.assertEqual(obj.prepare_empty_data(), [['.', '.'], ['.', '.']])
+
+    def test_each_of_dimension(self):
+        '''
+        TestPositionDetails:
+        '''
+        obj = PositionVault(row_count=3, col_count=2)
+        self.assertEqual(list(obj.each_row()), [0, 1, 2])
