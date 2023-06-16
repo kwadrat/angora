@@ -101,11 +101,7 @@ class WorkArea:
         '''
         WorkArea:
         '''
-        if self.is_col:
-            item_len = self.col_cnt
-        else:
-            item_len = self.row_cnt
-        return item_len
+        return self.pos_dtls.side_size(self.is_col)
 
     def get_sketch(self, item_nr):
         '''

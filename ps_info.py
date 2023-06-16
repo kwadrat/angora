@@ -45,6 +45,16 @@ class PositionVault:
         '''
         return eg_bag.gen_cl_hd(self.col_cnt)
 
+    def side_size(self, is_col):
+        '''
+        PositionVault:
+        '''
+        if is_col:
+            item_len = self.col_cnt
+        else:
+            item_len = self.row_cnt
+        return item_len
+
 
 class TestPositionDetails(unittest.TestCase):
     def test_position_details(self):
@@ -70,3 +80,5 @@ class TestPositionDetails(unittest.TestCase):
         self.assertEqual(list(obj.each_row()), [0, 1, 2])
         self.assertEqual(list(obj.each_col()), [0, 1])
         self.assertEqual(obj.col_header(), '12')
+        self.assertEqual(obj.side_size(is_col=1), 2)
+        self.assertEqual(obj.side_size(is_col=0), 3)
