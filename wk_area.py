@@ -4,6 +4,7 @@
 import lb_cnst
 import eg_bag
 import wn_box
+import ps_info
 
 enable_stepping = 0
 small_enough = 3
@@ -33,8 +34,11 @@ class WorkArea:
         '''
         self.rows = rows
         self.cols = cols
-        self.row_cnt = len(self.rows)
-        self.col_cnt = len(self.cols)
+        row_b_cnt = len(self.rows)
+        col_b_cnt = len(self.cols)
+        self.row_cnt = row_b_cnt
+        self.col_cnt = col_b_cnt
+        self.pos_dtls = ps_info.PositionVault(row_b_cnt, col_b_cnt)
         self.verbose = verbose
         self.prepare_empty_data()
         self.assume_no_modification()
