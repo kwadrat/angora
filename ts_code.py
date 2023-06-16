@@ -7,6 +7,7 @@ import im_chisel
 import eg_bag
 import lb_cnst
 import wn_box
+import ps_info
 
 
 fast_test_ls = [
@@ -14,6 +15,7 @@ fast_test_ls = [
     lb_cnst.TestConstants,
     im_chisel.TestChiselTool,
     wn_box.TestBoxFunctions,
+    ps_info.TestPositionDetails,
     ]
 
 
