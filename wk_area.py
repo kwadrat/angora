@@ -248,15 +248,9 @@ class WorkArea:
         '''
         for ship_nr, ship_len in enumerate(len_ls):
             one_set = set(map(lambda one_sol: one_sol[ship_nr], poss_ls))
-            set_lngth = len(one_set)
-            if set_lngth == 1:  # In all cases ship is in the same place
-                ship_start = list(one_set)[0]
-                self.place_ship_with_water(item_len, item_nr, ship_start, ship_len)
-            elif set_lngth > 1:  # Ship is slightly moving, check for shorter segment always in shadow
-                ship_lnght = len_ls[ship_nr]
-                fully_in_shadow_ls = eg_bag.always_in_shadow(one_set, ship_lnght)
-                for one_item in fully_in_shadow_ls:
-                    self.helper_black(item_len, item_nr, one_item)
+            fully_in_shadow_ls = eg_bag.always_in_shadow(one_set, ship_len)
+            for one_item in fully_in_shadow_ls:
+                self.helper_black(item_len, item_nr, one_item)
 
     def analyze_possibilities(self, item_len, item_nr, len_ls, one_text):
         '''
