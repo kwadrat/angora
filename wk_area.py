@@ -165,7 +165,7 @@ class WorkArea:
         zaczerniona część wspólna.
         '''
         for row_nr in self.pos_dtls.each_row():
-            easy_ls = eg_bag.easy_guess(self.rows[row_nr], self.col_cnt)
+            easy_ls = self.pos_dtls.guess_in_row(self.rows[row_nr])
             for easy_start, easy_end in easy_ls:
                 for col_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
