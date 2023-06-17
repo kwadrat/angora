@@ -170,7 +170,7 @@ class WorkArea:
                 for col_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
         for col_nr in self.pos_dtls.each_col():
-            easy_ls = eg_bag.easy_guess(self.cols[col_nr], self.row_cnt)
+            easy_ls = self.pos_dtls.guess_in_col(self.cols[col_nr])
             for easy_start, easy_end in easy_ls:
                 for row_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
