@@ -55,6 +55,12 @@ class PositionVault:
             item_len = self.row_cnt
         return item_len
 
+    def guess_in_row(self, for_mat):
+        '''
+        PositionVault:
+        '''
+        return eg_bag.easy_guess(for_mat, self.col_cnt)
+
 
 class TestPositionDetails(unittest.TestCase):
     def test_position_details(self):
@@ -82,3 +88,10 @@ class TestPositionDetails(unittest.TestCase):
         self.assertEqual(obj.col_header(), '12')
         self.assertEqual(obj.side_size(is_col=1), 2)
         self.assertEqual(obj.side_size(is_col=0), 3)
+
+    def test_something_easy(self):
+        '''
+        TestPositionDetails:
+        '''
+        obj = PositionVault(row_count=30, col_count=30)
+        self.assertEqual(obj.guess_in_row([8, 3, 1, 1, 3, 3]), [(6, 8)])
