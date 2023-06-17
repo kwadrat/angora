@@ -23,9 +23,7 @@ class WorkArea:
         '''
         self.rows = rows
         self.cols = cols
-        row_b_cnt = len(self.rows)
-        col_b_cnt = len(self.cols)
-        self.pos_dtls = ps_info.PositionVault(row_b_cnt, col_b_cnt)
+        self.pos_dtls = ps_info.PositionVault(len(self.rows), len(self.cols))
         self.verbose = verbose
         self.int_table = self.pos_dtls.prepare_empty_data()
         self.assume_no_modification()
