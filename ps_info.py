@@ -55,11 +55,11 @@ class PositionVault:
             item_len = self.row_cnt
         return item_len
 
-    def guess_in_row(self, for_mat):
+    def guess_in_row(self, inflicted_ls):
         '''
         PositionVault:
         '''
-        return eg_bag.easy_guess(for_mat, self.col_cnt)
+        return eg_bag.easy_guess(inflicted_ls, self.col_cnt)
 
 
 class TestPositionDetails(unittest.TestCase):
