@@ -7,7 +7,6 @@ import wn_box
 import ps_info
 
 enable_stepping = 0
-small_enough = 3
 
 
 class WorkArea:
@@ -250,9 +249,7 @@ class WorkArea:
                 break
             else:
                 poss_ls.append(new_one)
-        solution_cnt = len(poss_ls)
-        if solution_cnt < small_enough:
-            self.fill_what_can_be_deduced(item_len, item_nr, len_ls, one_text, poss_ls)
+        self.fill_what_can_be_deduced(item_len, item_nr, len_ls, one_text, poss_ls)
         self.space_in_every_case(item_len, item_nr, len_ls, one_text, poss_ls)
 
     def clean_fully_populated(self, item_len, item_nr, len_ls, one_text):
