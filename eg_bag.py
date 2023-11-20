@@ -150,6 +150,16 @@ def always_in_shadow(one_set, ship_lngth):
     return list(range(max(one_set), min(one_set) + ship_lngth))
 
 
+def first_to_last(one_txt):
+    if lb_cnst.CODE_BLACK in one_txt:
+        first_index = one_txt.index(lb_cnst.CODE_BLACK)
+        last_index = one_txt.rindex(lb_cnst.CODE_BLACK)
+        result_ls = list(range(first_index + 1, last_index))
+    else:
+        result_ls = []
+    return result_ls
+
+
 class TestBagFunctions(unittest.TestCase):
     def test_angora_puzzle(self):
         '''
@@ -264,3 +274,13 @@ class TestBagFunctions(unittest.TestCase):
         self.assertEqual(always_in_shadow({0, 8}, 6), [])
         self.assertEqual(always_in_shadow({1, 6}, 7), [6, 7])
         self.assertEqual(always_in_shadow({2, 6}, 7), [6, 7, 8])
+
+    def test_no_black_single_length(self):
+        '''
+        TestBagFunctions:
+        '''
+        self.assertEqual(first_to_last('H.H'), [1])
+        self.assertEqual(first_to_last('H..H'), [1, 2])
+        self.assertEqual(first_to_last(' H..H'), [2, 3])
+        self.assertEqual(first_to_last(' H'), [])
+        self.assertEqual(first_to_last(' .'), [])
