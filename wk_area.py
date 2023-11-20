@@ -272,9 +272,8 @@ class WorkArea:
             one_text = self.get_details(item_nr)
             if len(len_ls) == 1:
                 # Fill gaps
-                first_index = one_text.index(lb_cnst.CODE_BLACK)
-                last_index = one_text.rindex(lb_cnst.CODE_BLACK)
-                for offset in range(first_index + 1, last_index):
+                offset_ls = eg_bag.first_to_last(one_text)
+                for offset in offset_ls:
                     if one_text[offset] is lb_cnst.CODE_UNKNOWN:
                         self.helper_black(item_len, item_nr, offset)
             self.analyze_possibilities(item_len, item_nr, len_ls, one_text)
