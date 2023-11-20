@@ -261,6 +261,25 @@ class WorkArea:
                 if one_char == lb_cnst.CODE_UNKNOWN:
                     self.helper_space(item_len, item_nr, offset)
 
+    def fill_c_for_both(self):
+        '''
+        WorkArea:
+        '''
+        self.is_end = 0
+        item_len = self.helper_len()
+        for item_nr in range(item_len):
+            len_ls = self.get_sketch(item_nr)
+            one_text = self.get_details(item_nr)
+            if len(len_ls) == 1:
+                # Fill gaps
+                first_index = one_text.index(lb_cnst.CODE_BLACK)
+                last_index = one_text.rindex(lb_cnst.CODE_BLACK)
+                for offset in range(first_index + 1, last_index):
+                    if one_text[offset] is lb_cnst.CODE_UNKNOWN:
+                        self.helper_black(item_len, item_nr, offset)
+            self.analyze_possibilities(item_len, item_nr, len_ls, one_text)
+            self.clean_fully_populated(item_len, item_nr, len_ls, one_text)
+
     def fill_a_from_each_border(self):
         '''
         WorkArea:
@@ -268,6 +287,7 @@ class WorkArea:
         for self.is_col in range(2):
             for self.is_end in range(2):
                 self.fill_b_from_each_border()
+            self.fill_c_for_both()
 
     def display_state(self, label):
         '''
