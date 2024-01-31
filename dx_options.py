@@ -18,5 +18,8 @@ def recognize_options():
     parser.add_argument('--guess_steps',
                         action='store_true', default=False,
                         help='Perform iterative solving')
+    parser.add_argument('--step_by_step',
+                        action='store_true', default=False,
+                        help='Detailed dump of each step')
     opt_bag = parser.parse_args()
     return parser, opt_bag
