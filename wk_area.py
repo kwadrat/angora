@@ -6,10 +6,14 @@ import eg_bag
 import wn_box
 import ps_info
 
-enable_stepping = 0
-
 
 class WorkArea:
+    def ask_for_every_step(self):
+        '''
+        WorkArea:
+        '''
+        self.enable_stepping = 1
+
     def assume_no_modification(self):
         '''
         WorkArea:
@@ -20,6 +24,7 @@ class WorkArea:
         '''
         WorkArea:
         '''
+        self.enable_stepping = 0
         self.rows = rows
         self.cols = cols
         self.pos_dtls = ps_info.PositionVault(len(self.rows), len(self.cols))
@@ -32,7 +37,7 @@ class WorkArea:
         WorkArea:
         '''
         self.int_table[row_nr][col_nr] = one_symbol
-        if enable_stepping:
+        if self.enable_stepping:
             self.save_to_file('g%03d' % self.modify_count, enable_axis=1)
         self.modify_count += 1
 
