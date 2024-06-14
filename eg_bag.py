@@ -94,6 +94,29 @@ def easy_guess(one_ls, line_size):
     return out_ls
 
 
+def starting_point(ship_len, cell_ls):
+    offset = 0
+    look_for_place = 1
+    while look_for_place:
+        good_place_found = 1
+        if offset + ship_len > len(cell_ls):
+            offset = None  # Impossible, ship extends beyond legal domain
+            look_for_place = 0
+            continue
+        if offset + ship_len < len(cell_ls) and cell_ls[offset + ship_len] == lb_cnst.CODE_BLACK:
+            offset += 1
+            good_place_found = 0
+            continue
+        for i in reversed(range(ship_len)):
+            if cell_ls[offset + i] == lb_cnst.CODE_EMPTY:
+                offset += i + 1
+                good_place_found = 0
+                break
+        if good_place_found:
+            look_for_place = 0
+    return offset
+
+
 def near_border(first_by_border, cell_ls):
     black_ls = []
     space_ls = []
@@ -117,29 +140,6 @@ def near_border(first_by_border, cell_ls):
             if cell_ls[nr] == lb_cnst.CODE_BLACK:
                 black_detected = 1
     return [black_ls, space_ls]
-
-
-def starting_point(ship_len, cell_ls):
-    offset = 0
-    look_for_place = 1
-    while look_for_place:
-        good_place_found = 1
-        if offset + ship_len > len(cell_ls):
-            offset = None  # Impossible, ship extends beyond legal domain
-            look_for_place = 0
-            continue
-        if offset + ship_len < len(cell_ls) and cell_ls[offset + ship_len] == lb_cnst.CODE_BLACK:
-            offset += 1
-            good_place_found = 0
-            continue
-        for i in reversed(range(ship_len)):
-            if cell_ls[offset + i] == lb_cnst.CODE_EMPTY:
-                offset += i + 1
-                good_place_found = 0
-                break
-        if good_place_found:
-            look_for_place = 0
-    return offset
 
 
 def gen_cl_hd(length):
