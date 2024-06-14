@@ -3,9 +3,9 @@
 
 import unittest
 
-CODE_BLACK = 'H'
-CODE_UNKNOWN = '.'
-CODE_EMPTY = ' '
+CODE_BLACK = 'H'  # Here is a black point
+CODE_UNKNOWN = '.'  # It can be a black point, it can be space - not yet decided
+CODE_EMPTY = ' '  # Here is a spacea (no black point)
 
 
 class TestConstants(unittest.TestCase):
