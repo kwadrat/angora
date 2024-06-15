@@ -52,9 +52,10 @@ class WorkArea:
         '''
         WorkArea:
         '''
-        if self.int_table[row_nr][col_nr] == lb_cnst.CODE_UNKNOWN:
+        current_value = self.int_table[row_nr][col_nr]
+        if current_value == lb_cnst.CODE_UNKNOWN:
             self.single_set(row_nr, col_nr, lb_cnst.CODE_EMPTY)
-        elif self.int_table[row_nr][col_nr] != lb_cnst.CODE_EMPTY:
+        elif current_value != lb_cnst.CODE_EMPTY:
             raise RuntimeError('Why cleaning this place?')
 
     def slim_text(self, enable_axis=1):
