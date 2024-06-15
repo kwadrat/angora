@@ -142,6 +142,7 @@ def near_border(first_by_border, cell_ls):
     offset = starting_point(first_by_border, cell_ls)
     if offset is not None:
         if offset:
+            # There is a distance between start of row and start of ship
             for i in range(offset):
                 if cell_ls[i] == lb_cnst.CODE_UNKNOWN:
                     space_ls.append(i)
