@@ -7,6 +7,13 @@ import itertools
 import lb_cnst
 
 
+def all_spaces(item_len):
+    '''
+    Entire line shoult be filled with spaces
+    '''
+    return list(range(item_len))
+
+
 def lengths_of_trains(seq):
     '''
     Determine length of trains
@@ -230,6 +237,14 @@ class TestBagFunctions(unittest.TestCase):
         self.assertEqual(near_border(4, '...HH......'), [[], [0]])
         self.assertEqual(near_border(3, ' ..HH'), [[], [1]])
         self.assertEqual(near_border(2, ' ..HH'), [[], [1, 2]])
+
+    def test_fill_with_spaces(self):
+        '''
+        TestBagFunctions:
+        '''
+        self.assertEqual(all_spaces(item_len=1), [0])
+        self.assertEqual(all_spaces(item_len=2), [0, 1])
+        self.assertEqual(all_spaces(item_len=3), [0, 1, 2])
 
     def test_starting_place_for_ship_near_border(self):
         '''
