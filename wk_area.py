@@ -185,7 +185,8 @@ class WorkArea:
         item_len = self.helper_len()
         for item_nr in range(item_len):
             len_ls = self.get_sketch(item_nr)
-            if 1:
+            if len_ls:
+                # For one (or more) numbers for this line
                 one_text = self.get_details(item_nr)
                 if self.is_end:
                     one_length = len_ls[-1]
@@ -208,6 +209,11 @@ class WorkArea:
                 black_ls = eg_bag.fill_ship_by_border(one_length, one_text)
                 for offset in black_ls:
                     self.helper_black(item_len, item_nr, offset)
+            else:
+                # There is no numbers in this line - all fields should be empty
+                space_ls = eg_bag.all_spaces(item_len)
+                for offset in space_ls:
+                    self.helper_space(item_len, item_nr, offset)
 
     def place_ship_with_water(self, item_len, item_nr, ship_start, ship_len):
         '''
