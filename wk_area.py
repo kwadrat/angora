@@ -106,6 +106,8 @@ class WorkArea:
     def get_sketch(self, item_nr):
         '''
         WorkArea:
+        Show numbers for row or column.
+        This list can be empty - all places are spaces.
         '''
         if self.is_col:
             len_ls = self.cols[item_nr]
