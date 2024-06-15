@@ -56,7 +56,8 @@ class WorkArea:
         if current_value == lb_cnst.CODE_UNKNOWN:
             self.single_set(row_nr, col_nr, lb_cnst.CODE_EMPTY)
         elif current_value != lb_cnst.CODE_EMPTY:
-            raise RuntimeError('Why cleaning this place?')
+            one_msg = "Why cleaning this place [%d, %d, '%s']?" % (row_nr, col_nr, current_value)
+            raise RuntimeError(one_msg)
 
     def slim_text(self, enable_axis=1):
         '''
