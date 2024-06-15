@@ -105,6 +105,12 @@ class WorkArea:
         '''
         return self.pos_dtls.side_size(self.is_col)
 
+    def helper_line_len(self):
+        '''
+        WorkArea:
+        '''
+        return self.pos_dtls.side_size(not self.is_col)
+
     def get_sketch(self, item_nr):
         '''
         WorkArea:
