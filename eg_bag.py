@@ -47,8 +47,8 @@ def from_border(first_by_border, cell_ls):
         for nr in range(first_by_border):
             if cell_ls[nr] == lb_cnst.CODE_UNKNOWN:
                 black_ls.append(nr)
-        if cell_ls[first_by_border] == lb_cnst.CODE_UNKNOWN:
-            space_ls.append(first_by_border)
+        if first_by_border < len(cell_ls) and cell_ls[first_by_border] == lb_cnst.CODE_UNKNOWN:
+                space_ls.append(first_by_border)
     return [black_ls, space_ls]
 
 
