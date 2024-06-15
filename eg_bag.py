@@ -141,12 +141,14 @@ def near_border(first_by_border, cell_ls):
                 if cell_ls[i] == lb_cnst.CODE_UNKNOWN:
                     space_ls.append(i)
         else:
-            if cell_ls[first_by_border] == lb_cnst.CODE_BLACK:
-                for i in range(first_by_border):
-                    if cell_ls[first_by_border + i] == lb_cnst.CODE_BLACK and cell_ls[i] == lb_cnst.CODE_UNKNOWN:
-                        space_ls.append(i)
-                    else:
-                        break  # No more spaces to insert
+            # There is no distance - the ship starts on the beginning of the row
+            if first_by_border < len(cell_ls):
+                if cell_ls[first_by_border] == lb_cnst.CODE_BLACK:
+                    for i in range(first_by_border):
+                        if cell_ls[first_by_border + i] == lb_cnst.CODE_BLACK and cell_ls[i] == lb_cnst.CODE_UNKNOWN:
+                            space_ls.append(i)
+                        else:
+                            break  # No more spaces to insert
         for nr in range(offset, offset + first_by_border):
             if black_detected and cell_ls[nr] != lb_cnst.CODE_BLACK:
                 black_ls.append(nr)
@@ -237,6 +239,7 @@ class TestBagFunctions(unittest.TestCase):
         self.assertEqual(near_border(4, '...HH......'), [[], [0]])
         self.assertEqual(near_border(3, ' ..HH'), [[], [1]])
         self.assertEqual(near_border(2, ' ..HH'), [[], [1, 2]])
+        self.assertEqual(near_border(2, 'H.'), [[1], []])
 
     def test_fill_with_spaces(self):
         '''
