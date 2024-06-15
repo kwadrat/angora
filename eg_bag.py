@@ -131,6 +131,11 @@ def starting_point(ship_len, cell_ls):
 
 
 def near_border(first_by_border, cell_ls):
+    '''
+    Which places can be marked black or space
+    first_by_border - length of first ship in this line
+    cell_ls - the shape of current row
+    '''
     black_ls = []
     space_ls = []
     black_detected = 0
