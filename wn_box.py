@@ -20,15 +20,20 @@ class WoodenBox:
         '''
         WoodenBox:
         '''
-        for one_ship in self.wood_ls:
-            one_ship.apply_new_text(cell_txt)
-        self.wood_ls[0].multi_rotor_pos(0)
+        if len(self.wood_ls) > 0:
+            for one_ship in self.wood_ls:
+                one_ship.apply_new_text(cell_txt)
+            self.wood_ls[0].multi_rotor_pos(0)
 
     def next_full_pos(self):
         '''
         WoodenBox:
         '''
-        return self.wood_ls[0].next_head_pos()
+        if self.wood_ls:
+            result = self.wood_ls[0].next_head_pos()
+        else:
+            result = None
+        return result
 
 
 class TestBoxFunctions(unittest.TestCase):
@@ -108,4 +113,12 @@ class TestBoxFunctions(unittest.TestCase):
         obj.text_for_all(' .HHH..    H H H H  ')
         self.assertEqual(obj.next_full_pos(), [1, 11, 13, 15, 17])
         self.assertEqual(obj.next_full_pos(), [2, 11, 13, 15, 17])
+        self.assertEqual(obj.next_full_pos(), None)
+
+    def test_h(self):
+        '''
+        TestBoxFunctions:
+        '''
+        obj = WoodenBox([])
+        obj.text_for_all(' ')
         self.assertEqual(obj.next_full_pos(), None)
