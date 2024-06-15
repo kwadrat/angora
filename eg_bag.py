@@ -76,7 +76,7 @@ def transpose(all_lines, row_a_cnt, col_a_cnt):
 def fill_ship_by_border(first_by_border, cell_ls):
     black_ls = []
     # Fill fields of ship that is touching border
-    if cell_ls[first_by_border] == lb_cnst.CODE_EMPTY:
+    if first_by_border == len(cell_ls) or cell_ls[first_by_border] == lb_cnst.CODE_EMPTY:
         if lb_cnst.CODE_BLACK in cell_ls[:first_by_border]:
             for nr in range(first_by_border):
                 if cell_ls[nr] == lb_cnst.CODE_UNKNOWN:
