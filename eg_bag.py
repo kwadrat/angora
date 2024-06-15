@@ -95,6 +95,12 @@ def easy_guess(one_ls, line_size):
 
 
 def starting_point(ship_len, cell_ls):
+    '''
+    Find the place where a ship of specified length could be placed, counting from left side of list of cells
+    Result:
+    - number (starting from 0) specifying the start of the ship.
+    - None - there is no place for the ship
+    '''
     offset = 0
     look_for_place = 1
     while look_for_place:
