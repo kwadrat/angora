@@ -9,7 +9,7 @@ import lb_cnst
 
 def all_spaces(item_len):
     '''
-    Entire line shoult be filled with spaces
+    Entire line should be filled with spaces
     '''
     return list(range(item_len))
 
