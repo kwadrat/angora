@@ -21,5 +21,8 @@ def recognize_options():
     parser.add_argument('--step_by_step',
                         action='store_true', default=False,
                         help='Detailed dump of each step')
+    parser.add_argument('--final_colors',
+                        action='store_true', default=False,
+                        help='Final red/green check on rows and columns')
     opt_bag = parser.parse_args()
     return parser, opt_bag
