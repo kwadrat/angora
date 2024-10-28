@@ -9,6 +9,9 @@ def recognize_options():
     parser.add_argument('--state',
                         default=None,
                         help='Initial state file name')
+    parser.add_argument('--expected_solution',
+                        default=None,
+                        help='Stop on first discrepancy from good solution')
     parser.add_argument('--run_tests',
                         action='store_true', default=False,
                         help='Run tests')
