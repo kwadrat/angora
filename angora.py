@@ -6,6 +6,7 @@ import ts_code
 import fx_area
 import wk_area
 import eg_bag
+import rn_info
 
 import sys
 
@@ -22,38 +23,16 @@ def text_to_numbers(one_txt):
 rows = text_to_numbers(fx_area.rows)
 cols = text_to_numbers(fx_area.cols)
 
-ZnakEscape = chr(27)
-
-
-def color_message(napis, paint, color):
-    if paint:
-        result = '%(escape)s[%(color)sm%(napis)s%(escape)s[0m' % {
-            'escape': ZnakEscape,
-            'napis': napis,
-            'color': color,
-            }
-    else:
-        result = napis
-    return result
-
-
-def green_message(napis, paint):
-    return color_message(napis, paint, '32')
-
-
-def red_message(napis, paint):
-    return color_message(napis, paint, '31')
-
 
 def zip_check(row_shadow, rows, desc):
     row_stat = map(lambda a, b: eg_bag.is_inside(a, b), row_shadow, rows)
     eq_stat = map(lambda a, b: a == b, row_shadow, rows)
     for nr, (a, b, c, d) in enumerate(zip(row_shadow, rows, row_stat, eq_stat)):
-        order_number = green_message(str(nr + 1), d)
-        print('%s %s %s %s' % (order_number, red_message(c, not c), a, b))
+        order_number = rn_info.green_message(str(nr + 1), d)
+        print('%s %s %s %s' % (order_number, rn_info.red_message(c, not c), a, b))
     total_state = all(row_stat)
     total_eq = all(eq_stat)
-    print('%s %s' % (green_message(desc + ' total:', total_eq), red_message(total_state, not total_state)))
+    print('%s %s' % (rn_info.green_message(desc + ' total:', total_eq), rn_info.red_message(total_state, not total_state)))
 
 
 def main(state_file, step_by_step):
