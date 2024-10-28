@@ -5,6 +5,7 @@ import lb_cnst
 import eg_bag
 import wn_box
 import ps_info
+import gl_sea
 import rn_info
 
 
@@ -334,3 +335,18 @@ class WorkArea:
         '''
         print('Place %s %d' % (label, self.modify_count))
         print(self.slim_text())
+
+    def enlight_final(self):
+        '''
+        WorkArea:
+        '''
+        error_occured = 0
+        tmp_rows = list(map(cell_to_numbers, self.int_table))
+        tmp_error = compare_with_colors('Rows:', gl_sea.g_rows, tmp_rows)
+        if tmp_error:
+            error_occured = tmp_error
+        tmp_cols = list(map(cell_to_numbers, list(zip(* self.int_table))))
+        tmp_error = compare_with_colors('Cols:', gl_sea.g_cols, tmp_cols)
+        if tmp_error:
+            error_occured = tmp_error
+        return error_occured
