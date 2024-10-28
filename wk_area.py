@@ -51,6 +51,7 @@ class WorkArea:
         self.pos_dtls = ps_info.PositionVault(len(self.rows), len(self.cols))
         self.verbose = verbose
         self.int_table = self.pos_dtls.prepare_empty_data()
+        self.exp_table = None
         self.assume_no_modification()
 
     def single_set(self, row_nr, col_nr, one_symbol):
