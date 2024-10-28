@@ -16,7 +16,7 @@ def cell_to_numbers(one_line):
 def compare_with_colors(one_label, expected_ls, guess_ls):
     difference_occured = 0
     label_flag = 1
-    for nr, (a, b) in enumerate(zip(expected_ls, guess_ls)):
+    for nr, (a, b) in enumerate(zip(expected_ls, guess_ls), 1):
         if a != b:
             if label_flag:
                 print(one_label)
