@@ -98,6 +98,19 @@ class WorkArea:
         out_txt = '\n'.join(out_ls)
         return out_txt
 
+    def table_from_file(self, prm_table, file_name):
+        '''
+        WorkArea:
+        '''
+        fd = open(file_name)
+        full_txt = fd.read()
+        fd.close()
+        all_lines = full_txt.splitlines()
+        for row_nr in self.pos_dtls.each_row():
+            row_txt = all_lines[row_nr]
+            for col_nr in self.pos_dtls.each_col():
+                prm_table[row_nr][col_nr] = row_txt[col_nr]
+
     def read_from_file(self, file_name):
         '''
         WorkArea:
