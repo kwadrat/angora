@@ -35,7 +35,7 @@ def zip_check(row_shadow, rows, desc):
     print('%s %s' % (rn_info.green_message(desc + ' total:', total_eq), rn_info.red_message(total_state, not total_state)))
 
 
-def main(state_file, step_by_step):
+def main(state_file, step_by_step, final_colors):
     r_sum = sum(map(sum, rows))
     c_sum = sum(map(sum, cols))
     assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
@@ -80,7 +80,7 @@ if __name__ == '__main__':
         error_occured = 0
         option_done = 1
     if opt_bag.guess_steps:
-        main(opt_bag.state, opt_bag.step_by_step)
+        main(opt_bag.state, opt_bag.step_by_step, opt_bag.final_colors)
         error_occured = 0
         option_done = 1
     if not option_done:
