@@ -20,8 +20,8 @@ def text_to_numbers(one_txt):
     return list(map(line_to_numbers, all_lines))
 
 
-rows = text_to_numbers(fx_area.rows)
-cols = text_to_numbers(fx_area.cols)
+g_rows = text_to_numbers(fx_area.rows)
+g_cols = text_to_numbers(fx_area.cols)
 
 
 def zip_check(row_shadow, rows, desc):
@@ -36,10 +36,10 @@ def zip_check(row_shadow, rows, desc):
 
 
 def main(state_file, step_by_step, final_colors):
-    r_sum = sum(map(sum, rows))
-    c_sum = sum(map(sum, cols))
+    r_sum = sum(map(sum, g_rows))
+    c_sum = sum(map(sum, g_cols))
     assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
-    work_a_area = wk_area.WorkArea(rows, cols)
+    work_a_area = wk_area.WorkArea(g_rows, g_cols)
     if step_by_step:
         work_a_area.ask_for_every_step()
     if state_file:
@@ -64,8 +64,8 @@ def rc_dump(label, data_ls):
 
 
 def rc_order():
-    rc_dump('Rows', rows)
-    rc_dump('Cols', cols)
+    rc_dump('Rows', g_rows)
+    rc_dump('Cols', g_cols)
 
 
 if __name__ == '__main__':
