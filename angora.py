@@ -22,7 +22,7 @@ def zip_check(row_shadow, rows, desc):
     print('%s %s' % (rn_info.green_message(desc + ' total:', total_eq), rn_info.red_message(total_state, not total_state)))
 
 
-def main(state_file, step_by_step, final_colors):
+def main(state_file, step_by_step, final_colors, expected_solution):
     error_occured = 0
     r_sum = sum(map(sum, gl_sea.g_rows))
     c_sum = sum(map(sum, gl_sea.g_cols))
@@ -58,7 +58,7 @@ if __name__ == '__main__':
         error_occured = 0
         option_done = 1
     if opt_bag.guess_steps:
-        error_occured = main(opt_bag.state, opt_bag.step_by_step, opt_bag.final_colors)
+        error_occured = main(opt_bag.state, opt_bag.step_by_step, opt_bag.final_colors, opt_bag.expected_solution)
         option_done = 1
     if not option_done:
         parser.print_help()
