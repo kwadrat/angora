@@ -3,25 +3,12 @@
 
 import dx_options
 import ts_code
-import fx_area
 import wk_area
 import eg_bag
 import rn_info
+import gl_sea
 
 import sys
-
-
-def line_to_numbers(one_line):
-    return list(map(int, one_line.split()))
-
-
-def text_to_numbers(one_txt):
-    all_lines = one_txt.splitlines()
-    return list(map(line_to_numbers, all_lines))
-
-
-g_rows = text_to_numbers(fx_area.rows)
-g_cols = text_to_numbers(fx_area.cols)
 
 
 def zip_check(row_shadow, rows, desc):
@@ -36,10 +23,10 @@ def zip_check(row_shadow, rows, desc):
 
 
 def main(state_file, step_by_step, final_colors):
-    r_sum = sum(map(sum, g_rows))
-    c_sum = sum(map(sum, g_cols))
+    r_sum = sum(map(sum, gl_sea.g_rows))
+    c_sum = sum(map(sum, gl_sea.g_cols))
     assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
-    work_a_area = wk_area.WorkArea(g_rows, g_cols)
+    work_a_area = wk_area.WorkArea(gl_sea.g_rows, gl_sea.g_cols)
     if step_by_step:
         work_a_area.ask_for_every_step()
     if state_file:
@@ -55,19 +42,6 @@ def main(state_file, step_by_step, final_colors):
             break
 
 
-def rc_dump(label, data_ls):
-    a = list(map(lambda x: (sum(x[1]) + len(x[1]) - 1, x[0] + 1, x[1]), enumerate(data_ls)))
-    a.sort(reverse=1)
-    print(label)
-    for one_tpl in a:
-        print(one_tpl)
-
-
-def rc_order():
-    rc_dump('Rows', g_rows)
-    rc_dump('Cols', g_cols)
-
-
 if __name__ == '__main__':
     parser, opt_bag = dx_options.recognize_options()
     option_done = 0
@@ -76,7 +50,7 @@ if __name__ == '__main__':
         error_occured = ts_code.perform_tests()
         option_done = 1
     if opt_bag.show_order:
-        rc_order()
+        gl_sea.rc_order()
         error_occured = 0
         option_done = 1
     if opt_bag.guess_steps:
