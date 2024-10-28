@@ -41,6 +41,8 @@ def main(state_file, step_by_step, final_colors):
             work_a_area.display_state('a')
         else:
             break
+    if final_colors:
+        error_occured = work_a_area.enlight_final()
     return error_occured
 
 
