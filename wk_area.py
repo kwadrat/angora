@@ -5,10 +5,23 @@ import lb_cnst
 import eg_bag
 import wn_box
 import ps_info
+import rn_info
 
 
 def cell_to_numbers(one_line):
     return list(map(len, ''.join(one_line).strip().split()))
+
+
+def compare_with_colors(one_label, expected_ls, guess_ls):
+    print(one_label)
+    difference_occured = 0
+    for nr, (a, b) in enumerate(zip(expected_ls, guess_ls)):
+        if a != b:
+            print(nr)
+            print(rn_info.green_message(str(a), 1))
+            print(rn_info.red_message(str(b), 1))
+            difference_occured = 1
+    return difference_occured
 
 
 class WorkArea:
