@@ -112,18 +112,15 @@ class WorkArea:
             for col_nr in self.pos_dtls.each_col():
                 prm_table[row_nr][col_nr] = row_txt[col_nr]
 
-    def read_from_file(self, file_name):
+    def read_from_file(self, state_file, expected_solution):
         '''
         WorkArea:
         '''
-        fd = open(file_name)
-        full_txt = fd.read()
-        fd.close()
-        all_lines = full_txt.splitlines()
-        for row_nr in self.pos_dtls.each_row():
-            row_txt = all_lines[row_nr]
-            for col_nr in self.pos_dtls.each_col():
-                self.int_table[row_nr][col_nr] = row_txt[col_nr]
+        if state_file:
+            self.table_from_file(self.int_table, state_file)
+        if expected_solution:
+            self.exp_table = self.pos_dtls.prepare_empty_data()
+            self.table_from_file(self.exp_table, expected_solution)
 
     def save_to_file(self, file_name, enable_axis=0):
         '''

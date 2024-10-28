@@ -30,8 +30,7 @@ def main(state_file, step_by_step, final_colors, expected_solution):
     work_a_area = wk_area.WorkArea(gl_sea.g_rows, gl_sea.g_cols)
     if step_by_step:
         work_a_area.ask_for_every_step()
-    if state_file:
-        work_a_area.read_from_file(state_file)
+    work_a_area.read_from_file(state_file, expected_solution)
     work_a_area.small_margins_hint()
     prev_count = -1
     while 1:
