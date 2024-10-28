@@ -58,6 +58,11 @@ class WorkArea:
         '''
         WorkArea:
         '''
+        if self.exp_table is not None:
+            if self.exp_table[row_nr][col_nr] != one_symbol:
+                self.display_state('b')
+                print('row_nr %d col_nr %d one_symbol %s' % (row_nr + 1, col_nr + 1, repr(one_symbol)))
+                raise RuntimeError('Discrepancy detected')
         self.int_table[row_nr][col_nr] = one_symbol
         if self.enable_stepping:
             self.save_to_file('g%03d' % self.modify_count, enable_axis=1)
