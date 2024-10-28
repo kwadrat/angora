@@ -7,6 +7,10 @@ import wn_box
 import ps_info
 
 
+def cell_to_numbers(one_line):
+    return list(map(len, ''.join(one_line).strip().split()))
+
+
 class WorkArea:
     def ask_for_every_step(self):
         '''
