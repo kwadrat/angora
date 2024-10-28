@@ -54,6 +54,40 @@ class WorkArea:
         self.exp_table = None
         self.assume_no_modification()
 
+    def slim_text(self, enable_axis=1):
+        '''
+        WorkArea:
+        '''
+        out_ls = []
+        if enable_axis:
+            col_header = self.pos_dtls.col_header()
+            out_ls.append(col_header)
+        for nr, row_data in enumerate(self.int_table):
+            if enable_axis:
+                trailing_txt = ' ' + str(nr + 1)
+            else:
+                trailing_txt = ''
+            unified_line = ''.join(row_data) + trailing_txt
+            out_ls.append(unified_line)
+        out_txt = '\n'.join(out_ls)
+        return out_txt
+
+    def save_to_file(self, file_name, enable_axis=0):
+        '''
+        WorkArea:
+        '''
+        full_txt = self.slim_text(enable_axis) + '\n'
+        fd = open(file_name, 'w')
+        fd.write(full_txt)
+        fd.close()
+
+    def display_state(self, label):
+        '''
+        WorkArea:
+        '''
+        print('Place %s %d' % (label, self.modify_count))
+        print(self.slim_text())
+
     def single_set(self, row_nr, col_nr, one_symbol):
         '''
         WorkArea:
@@ -86,24 +120,6 @@ class WorkArea:
             one_msg = "Why cleaning this place [%d, %d, '%s']?" % (row_nr, col_nr, current_value)
             raise RuntimeError(one_msg)
 
-    def slim_text(self, enable_axis=1):
-        '''
-        WorkArea:
-        '''
-        out_ls = []
-        if enable_axis:
-            col_header = self.pos_dtls.col_header()
-            out_ls.append(col_header)
-        for nr, row_data in enumerate(self.int_table):
-            if enable_axis:
-                trailing_txt = ' ' + str(nr + 1)
-            else:
-                trailing_txt = ''
-            unified_line = ''.join(row_data) + trailing_txt
-            out_ls.append(unified_line)
-        out_txt = '\n'.join(out_ls)
-        return out_txt
-
     def table_from_file(self, prm_table, file_name):
         '''
         WorkArea:
@@ -126,15 +142,6 @@ class WorkArea:
         if expected_solution:
             self.exp_table = self.pos_dtls.prepare_empty_data()
             self.table_from_file(self.exp_table, expected_solution)
-
-    def save_to_file(self, file_name, enable_axis=0):
-        '''
-        WorkArea:
-        '''
-        full_txt = self.slim_text(enable_axis) + '\n'
-        fd = open(file_name, 'w')
-        fd.write(full_txt)
-        fd.close()
 
     def helper_len(self):
         '''
@@ -347,13 +354,6 @@ class WorkArea:
             for self.is_end in range(2):
                 self.fill_b_from_each_border()
             self.fill_c_for_both()
-
-    def display_state(self, label):
-        '''
-        WorkArea:
-        '''
-        print('Place %s %d' % (label, self.modify_count))
-        print(self.slim_text())
 
     def enlight_final(self):
         '''
