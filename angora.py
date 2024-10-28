@@ -23,6 +23,7 @@ def zip_check(row_shadow, rows, desc):
 
 
 def main(state_file, step_by_step, final_colors):
+    error_occured = 0
     r_sum = sum(map(sum, gl_sea.g_rows))
     c_sum = sum(map(sum, gl_sea.g_cols))
     assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
@@ -40,6 +41,7 @@ def main(state_file, step_by_step, final_colors):
             work_a_area.display_state('a')
         else:
             break
+    return error_occured
 
 
 if __name__ == '__main__':
@@ -54,8 +56,7 @@ if __name__ == '__main__':
         error_occured = 0
         option_done = 1
     if opt_bag.guess_steps:
-        main(opt_bag.state, opt_bag.step_by_step, opt_bag.final_colors)
-        error_occured = 0
+        error_occured = main(opt_bag.state, opt_bag.step_by_step, opt_bag.final_colors)
         option_done = 1
     if not option_done:
         parser.print_help()
