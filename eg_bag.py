@@ -311,6 +311,7 @@ class TestBagFunctions(unittest.TestCase):
         self.assertEqual(always_in_shadow({0, 8}, 6), [])
         self.assertEqual(always_in_shadow({1, 6}, 7), [6, 7])
         self.assertEqual(always_in_shadow({2, 6}, 7), [6, 7, 8])
+        self.assertEqual(always_in_shadow(set(), 6), [])
 
     def test_no_black_single_length(self):
         '''
