@@ -168,6 +168,8 @@ def gen_cl_hd(length):
 
 
 def always_in_shadow(one_set, ship_lngth):
+    if not one_set:
+        return []
     return list(range(max(one_set), min(one_set) + ship_lngth))
 
 
