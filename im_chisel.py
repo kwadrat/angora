@@ -88,7 +88,7 @@ class ItemChisel:
         look_for_result = 1
         while look_for_result and self.still_searching():
             self.local_nr += 1
-            if self.local_nr >= 0 and self.local_nr < self.total_len:
+            if self.within_working_area():
                 if self.black_before_first_ship():
                     self.set_local(None)
                     look_for_result = 0  # Some fields are black before first ship - it is wrong!
