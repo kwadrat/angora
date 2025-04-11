@@ -51,6 +51,13 @@ class ItemChisel:
         self.cell_txt = cell_txt
         self.total_len = len(self.cell_txt)
 
+    def can_be_black(self):
+        '''
+        ItemChisel:
+        Black was not yet excluded.
+        '''
+        return self.cell_txt[self.local_nr] in (lb_cnst.CODE_UNKNOWN, lb_cnst.CODE_BLACK)
+
     def still_searching(self):
         '''
         ItemChisel:
