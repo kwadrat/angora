@@ -54,6 +54,7 @@ class ItemChisel:
     def black_before_first_ship(self):
         '''
         ItemChisel:
+        There should be no black fields before first ship.
         '''
         return self.elem_nr == 0 and self.cell_txt[:self.local_nr].count(lb_cnst.CODE_BLACK) > 0
 
