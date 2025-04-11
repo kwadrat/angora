@@ -72,7 +72,7 @@ class ItemChisel:
         '''
         result = None
         look_for_result = 1
-        while look_for_result and self.local_nr is not None and self.local_nr < self.total_len:
+        while look_for_result and self.still_searching():
             self.local_nr += 1
             if self.local_nr >= 0 and self.local_nr < self.total_len:
                 if self.black_before_first_ship():
