@@ -51,6 +51,14 @@ class ItemChisel:
         self.cell_txt = cell_txt
         self.total_len = len(self.cell_txt)
 
+    def still_searching(self):
+        '''
+        ItemChisel:
+        Position is defined.
+        Position is still inside working area, before end of line.
+        '''
+        return self.local_nr is not None and self.local_nr < self.total_len
+
     def black_before_first_ship(self):
         '''
         ItemChisel:
