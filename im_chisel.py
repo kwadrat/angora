@@ -66,7 +66,7 @@ class ItemChisel:
         while look_for_result and self.local_nr is not None and self.local_nr < self.total_len:
             self.local_nr += 1
             if self.local_nr >= 0 and self.local_nr < self.total_len:
-                if self.elem_nr == 0 and self.cell_txt[:self.local_nr].count(lb_cnst.CODE_BLACK) > 0:
+                if self.black_before_first_ship():
                     self.set_local(None)
                     look_for_result = 0  # Some fields are black before first ship - it is wrong!
                 elif self.cell_txt[self.local_nr] in (lb_cnst.CODE_UNKNOWN, lb_cnst.CODE_BLACK):
