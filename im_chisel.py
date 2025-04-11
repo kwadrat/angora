@@ -51,6 +51,13 @@ class ItemChisel:
         self.cell_txt = cell_txt
         self.total_len = len(self.cell_txt)
 
+    def within_working_area(self):
+        '''
+        ItemChisel:
+        Current position is within working area - can be set to black or space.
+        '''
+        return self.local_nr >= 0 and self.local_nr < self.total_len
+
     def can_be_black(self):
         '''
         ItemChisel:
