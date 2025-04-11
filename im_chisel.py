@@ -51,6 +51,12 @@ class ItemChisel:
         self.cell_txt = cell_txt
         self.total_len = len(self.cell_txt)
 
+    def black_before_first_ship(self):
+        '''
+        ItemChisel:
+        '''
+        return self.elem_nr == 0 and self.cell_txt[:self.local_nr].count(lb_cnst.CODE_BLACK) > 0
+
     def internal_rotate(self):
         '''
         ItemChisel:
