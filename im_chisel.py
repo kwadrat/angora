@@ -58,6 +58,13 @@ class ItemChisel:
         '''
         return self.local_nr >= 0 and self.local_nr < self.total_len
 
+    def not_last(self):
+        '''
+        ItemChisel:
+        Black was not yet excluded.
+        '''
+        return self.next_chisel is not None
+
     def can_be_black(self):
         '''
         ItemChisel:
@@ -99,7 +106,7 @@ class ItemChisel:
                         part_inside = self.cell_txt[self.local_nr:end_point]
                         part_after = self.cell_txt[end_point:]
                         other_txt = part_before + part_after
-                        if self.next_chisel is not None or other_txt.count(lb_cnst.CODE_BLACK) == 0:
+                        if self.not_last() or other_txt.count(lb_cnst.CODE_BLACK) == 0:
                             if part_inside.count(lb_cnst.CODE_EMPTY) == 0:
                                 if self.local_nr == 0 or self.cell_txt[self.local_nr - 1] != lb_cnst.CODE_BLACK:
                                     if end_point == self.total_len or self.cell_txt[end_point] != lb_cnst.CODE_BLACK:
