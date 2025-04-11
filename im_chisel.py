@@ -85,7 +85,7 @@ class ItemChisel:
                 if self.black_before_first_ship():
                     self.set_local(None)
                     look_for_result = 0  # Some fields are black before first ship - it is wrong!
-                elif self.cell_txt[self.local_nr] in (lb_cnst.CODE_UNKNOWN, lb_cnst.CODE_BLACK):
+                elif self.can_be_black():
                     end_point = self.local_nr + self.ship_len
                     part_before = self.cell_txt[self.sub_start:self.local_nr]
                     part_inside = self.cell_txt[self.local_nr:end_point]
