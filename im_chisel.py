@@ -65,6 +65,14 @@ class ItemChisel:
         '''
         return self.next_chisel is not None
 
+    def left_margin_or_not_black(self):
+        '''
+        ItemChisel:
+        Either is on the left margin of working area,
+        or has non-black just before the ship.
+        '''
+        return self.local_nr == 0 or self.cell_txt[self.local_nr - 1] != lb_cnst.CODE_BLACK
+
     def can_be_black(self):
         '''
         ItemChisel:
@@ -108,7 +116,7 @@ class ItemChisel:
                         other_txt = part_before + part_after
                         if self.not_last() or other_txt.count(lb_cnst.CODE_BLACK) == 0:
                             if part_inside.count(lb_cnst.CODE_EMPTY) == 0:
-                                if self.local_nr == 0 or self.cell_txt[self.local_nr - 1] != lb_cnst.CODE_BLACK:
+                                if self.left_margin_or_not_black():
                                     if end_point == self.total_len or self.cell_txt[end_point] != lb_cnst.CODE_BLACK:
                                         result = self.local_nr
                                         look_for_result = 0
