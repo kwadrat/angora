@@ -130,11 +130,12 @@ class ItemChisel:
         '''
         res_ls = None
         if self.local_nr is not None:
-            res_ls = [self.local_nr]
-            if self.next_chisel is not None:
+            if self.next_chisel is None:
+                res_ls = [self.local_nr]
+            else:
                 tail_ls = self.next_chisel.get_list_of_positions()
                 if tail_ls is not None:
-                    res_ls.extend(tail_ls)
+                    res_ls = [self.local_nr] + tail_ls
         return res_ls
 
     def count_of_intruders_between_me_and_next(self, curr_pos, position_of_next=None):
