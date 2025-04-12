@@ -179,7 +179,7 @@ class ItemChisel:
                     look_for_good_values = 0  # No more good places for current ship, end search loop
         return result
 
-    def update_locations(self):
+    def dive_into_next(self):
         '''
         ItemChisel:
         '''
@@ -189,7 +189,7 @@ class ItemChisel:
         else:
             updating_not_finished = 1
             while updating_not_finished:
-                position_of_next = self.next_chisel.update_locations()
+                position_of_next = self.next_chisel.dive_into_next()
                 if position_of_next is None:
                     curr_pos = self.internal_rotate()
                     if curr_pos is None:
@@ -220,7 +220,7 @@ class ItemChisel:
         ItemChisel:
         '''
         result = self.get_list_of_positions()
-        self.update_locations()
+        self.dive_into_next()
         return result
 
 
