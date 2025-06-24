@@ -46,9 +46,9 @@ class WorkArea:
         WorkArea:
         '''
         self.enable_stepping = 0
-        self.rows = p_rows
+        self.a_rows = p_rows
         self.cols = p_cols
-        self.pos_dtls = ps_info.PositionVault(len(self.rows), len(self.cols))
+        self.pos_dtls = ps_info.PositionVault(len(self.a_rows), len(self.cols))
         self.verbose = verbose
         self.int_table = self.pos_dtls.prepare_empty_data()
         self.exp_table = None
@@ -164,7 +164,7 @@ class WorkArea:
         if self.is_col:
             len_ls = self.cols[item_nr]
         else:
-            len_ls = self.rows[item_nr]
+            len_ls = self.a_rows[item_nr]
         return len_ls
 
     def get_details(self, item_nr):
@@ -219,7 +219,7 @@ class WorkArea:
         zaczerniona część wspólna.
         '''
         for row_nr in self.pos_dtls.each_row():
-            easy_ls = self.pos_dtls.guess_in_row(self.rows[row_nr])
+            easy_ls = self.pos_dtls.guess_in_row(self.a_rows[row_nr])
             for easy_start, easy_end in easy_ls:
                 for col_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
