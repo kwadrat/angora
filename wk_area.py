@@ -99,6 +99,21 @@ class WorkArea:
         print('Place %s %d' % (label, self.modify_count))
         print(self.slim_text())
 
+    def temporary_condition(self, row_nr, col_nr):
+        '''
+        WorkArea:
+        '''
+        row_txt = self.get_a_details(row_nr, is_a_col=0)
+        error_occured = wn_box.possible_problem(row_txt, self.a_rows[row_nr])
+        if error_occured:
+            raise RuntimeError('row = %d' % row_nr)
+        else:
+            col_txt = self.get_a_details(col_nr, is_a_col=1)
+            error_occured = wn_box.possible_problem(col_txt, self.a_cols[col_nr])
+            if error_occured:
+                raise RuntimeError('column = %d' % col_nr)
+        return error_occured
+
     def single_set(self, row_nr, col_nr, one_symbol):
         '''
         WorkArea:
