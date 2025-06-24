@@ -105,11 +105,11 @@ class WorkArea:
         '''
         row_txt = self.get_a_details(row_nr, is_a_col=0)
         if wn_box.possible_problem(row_txt, self.a_rows[row_nr]):
-            raise RuntimeError('row = %d' % row_nr)
+            raise RuntimeError('row = %d (offset %d)' % (row_nr, col_nr))
         else:
             col_txt = self.get_a_details(col_nr, is_a_col=1)
             if wn_box.possible_problem(col_txt, self.a_cols[col_nr]):
-                raise RuntimeError('column = %d' % col_nr)
+                raise RuntimeError('column = %d (offset %d)' % (col_nr, row_nr))
 
     def single_set(self, row_nr, col_nr, one_symbol):
         '''
