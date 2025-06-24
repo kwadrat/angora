@@ -36,6 +36,16 @@ class WoodenBox:
         return result
 
 
+def possible_problem(ground_txt, ship_ls):
+    wd_bx = WoodenBox(ship_ls)
+    wd_bx.text_for_all(ground_txt)
+    error_occured = wd_bx.next_full_pos() is None
+    if error_occured:
+        tmp_format = 'ground_txt, ship_ls'
+        print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+    return error_occured
+
+
 class TestBoxFunctions(unittest.TestCase):
     def test_b(self):
         '''
