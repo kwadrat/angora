@@ -80,6 +80,18 @@ class WorkArea:
         fd.write(full_txt)
         fd.close()
 
+    def get_a_details(self, item_nr, is_a_col, is_a_end=0):
+        '''
+        WorkArea:
+        '''
+        if is_a_col:
+            line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
+        else:
+            line_ls = self.int_table[item_nr]
+        if is_a_end:
+            line_ls = reversed(line_ls)
+        return ''.join(line_ls)
+
     def display_state(self, label):
         '''
         WorkArea:
@@ -165,18 +177,6 @@ class WorkArea:
         else:
             len_ls = self.a_rows[item_nr]
         return len_ls
-
-    def get_a_details(self, item_nr, is_a_col, is_a_end=0):
-        '''
-        WorkArea:
-        '''
-        if is_a_col:
-            line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
-        else:
-            line_ls = self.int_table[item_nr]
-        if is_a_end:
-            line_ls = reversed(line_ls)
-        return ''.join(line_ls)
 
     def get_details(self, item_nr):
         '''
