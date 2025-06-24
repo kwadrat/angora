@@ -41,13 +41,13 @@ class WorkArea:
         '''
         self.modify_count = 0
 
-    def __init__(self, rows, cols, verbose=0):
+    def __init__(self, p_rows, p_cols, verbose=0):
         '''
         WorkArea:
         '''
         self.enable_stepping = 0
-        self.rows = rows
-        self.cols = cols
+        self.rows = p_rows
+        self.cols = p_cols
         self.pos_dtls = ps_info.PositionVault(len(self.rows), len(self.cols))
         self.verbose = verbose
         self.int_table = self.pos_dtls.prepare_empty_data()
