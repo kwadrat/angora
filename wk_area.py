@@ -40,6 +40,12 @@ class WorkArea:
         '''
         self.modify_count = 0
 
+    def __repr__(self):
+        '''
+        WorkArea:
+        '''
+        return 'WorkArea(col=%d, end=%d)' % (self.is_col, self.is_end)
+
     def __init__(self, p_rows, p_cols, verbose=0):
         '''
         WorkArea:
