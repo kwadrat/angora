@@ -5,7 +5,6 @@ import lb_cnst
 import eg_bag
 import wn_box
 import ps_info
-import gl_sea
 import rn_info
 
 
@@ -361,11 +360,11 @@ class WorkArea:
         '''
         error_occured = 0
         tmp_rows = list(map(cell_to_numbers, self.int_table))
-        tmp_error = compare_with_colors('Rows:', gl_sea.g_rows, tmp_rows)
+        tmp_error = compare_with_colors('Rows:', self.a_rows, tmp_rows)
         if tmp_error:
             error_occured = tmp_error
         tmp_cols = list(map(cell_to_numbers, list(zip(* self.int_table))))
-        tmp_error = compare_with_colors('Cols:', gl_sea.g_cols, tmp_cols)
+        tmp_error = compare_with_colors('Cols:', self.a_cols, tmp_cols)
         if tmp_error:
             error_occured = tmp_error
         return error_occured
