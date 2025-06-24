@@ -126,6 +126,7 @@ class WorkArea:
         self.int_table[row_nr][col_nr] = one_symbol
         if self.enable_stepping:
             self.save_to_file('g%03d' % self.modify_count, enable_axis=1)
+        self.temporary_condition(row_nr, col_nr)
         self.modify_count += 1
 
     def set_black(self, row_nr, col_nr):
