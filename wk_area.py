@@ -47,8 +47,8 @@ class WorkArea:
         '''
         self.enable_stepping = 0
         self.a_rows = p_rows
-        self.cols = p_cols
-        self.pos_dtls = ps_info.PositionVault(len(self.a_rows), len(self.cols))
+        self.a_cols = p_cols
+        self.pos_dtls = ps_info.PositionVault(len(self.a_rows), len(self.a_cols))
         self.verbose = verbose
         self.int_table = self.pos_dtls.prepare_empty_data()
         self.exp_table = None
@@ -162,7 +162,7 @@ class WorkArea:
         This list can be empty - all places are spaces.
         '''
         if self.is_col:
-            len_ls = self.cols[item_nr]
+            len_ls = self.a_cols[item_nr]
         else:
             len_ls = self.a_rows[item_nr]
         return len_ls
@@ -224,7 +224,7 @@ class WorkArea:
                 for col_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
         for col_nr in self.pos_dtls.each_col():
-            easy_ls = self.pos_dtls.guess_in_col(self.cols[col_nr])
+            easy_ls = self.pos_dtls.guess_in_col(self.a_cols[col_nr])
             for easy_start, easy_end in easy_ls:
                 for row_nr in range(easy_start, easy_end):
                     self.set_black(row_nr, col_nr)
