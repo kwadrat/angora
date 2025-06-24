@@ -182,15 +182,7 @@ class WorkArea:
         '''
         WorkArea:
         '''
-        if self.is_col:
-            line_ls = list(map(lambda lbd_line: lbd_line[item_nr], self.int_table))
-        else:
-            line_ls = self.int_table[item_nr]
-        if self.is_end:
-            one_text = ''.join(reversed(line_ls))
-        else:
-            one_text = ''.join(line_ls)
-        return one_text
+        return self.get_a_details(item_nr, self.is_col, self.is_end)
 
     def helper_position(self, item_len, item_nr, offset):
         '''
