@@ -29,9 +29,7 @@ def board_quick_sums():
 
 
 def main(state_file, step_by_step, final_colors, expected_solution):
-    r_sum = sum(map(sum, gl_sea.g_rows))
-    c_sum = sum(map(sum, gl_sea.g_cols))
-    assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
+    board_quick_sums()
     work_a_area = wk_area.WorkArea(gl_sea.g_rows, gl_sea.g_cols)
     if step_by_step:
         work_a_area.ask_for_every_step()
