@@ -23,7 +23,6 @@ def zip_check(row_shadow, rows, desc):
 
 
 def main(state_file, step_by_step, final_colors, expected_solution):
-    error_occured = 0
     r_sum = sum(map(sum, gl_sea.g_rows))
     c_sum = sum(map(sum, gl_sea.g_cols))
     assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
@@ -32,8 +31,7 @@ def main(state_file, step_by_step, final_colors, expected_solution):
         work_a_area.ask_for_every_step()
     work_a_area.read_from_file(state_file, expected_solution)
     work_a_area.small_margins_hint()
-    error_occured = work_a_area.general_processing()
-    return error_occured
+    return work_a_area.general_processing()
 
 
 if __name__ == '__main__':
