@@ -22,6 +22,12 @@ def zip_check(row_shadow, rows, desc):
     print('%s %s' % (rn_info.green_message(desc + ' total:', total_eq), rn_info.red_message(total_state, not total_state)))
 
 
+def board_quick_sums():
+    r_sum = sum(map(sum, gl_sea.g_rows))
+    c_sum = sum(map(sum, gl_sea.g_cols))
+    assert r_sum == c_sum, '%d %d' % (r_sum, c_sum)
+
+
 def main(state_file, step_by_step, final_colors, expected_solution):
     r_sum = sum(map(sum, gl_sea.g_rows))
     c_sum = sum(map(sum, gl_sea.g_cols))
