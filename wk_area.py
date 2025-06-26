@@ -377,16 +377,16 @@ class WorkArea:
                 self.fill_b_from_each_border()
             self.fill_c_for_both()
 
-    def enlight_final(self):
+    def enlight_final(self, one_table):
         '''
         WorkArea:
         '''
         error_occured = 0
-        tmp_rows = list(map(cell_to_numbers, self.int_table))
+        tmp_rows = list(map(cell_to_numbers, one_table))
         tmp_error = compare_with_colors('Rows:', self.a_rows, tmp_rows)
         if tmp_error:
             error_occured = tmp_error
-        tmp_cols = list(map(cell_to_numbers, list(zip(* self.int_table))))
+        tmp_cols = list(map(cell_to_numbers, list(zip(* one_table))))
         tmp_error = compare_with_colors('Cols:', self.a_cols, tmp_cols)
         if tmp_error:
             error_occured = tmp_error
@@ -406,5 +406,5 @@ class WorkArea:
             else:
                 break
         if final_colors:
-            error_occured = self.enlight_final()
+            error_occured = self.enlight_final(self.int_table)
         return error_occured
