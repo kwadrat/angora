@@ -27,5 +27,8 @@ def recognize_options():
     parser.add_argument('--final_colors',
                         action='store_true', default=False,
                         help='Final red/green check on rows and columns')
+    parser.add_argument('--check_expected',
+                        action='store_true', default=False,
+                        help='Verify correctness of expected state')
     opt_bag = parser.parse_args()
     return parser, opt_bag
