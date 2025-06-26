@@ -32,16 +32,7 @@ def main(state_file, step_by_step, final_colors, expected_solution):
         work_a_area.ask_for_every_step()
     work_a_area.read_from_file(state_file, expected_solution)
     work_a_area.small_margins_hint()
-    prev_count = -1
-    while 1:
-        prev_count = work_a_area.modify_count
-        work_a_area.fill_a_from_each_border()
-        if work_a_area.modify_count > prev_count:
-            work_a_area.display_state('a')
-        else:
-            break
-    if final_colors:
-        error_occured = work_a_area.enlight_final()
+    error_occured = work_a_area.general_processing()
     return error_occured
 
 
