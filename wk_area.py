@@ -391,3 +391,20 @@ class WorkArea:
         if tmp_error:
             error_occured = tmp_error
         return error_occured
+
+    def general_processing(self):
+        '''
+        WorkArea:
+        '''
+        error_occured = 0
+        prev_count = -1
+        while 1:
+            prev_count = self.modify_count
+            self.fill_a_from_each_border()
+            if self.modify_count > prev_count:
+                self.display_state('a')
+            else:
+                break
+        if final_colors:
+            error_occured = self.enlight_final()
+        return error_occured
