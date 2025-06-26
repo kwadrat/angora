@@ -38,6 +38,13 @@ def main(state_file, step_by_step, final_colors, expected_solution):
     return work_a_area.general_processing()
 
 
+def check_rows_columns(expected_solution):
+    board_quick_sums()
+    work_b_area = wk_area.WorkArea(gl_sea.g_rows, gl_sea.g_cols)
+    work_b_area.read_from_file(None, expected_solution)
+    return work_b_area.verify_solution()
+
+
 if __name__ == '__main__':
     parser, opt_bag = dx_options.recognize_options()
     option_done = 0
@@ -51,6 +58,9 @@ if __name__ == '__main__':
         option_done = 1
     if opt_bag.guess_steps:
         error_occured = main(opt_bag.state, opt_bag.step_by_step, opt_bag.final_colors, opt_bag.expected_solution)
+        option_done = 1
+    if opt_bag.check_expected:
+        error_occured = check_rows_columns(opt_bag.expected_solution)
         option_done = 1
     if not option_done:
         parser.print_help()

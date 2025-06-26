@@ -408,3 +408,9 @@ class WorkArea:
         if final_colors:
             error_occured = self.enlight_final(self.int_table)
         return error_occured
+
+    def verify_solution(self):
+        '''
+        WorkArea:
+        '''
+        return self.enlight_final(self.exp_table)
