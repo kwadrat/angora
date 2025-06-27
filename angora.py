@@ -35,7 +35,7 @@ def main(state_file, step_by_step, final_colors, expected_solution):
         work_a_area.ask_for_every_step()
     work_a_area.read_from_file(state_file, expected_solution)
     work_a_area.small_margins_hint()
-    return work_a_area.general_processing()
+    return work_a_area.general_processing(final_colors)
 
 
 def check_rows_columns(expected_solution):

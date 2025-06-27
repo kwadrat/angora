@@ -392,7 +392,7 @@ class WorkArea:
             error_occured = tmp_error
         return error_occured
 
-    def general_processing(self):
+    def general_processing(self, final_colors):
         '''
         WorkArea:
         '''
