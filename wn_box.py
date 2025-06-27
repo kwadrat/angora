@@ -132,3 +132,14 @@ class TestBoxFunctions(unittest.TestCase):
         obj = WoodenBox([])
         obj.text_for_all(' ')
         self.assertEqual(obj.next_full_pos(), None)
+
+    def test_i(self):
+        '''
+        TestBoxFunctions:
+        '''
+        obj = WoodenBox([2, 2])
+        one_line = '....H ..'
+        obj.text_for_all(one_line)
+        self.assertEqual(obj.next_full_pos(), [0, 3])
+        self.assertEqual(obj.next_full_pos(), [3, 6])
+        self.assertEqual(obj.next_full_pos(), None)

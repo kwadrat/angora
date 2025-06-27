@@ -201,7 +201,7 @@ class ItemChisel:
                         else:
                             position_of_next = self.next_chisel.multi_rotor_pos(next_pos)
                             if position_of_next is None:
-                                updating_not_finished = 0  # Next ship failed to find place, send failure upward
+                                pass  # Next ship failed to find place, try to advance current ship
                             else:
                                 if self.count_of_intruders_between_me_and_next(self.local_nr, position_of_next) == 0:
                                     my_status = self.local_nr
