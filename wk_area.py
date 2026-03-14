@@ -284,6 +284,9 @@ class WorkArea:
                 black_ls = eg_bag.fill_ship_by_border(one_length, one_text)
                 for offset in black_ls:
                     self.helper_black(line_len, item_nr, offset)
+                black_ls = eg_bag.edge_hints(min(len_ls), one_text)
+                for offset in black_ls:
+                    self.helper_black(line_len, item_nr, offset)
             else:
                 # There is no numbers in this line - all fields should be empty
                 space_ls = eg_bag.all_spaces(line_len)
