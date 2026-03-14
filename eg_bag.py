@@ -183,6 +183,35 @@ def first_to_last(one_txt):
     return result_ls
 
 
+def edge_hints(smallest_common, x_txt):
+    '''
+    smallest_common - shortest common length of ships in the line
+    x_txt - points
+    return value:
+    - black list
+    '''
+    was_black = 0  # Dummy value (silence pyflake warning)
+    black_ls = []
+    cur_pos = 0
+    work = 1
+    last_in_shadow = -1
+    while work:
+        the_elem = x_txt[cur_pos]
+        if cur_pos <= last_in_shadow:
+            if was_black and the_elem == lb_cnst.CODE_UNKNOWN:
+                black_ls.append(cur_pos)
+            if the_elem == lb_cnst.CODE_BLACK:
+                was_black = 1  # After black mark other as black
+        if the_elem == lb_cnst.CODE_EMPTY:
+            last_in_shadow = cur_pos + smallest_common
+            # Look for black in shadow - the rest should be also black
+            was_black = 0
+        cur_pos += 1
+        if cur_pos >= len(x_txt):
+            work = 0
+    return black_ls
+
+
 class TestBagFunctions(unittest.TestCase):
     def test_angora_puzzle(self):
         '''
@@ -322,3 +351,13 @@ class TestBagFunctions(unittest.TestCase):
         self.assertEqual(first_to_last(' H..H'), [2, 3])
         self.assertEqual(first_to_last(' H'), [])
         self.assertEqual(first_to_last(' .'), [])
+
+    def test_internal_edge(self):
+        '''
+        TestBagFunctions:
+        '''
+        self.assertEqual(edge_hints(1, '...'), [])
+        self.assertEqual(edge_hints(2, '. H...'), [3])
+        self.assertEqual(edge_hints(3, '. H...'), [3, 4])
+        self.assertEqual(edge_hints(3, '. .H..'), [4])
+        self.assertEqual(edge_hints(4, '... ..H....'), [7])
