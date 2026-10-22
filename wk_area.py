@@ -64,9 +64,6 @@ class WorkArea:
         WorkArea:
         '''
         out_ls = []
-        if enable_axis:
-            col_header = self.pos_dtls.col_header()
-            out_ls.append(col_header)
         for nr, row_data in enumerate(self.int_table):
             if enable_axis:
                 trailing_txt = ' ' + str(nr + 1)
@@ -74,6 +71,9 @@ class WorkArea:
                 trailing_txt = ''
             unified_line = ''.join(row_data) + trailing_txt
             out_ls.append(unified_line)
+        if enable_axis:
+            col_header = self.pos_dtls.col_header()
+            out_ls.append(col_header)
         out_txt = '\n'.join(out_ls)
         return out_txt
 
