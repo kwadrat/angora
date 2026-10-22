@@ -50,6 +50,7 @@ class WorkArea:
         '''
         WorkArea:
         '''
+        self.new_line = '\n'
         self.enable_stepping = 0
         self.a_rows = p_rows
         self.a_cols = p_cols
@@ -74,14 +75,14 @@ class WorkArea:
         if enable_axis:
             col_header = self.pos_dtls.col_header()
             out_ls.append(col_header)
-        out_txt = '\n'.join(out_ls)
+        out_txt = self.new_line.join(out_ls)
         return out_txt
 
     def save_to_file(self, file_name, enable_axis=0):
         '''
         WorkArea:
         '''
-        full_txt = self.slim_text(enable_axis) + '\n'
+        full_txt = self.slim_text(enable_axis) + self.new_line
         fd = open(file_name, 'w')
         fd.write(full_txt)
         fd.close()
